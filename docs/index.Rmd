@@ -1,7 +1,7 @@
 ---
 title: "R data structure with stringr, forcats, lubridate, and tidyr"
 subtitle: "PSYC 259: Principles of Data Science"
-author: "John Franchak, with minimal updates by Tabea Springstein"
+author: "John Franchak & Holly O'Rourke"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -11,6 +11,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      slideNumberFormat: "%current%"
       navigation:
         scroll: false
 ---
@@ -31,6 +32,17 @@ style_mono_accent(
   header_h1_font_size = "3rem",
   header_h2_font_size = "2.5rem",
   header_h3_font_size = "2rem",
+text_slide_number_color = "#1c5253",
+  text_slide_number_font_size = "0.9em",
+  padding = "6px 36px 6px 36px",
+  extra_css = list(
+    ".remark-slide-content h1" = list("margin-bottom" = "0.3em"),
+    ".pull-left"  = list(width = "49%"),
+    ".pull-right" = list(width = "49%"),
+    ".col-text" = list(float = "left",  width = "30%"),
+    ".col-img"  = list(float = "right", width = "68%"),
+    ".col-img ~ *" = list(clear = "both")   # keeps later content below the columns
+  )
 )
 ```
 
@@ -40,7 +52,7 @@ library(flipbookr)
 library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 ```
 
-# Today's tutorial
+# Today's Tutorial
 
 - Working with different data types
   * Vectors and lists
@@ -52,7 +64,7 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
   * Binding and joining data
  
 .content-box-blue[
-`r icons::fontawesome("github")` Follow along from the [Github repo](https://github.com/psych-259-data-science-2022/259-data-structure)
+`r icons::fontawesome("github")` Follow along from the [Github repo](https://github.com/2026-PSYC-259/4-data-structure)
 ]
 
 .footnote[.small[.bold[Last updated: `r Sys.Date()`]]]
