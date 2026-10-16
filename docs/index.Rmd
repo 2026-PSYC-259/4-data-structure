@@ -1,5 +1,5 @@
 ---
-title: "R data structure with stringr, forcats, lubridate, and tidyr"
+title: "R Data Structure and Tidy Data"
 subtitle: "PSYC 259: Principles of Data Science"
 author: "John Franchak & Holly O'Rourke"
 output:
