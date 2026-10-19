@@ -50,16 +50,25 @@ text_slide_number_color = "#1c5253",
 knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
 library(flipbookr)
 library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
+library(tidyverse)
 ```
 
-# Today's Tutorial
+# Admin for Today
 
-- Working with different data types
-  * Vectors and lists
-  * Strings
-  * Factors
+- Workflow critique
+
+- Resources on course site
+
+---
+
+# Today's Outline
+
+- Part 1: More advanced data types
+  * Strings and logicals
   * Dates
-- Tidying data
+  * Factors
+  * Vectors and lists
+- Part 2: Tidying data
   * Pivoting from/to wide/long format
   * Binding and joining data
  
@@ -70,51 +79,205 @@ library(icons) #https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free
 .footnote[.small[.bold[Last updated: `r Sys.Date()`]]]
 
 ---
-# Common data types in R
+class: inverse, center, middle
+# Part 1: More Advanced Data Types
+---
+# Common Data Types in R
+
+.pull-left[
 - Numeric
   * integer: 1, 2, 3
   * double: 1.12124
-  
-- .brand-red[Character: “hello”]
 
-- Logical: T/F (TRUE/FALSE)
+- Character (aka string)
+  * "hello"
 
-- .brand-red[Datetime]
+- Logical
+  * T/F (TRUE/FALSE)
+]
 
-- .brand-red[Factor]
+.pull-right[
+- Vectors and lists
+  * Two different ways to store and manipulate data
 
-- .brand-red[Vectors and lists]
+- Datetime
+  * "2026-10-18"
+
+- Factor
+  * eye_colors <- c("Blue", "Green", "Brown")
+  * factor(eye_colors)
+]
 
 ---
-# What packages do we need?
+# What Packages Do We Need?
 
-```{r, warning=TRUE, message=TRUE}
-library(tidyverse)
-library(lubridate) #install if needed
+- Default tidyverse
+  * `ggplot2`: Graphing
+  * `tibble`: Using tibble-style dataframes
+  * `tidyr`: Shaping tibbles and columns
+  * `purrr`: Automating/iterating (instead of loops)
+  * `dplyr`: Selecting, filtering, and transforming dataframes
+  * `stringr`: Manipulating strings
+  * `forcats`: Manipulating factors
+  * `lubridate`: Manipulating dates
+
+---
+# Character Data (Strings)
+
+- At minimum, working with characters is needed to deal with file paths
+
+- String functions let you clean up messy text input
+
+- Understanding how to construct and format strings can help you avoid hard-coding things like graph labels and output tables
+
+- Learning how to wrangle strings and exploit patterns helps write more efficient code (e.g., selecting and mutating columns with `contains()`, `starts_with()`, etc.)
+
+- The `stringr` package has a suite of helper functions for common string operations
+
+```{r, include = F}
+ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
+  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+ds <- ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", values_drop_na = T, names_prefix = "age_") %>%
+  select(-id, -dob)
+```
+---
+# stringr Cheatsheet
+
+.content-box-blue[
+`r icons::fontawesome("github")` [View on RStudio GitHub](https://rstudio.github.io/cheatsheets/html/strings.html)
+]
+
+---
+# Jonah's first words
+```{r}
+ds$word
 ```
 
 ---
-# What packages do we need?
-
-- Default tidyverse
-  * `ggplot2`: graphing
-  * `tibble`: use tibble-style dataframes
-  * `tidyr`: shaping tibbles and columns
-  * `purrr`: tools for automation
-  * `dplyr`: selecting, filtering, and transforming dataframes
-  * `stringr`: functions for manipulating strings
-  * `forcats`: functions for manipulating factors
-- Extras
-  * `lubridate`: functions for manipulating dates
+# Length, Detecting Strings, & Counting Strings
+```{r}
+ds %>% mutate(word_length = str_length(word), 
+              has_b = str_detect(word, "b"), 
+              num_b = str_count(word, "b"))
+```
 
 ---
-# Vectors and lists: Collections of values
+# Regular Expressions (regex)
+
+- A **pattern language** for matching text, used in `stringr` functions like `str_detect()`, `str_extract()`, `str_replace_all()`
+- In R strings, a backslash must be doubled: `"\\d"`, `"\\."`
+.pull-left[
+.bold[Characters and classes]
+- `.` any character
+- `\\d` digit, `\\w` word character, `\\s` space
+- `[aeiou]` any one of these
+- `[^aeiou]` anything but these
+- `[:alpha:]`, `[:digit:]`, `[:punct:]` anything in this class
+]
+.pull-right[
+.bold[Anchors]
+- `^` start of string
+- `$` end of string
+- `\\b` word boundary
+]
+
+---
+# Regular Expressions (regex)
+
+.pull-left[
+.bold[Quantifiers]
+- `?` 0 or 1
+- `*` 0 or more
+- `+` 1 or more
+- `{3}` exactly 3, `{2,4}` 2 to 4
+]
+.pull-right[
+.bold[Alternatives and groups]
+- `a|b` a or b
+- `(ab)+` group, then repeat
+- `\\.` a literal period (escape special characters)
+]
+.content-box-blue[
+`r icons::fontawesome("github")` [RStudio regex cheatsheet](https://rstudio.github.io/cheatsheets/regex.pdf)
+]
+---
+`r chunk_reveal("patterns", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Matching Patterns")`
+
+```{r patterns, include = F}
+ds %>% mutate(contains_punct = str_detect(word, "[:punct:]")) #ROTATE
+ds %>% mutate(word_cleaned = str_remove_all(word, "[:punct:]")) #ROTATE
+ds %>% mutate(word_cleaned = str_replace_all(word, "[:punct:]"," ")) #ROTATE
+ds %>% mutate(vowel_count = str_count(word, "[aeiou]")) #ROTATE
+
+```
+
+---
+```{r}
+fnames <- list.files(path="data_raw", full.names = T)
+print(fnames)
+```
+
+---
+
+`r chunk_reveal("morepatterns", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Matching Patterns")`
+
+```{r morepatterns, include = F}
+fnames <- list.files(path="data_raw", full.names = T)
+str_split(fnames, "/") #ROTATE
+str_replace_all(fnames, "data_raw/|.csv|vocab","") #ROTATE
+str_extract_all(fnames, "\\d{2}.\\d{1}|\\d{2}", simplify = T) #ROTATE
+str_extract_all(fnames, "\\.[:alpha:]{1,4}", simplify = T) #ROTATE
+str_extract_all(ds$word, boundary("word"), simplify = T) #ROTATE
+
+```
+
+---
+`r chunk_reveal("combiningstrings", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Combining Strings")`
+```{r combiningstrings, include = F}
+age <- seq(from = 12, to = 24, by = .5) 
+paste0("data_raw/vocab", age, ".csv") #ROTATE
+str_glue("data_raw/vocab{age}.csv") #ROTATE
+
+```
+---
+# Logical (T/F)
+
+- Logical data are usually created by comparisons or tests in R rather than data we collected
+  * Created by operators like `>`,`<`,`==`,`!=`,`>=`, `%in%`, `is.na()`, `str_detect()`, etc.
+  * Also inside mutate(), filter(), etc.
+
+- FALSE = 0, TRUE = 1
+  * sum() counts matches and mean() gives a proportion of TRUEs
+
+---
+
+`r chunk_reveal("logicals", break_type = "auto", widths = c(1, 0), display_type = "code", title = "# Logicals from Text")`
+
+```{r logicals, include = FALSE}
+contains_b <- str_detect(ds$word, "b") # TRUE if the word contains b
+contains_b 
+typeof(contains_b) 
+sum(contains_b) 
+mean(contains_b) 
+!contains_b 
+ds$word[contains_b] 
+ds %>% mutate(contains_b = contains_b) 
+ds %>% filter(contains_b) 
+ds %>% mutate(b_and_vowels = contains_b & str_detect(word, "[aeiou]"))
+ds <- ds %>% mutate(b_or_startswithd = contains_b | str_starts(word, "d"))  
+```
+---
+# Vectors and Lists: Collections of Values
+
 - Vectors are type-homogeneous
+
   * Numeric vectors, `c(1,2,3,4,5)`, `1:5`
   * Character vectors,  `c("Hello", "Goodbye")`
   * Logical vectors, `c(T, T, T, F, T, F)`
   * Vector items can be named `c(x = 1, y = 2)`
+
 - Lists are type-heterogeneous
+
   * Mix types, `list("1", 1, TRUE, 1:5)`
   * Tibbles are lists of vectors/lists of the same length
 
@@ -159,105 +322,14 @@ model <- lm(height ~ mass, data = starwars)
 typeof(model)
 model$coefficients
 ```
-
 ---
-# Character data (strings)
-
-- At minimum, working with characters is needed to deal with file paths
-
-- String functions let you clean up messy text input
-
-- Understanding how to construct and format strings can help you avoid hard-coding things like graph labels and output tables
-
-- Learning how to wrangle strings and exploit patterns helps write more efficient code (e.g., selecting and mutating with `contains()`, `starts_with()`, etc.)
-
-- The `stringr` package has a suite of helper functions for common string operations
-
-```{r, include = F}
-ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
-  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-ds <- ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", values_drop_na = T, names_prefix = "age_") %>%
-  select(-id, -dob)
-```
----
-class: center, middle
-background-image: url("stringr.png")
-background-size: contain
-
----
-# Jonah's first words
-```{r}
-ds$word
-```
-
----
-# Length, containing strings, counting strings
-```{r}
-ds %>% mutate(word_len = str_length(word), 
-              has_b = str_detect(word, "b"), 
-              num_b = str_count(word, "b"))
-```
-
----
-class: center, middle
-background-image: url("regx.png")
-background-size: contain
-
----
-`r chunk_reveal("patterns", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Matching patterns")`
-
-```{r patterns, include = F}
-ds %>% mutate(word_cleaned = str_remove_all(word, "[:punct:]")) #ROTATE
-ds %>% mutate(word_cleaned = str_replace_all(word, "[:punct:]"," ")) #ROTATE
-ds %>% mutate(vowel_count = str_count(word, "[aeiou]")) #ROTATE
-#ds %>% mutate(is_three_letter = str_detect(word, "[:alnum:{3}]")) #ROTATE
-# if the goal was to detect three-letter words this code does not work
-ds %>% mutate(is_three_letter = str_detect(word, "\\b\\w{3}\\b"))
-
-```
-
----
-```{r}
-fnames <- list.files(path="data_raw", full.names = T)
-print(fnames)
-```
-
----
-
-`r chunk_reveal("morepatterns", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Matching patterns")`
-
-```{r morepatterns, include = F}
-fnames <- list.files(path="data_raw", full.names = T)
-str_split(fnames, "/") #ROTATE
-str_replace_all(fnames, "data_raw/|.csv|vocab","") #ROTATE
-str_extract_all(fnames, "\\d{2}.\\d{1}|\\d{2}", simplify = T) #ROTATE
-str_extract_all(fnames, "\\.[:alpha:]{1,4}", simplify = T) #ROTATE
-str_extract_all(ds$word, boundary("word"), simplify = T) #ROTATE
-
-```
-
----
-`r chunk_reveal("combiningstrings", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Combining strings")`
-```{r combiningstrings, include = F}
-age <- seq(from = 12, to = 24, by = .5) 
-paste0("data_raw/vocab", age, ".csv") #ROTATE
-str_glue("data_raw/vocab{age}.csv") #ROTATE
-str_glue("Tabea last modified these slides at {now()}") #ROTATE
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 3) #ROTATE
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 4) #ROTATE
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 5) #ROTATE
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 6) #ROTATE
-
-```
----
-# Working with dates and times
+# Working with Dates and Times
 - Correctly parse dates/times from character data
 
 - Calculate differences between dates/times (e.g., ages, task length)
 
 - Determine local time using time zones
 
-- Lots of options within the `lubridate` package
 
 ```{r, include = F}
 dates <- tibble(dates1 = c("2017-09-01", "2016-09-01", "2015-09-01", "2014-09-01"),
@@ -266,17 +338,17 @@ dates <- tibble(dates1 = c("2017-09-01", "2016-09-01", "2015-09-01", "2014-09-01
 ```
 
 ---
-`r chunk_reveal("parse", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Parsing dates")`
+`r chunk_reveal("parse", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Parsing Dates")`
 
 ```{r parse, include = FALSE}
-dates # ROTATE
+dates
 dates %>% mutate(dates1_parsed = ymd(dates1)) #ROTATE
 dates %>% mutate(dates2_parsed = mdy(dates2)) #ROTATE
 dates %>% mutate(dates3_parsed = parse_date(dates3, format = "%B %d, %Y")) #ROTATE
 ```
 
 ---
-# Time is weird
+# Time is Weird
 
 - Leap days and leap seconds mean that physical time is not the same as calendar time
   * lubridate `durations` represent physical time
@@ -309,13 +381,15 @@ t2 <- as_datetime("2022-01-27 13:39:28", tz = "America/New_York")
 t2-t1
 t3 <- as_datetime("2021-10-15 10:39:28", tz = "America/Los_Angeles")
 t3
-as.period(interval(start = t3, end = t1), unit = "days")
-with_tz(t3, "America/New_York")
-force_tz(t3, "America/New_York")
+t4 <- as_datetime(now())
+t4
+as.period(interval(start = t1, end = t4), unit = "days")
+with_tz(t4, "America/New_York")
+force_tz(t4, "America/New_York")
 ```
 
 ---
-# Factors represent categories
+# Factors Represent Categories
 ```{r}
 x <- c(1, 1, 2, 3, 1, 4)
 x <- factor(x, levels = c(1,2,3), labels = c("rarely", "neutral", "frequently"))
@@ -326,8 +400,8 @@ x
 - levels are ordered, which carries forward to output, modeling, graphics, etc.
 
 - factors work as dummy codes; use as.numeric(factor) to treat as a continuous variable in models
-
 ---
+
 `r chunk_reveal("factors", break_type = "auto", widths = c(1, 1), title = "# Factors")`
 
 ```{r factors, include = FALSE}
@@ -359,6 +433,118 @@ fct_count(fct_rev(ds$eye_f)) #ROTATE
 fct_count(fct_infreq(ds$eye_f)) #ROTATE
 fct_count(factor(ds$eye_f, levels = c("red", "brown", "blue"))) #ROTATE
 ```
+---
+class: inverse, center, middle
+# Part 2: Tidying Data
+---
+# Why do data need to be wrangled and tidied?
+
+- Data files are often created without the foresight of how they might be used by computers
+  * Instead, they are made to look nice for humans
+
+- We need to tidy data to make it convenient for programming
+  * Format is dictated by analyses
+  * You may need multiple formats
+---
+# Tidy Data (Wickham, 2014)
+
+- Each variable is a column
+  * Variable: “All values that measure the same underlying attribute”
+- Each observation is a row
+  * Observation: Unit for which all variables were measured (person, session, trial, etc.)
+- Each type of observational unit is a table
+  * e.g., participant questionnaire vs trial-by-trial data
+---
+`r chunk_reveal("selectcols", break_type = "rotate", float = "none", widths = c(8, 1), title = "# Dataset Preparations")`
+```{r selectcols, include = FALSE}
+print(relig_income, n = 5)
+relig_income %>% select(religion, contains("$")) #ROTATE
+relig_income %>% select(religion, starts_with("$")) #ROTATE
+relig_income %>% select(religion, contains("k")) #ROTATE
+relig_income %>% select(religion, starts_with("$"), ends_with("k")) #ROTATE
+```
+---
+class: inverse, center, middle
+# Dataset Transformations 
+---
+
+`r chunk_reveal("pivot-longer", break_type = "auto", widths = c(2, 1), title = "# Multiple Columns -> One Variable ")`
+ 
+```{r pivot-longer, include = FALSE}
+ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
+  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+ds %>% print(n = 25) 
+ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word") 
+ds %>% pivot_longer(-(id:dob), names_to = "age", 
+                    names_prefix = "age_", values_to = "word")
+ds %>% pivot_longer(-(id:dob), names_to = "age", 
+                    values_to = "word", values_drop_na = T, names_prefix = "age_")
+```
+---
+
+`r chunk_reveal("pivot-wider", break_type = "auto", widths = c(1, 1), title = "# One Column -> Multiple variables")`
+ 
+```{r pivot-wider, include = FALSE}
+ds <- read_delim(list.files(path = "data_headers", full.names = T),
+                 col_names = c("field", "value"), col_types = c("cc"), 
+                 delim = " ", n_max = 8, id = "filename")
+print(ds)
+
+ds <- ds %>% pivot_wider(id_cols = "filename", 
+                         names_from = "field", 
+                         values_from = "value")
+ds
+```
+---
+`r chunk_reveal("separate", break_type = "auto", widths = c(1, 1), title = "# One Variable -> Multiple Variables")`
+```{r separate, include = FALSE}
+ds 
+ds %>% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
+```
+
+---
+# Multiple Variables -> One Variable
+-unite()
+---
+
+`r chunk_reveal("bindcols", break_type = "auto", widths = c(1, 1), title = "# Binding Columns")`
+ 
+```{r bindcols, include = FALSE}
+star_wars_numeric <- starwars %>% select(where(is.numeric)) #87x3
+star_wars_numeric
+star_wars_char <- starwars %>% select(where(is.character)) #87x8
+star_wars_char
+star_wars_combined <- bind_cols(star_wars_numeric, star_wars_char) #87x11
+star_wars_combined
+```
+---
+`r chunk_reveal("bindrows", break_type = "auto", widths = c(1, 1), title = "# Binding Rows")`
+ 
+```{r bindrows, include = FALSE}
+s1 <- starwars %>% slice_sample(n = 2) #2x14
+s1
+s2 <- starwars %>% slice_sample(n = 2) #2x14
+s2
+s3 <- starwars %>% slice_sample(n = 2) #2x14
+s3
+star_wars_combined <- bind_rows(s1, s2, s3) #6x14
+star_wars_combined
+```
+---
+
+`r chunk_reveal("join", break_type = "auto", widths = c(1, 1), title = "# Joining Data")`
+ 
+```{r join, include = FALSE}
+fnames <- list.files(path = "data_headers", full.names = T)
+header <- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %>% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+trials <- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+header 
+trials 
+left_join(header, trials, by = "filename") 
+left_join(slice_sample(header, n = 5), trials, by = "filename") 
+left_join(slice_sample(trials, n = 5), header, by = "filename") 
+```
+
 
 <!-- adjust font size and other formatting defs in this css code chunk -->
 ```{css, eval = TRUE, echo = FALSE}

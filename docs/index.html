@@ -36,14 +36,22 @@ class: center, middle, inverse, title-slide
 
 
 
-# Today's Tutorial
+# Admin for Today
 
-- Working with different data types
-  * Vectors and lists
-  * Strings
-  * Factors
+- Workflow critique
+
+- Resources on course site
+
+---
+
+# Today's Outline
+
+- Part 1: More advanced data types
+  * Strings and logicals
   * Dates
-- Tidying data
+  * Factors
+  * Vectors and lists
+- Part 2: Tidying data
   * Pivoting from/to wide/long format
   * Binding and joining data
  
@@ -51,71 +59,1449 @@ class: center, middle, inverse, title-slide
 &lt;svg viewBox="0 0 496 512" style="height:1em;display:inline-block;vertical-align:-.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; Follow along from the [Github repo](https://github.com/2026-PSYC-259/4-data-structure)
 ]
 
-.footnote[.small[.bold[Last updated: 2026-10-16]]]
+.footnote[.small[.bold[Last updated: 2026-10-19]]]
 
 ---
-# Common data types in R
+class: inverse, center, middle
+# Part 1: More Advanced Data Types
+---
+# Common Data Types in R
+
+.pull-left[
 - Numeric
   * integer: 1, 2, 3
   * double: 1.12124
-  
-- .brand-red[Character: “hello”]
 
-- Logical: T/F (TRUE/FALSE)
+- Character (aka string)
+  * "hello"
 
-- .brand-red[Datetime]
+- Logical
+  * T/F (TRUE/FALSE)
+]
 
-- .brand-red[Factor]
+.pull-right[
+- Vectors and lists
+  * Two different ways to store and manipulate data
 
-- .brand-red[Vectors and lists]
+- Datetime
+  * "2026-10-18"
 
----
-# What packages do we need?
-
-
-``` r
-library(tidyverse)
-```
-
-```
-── Attaching core tidyverse packages ───────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.2.1     ✔ readr     2.2.0
-✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.3     ✔ tibble    3.3.1
-✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-✔ purrr     1.2.2     
-── Conflicts ─────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
-```
-
-``` r
-library(lubridate) #install if needed
-```
+- Factor
+  * eye_colors &lt;- c("Blue", "Green", "Brown")
+  * factor(eye_colors)
+]
 
 ---
-# What packages do we need?
+# What Packages Do We Need?
 
 - Default tidyverse
-  * `ggplot2`: graphing
-  * `tibble`: use tibble-style dataframes
-  * `tidyr`: shaping tibbles and columns
-  * `purrr`: tools for automation
-  * `dplyr`: selecting, filtering, and transforming dataframes
-  * `stringr`: functions for manipulating strings
-  * `forcats`: functions for manipulating factors
-- Extras
-  * `lubridate`: functions for manipulating dates
+  * `ggplot2`: Graphing
+  * `tibble`: Using tibble-style dataframes
+  * `tidyr`: Shaping tibbles and columns
+  * `purrr`: Automating/iterating (instead of loops)
+  * `dplyr`: Selecting, filtering, and transforming dataframes
+  * `stringr`: Manipulating strings
+  * `forcats`: Manipulating factors
+  * `lubridate`: Manipulating dates
 
 ---
-# Vectors and lists: Collections of values
+# Character Data (Strings)
+
+- At minimum, working with characters is needed to deal with file paths
+
+- String functions let you clean up messy text input
+
+- Understanding how to construct and format strings can help you avoid hard-coding things like graph labels and output tables
+
+- Learning how to wrangle strings and exploit patterns helps write more efficient code (e.g., selecting and mutating columns with `contains()`, `starts_with()`, etc.)
+
+- The `stringr` package has a suite of helper functions for common string operations
+
+
+---
+# stringr Cheatsheet
+
+.content-box-blue[
+&lt;svg viewBox="0 0 496 512" style="height:1em;display:inline-block;vertical-align:-.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; [View on RStudio GitHub](https://rstudio.github.io/cheatsheets/html/strings.html)
+]
+
+---
+# Jonah's first words
+
+``` r
+ds$word
+```
+
+```
+  [1] "book"               "dad"                "cat"               
+  [4] "baby"               "socks/shoes"        "banana"            
+  [7] "cheese"             "shoes"              "monkey"            
+ [10] "hello"              "bear"               "milk/drink"        
+ [13] "cleanup"            "grandpa"            "mouth"             
+ [16] "coffee"             "agua"               "octopus"           
+ [19] "(wrist) watch"      "shower"             "hyena"             
+ [22] "heart"              "singing"            "top"               
+ [25] "ball"               "dog (animal)"       "llama"             
+ [28] "turkey"             "berry"              "apple"             
+ [31] "oh no"              "go"                 "car"               
+ [34] "that"               "more"               "peacock"           
+ [37] "cup"                "hide"               "too"               
+ [40] "blanket"            "peanut butter"      "running"           
+ [43] "empty"              "that one"           "sandal"            
+ [46] "bye bye"            "beep"               "hi"                
+ [49] "box"                "night-night"        "jacket"            
+ [52] "dinosaur"           "wow"                "snack/food"        
+ [55] "wash"               "stroller"           "shark"             
+ [58] "grandma"            "face"               "lemon"             
+ [61] "potty"              "the end"            "over there"        
+ [64] "make"               "diaper"             "bubble"            
+ [67] "fish"               "tea"                "peekaboo"          
+ [70] "mama"               "keys"               "yellow"            
+ [73] "pasta"              "spoon"              "light"             
+ [76] "button"             "penis"              "finger"            
+ [79] "this one"           "both"               "teeth"             
+ [82] "mmmm"               "lion"               "google"            
+ [85] "trash"              "cow"                "broccoli"          
+ [88] "yogurt"             "outside"            "toy"               
+ [91] "train"              "spaghetti"          "stairs"            
+ [94] "black"              "wipe"               "loud"              
+ [97] "uhoh"               "stick"              "hat"               
+[100] "elephant"           "no"                 "yeah"              
+[103] "zebra"              "circle"             "lap"               
+[106] "towel"              "back"               "oatmeal"           
+[109] "xylophone"          "crib"               "where"             
+[112] "sticker"            "cookie"             "[eating sound]"    
+[115] "bee"                "tree"               "high five"         
+[118] "eat"                "plate"              "plane"             
+[121] "olive"              "pepper (vegetable)" "cough"             
+[124] "dolphin"            "lay down"           "poop"              
+[127] "done"               "rabbit"             "(fist) bump"       
+[130] "up"                 "tray"               "people"            
+[133] "ice cream"          "animal"             "window"            
+[136] "letter"             "walrus"             "nose"              
+[139] "hippo"              "tissue"             "bread"             
+[142] "girl"               "orange (color)"     "frog"              
+[145] "rice"               "art"                "marker"            
+[148] "number"             "kicking"            "bag"               
+[151] "gentle"             "pig"                "pear"              
+[154] "horse"              "here"               "soap"              
+[157] "pee"                "mine"               "drum"              
+[160] "goes"               "shorts"             "gentle"            
+[163] "owl"                "bird"               "cereal"            
+[166] "flower"             "school"             "mirror"            
+[169] "(finger) nail"      "lip"                "music"             
+[172] "hold"               "bite"               "thank you"         
+[175] "zebra"              "squirrel"           "spider"            
+[178] "kiwi"               "read"               "picture"           
+[181] "bless you"          "spatula"            "clock"             
+[184] "happy"              "racoon"             "house"             
+[187] "pancake"            "bumblebee"          "watermelon"        
+[190] "wheel"              "computer"           "snake"             
+[193] "wet"                "dark"               "curtain"           
+[196] "Jonah"              "paper"              "cheek"             
+[199] "shirt"              "big"                "roll (v)"          
+[202] "guitar"             "zuchinni"           "broken"            
+[205] "rhino"              "pork"               "belly"             
+[208] "help"               "sheep"              "dip"               
+[211] "butterfly"          "bless you"          "skateboard"        
+[214] "woof"               "move"               "cap"               
+[217] "juice"              "cracker"            "down"              
+[220] "bamba"              "do it"              "little"            
+[223] "hot"                "alligator"          "pocket"            
+[226] "clip"               "everybody"          "close"             
+[229] "bib"                "slide"              "laundry"           
+[232] "away"               "boat"               "green"             
+[235] "stop"               "meow"               "bed"               
+[238] "gone"               "fit"                "wash"              
+[241] "open"               "toes"               "penguin"           
+[244] "fork"               "red"                "piece"             
+[247] "oink"               "pepper (spice)"     "garbage"           
+[250] "working"            "yay"                "cheers"            
+[253] "bus"                "feet"               "balloon"           
+[256] "duckie"             "roar"               "vacuum"            
+[259] "upside down"        "ravioli"            "sleep sack"        
+[262] "egg"                "pants"              "goose"             
+[265] "clap"               "mail"               "moo"               
+[268] "friend"             "knife"              "farm"              
+[271] "couch"              "color"              "cactus"            
+[274] "drink"              "taco"               "tortilla"          
+[277] "castle"             "dolphin"            "please"            
+[280] "right there"        "chicken"            "chair"             
+[283] "hand"               "towel"              "sweep"             
+[286] "breakfast"          "crab"               "count"             
+[289] "market"             "booger"             "carrot"            
+[292] "orange (fruit)"     "rail"               "robot"             
+[295] "chili"              "star"               "noodle"            
+[298] "castle"             "bathroom"           "cheers"            
+[301] "ear"                "rock"               "shopping"          
+[304] "tower"              "alright"            "green bean"        
+[307] "wiggle"             "(eye) gunk"         "avocado"           
+[310] "exercise"           "jumping"            "tail"              
+[313] "tent"               "snail"              "blueberry"         
+[316] "loud"               "nectarine"          "hug"               
+[319] "glasses"            "home"               "brush"             
+[322] "(guitar) pick"      "bike"               "pajamas"           
+[325] "pouch"              "grape"              "footloose"         
+[328] "page"               "phone"              "puzzle"            
+[331] "stove"              "reach"              "throw"             
+[334] "kitchen"            "kiss"               "swim"              
+[337] "climb"              "happy"              "haircut"           
+[340] "walk"               "leaf"               "park"              
+[343] "white"              "that way"           "teacher"           
+[346] "elbow"              "hair"               "table"             
+[349] "umbrella"           "coaster"            "bug"               
+[352] "show"               "fall down"          "boy"               
+[355] "pull"               "[gorilla sound]"    "basket"            
+[358] "toast"              "three"              "this"              
+[361] "purple"             "neigh"              "magnet"            
+[364] "upstairs"           "like"               "turn"              
+[367] "pillow"             "baa"                "kale"              
+[370] "plum"               "excuse me"          "get"               
+[373] "out"                "button"             "time"              
+[376] "tiger"              "barn"               "pink"              
+[379] "nurse"              "tv"                 "dishes"            
+[382] "sauce"              "catch"              "sun"               
+[385] "sheet"              "rooster"            "dishwasher"        
+[388] "tomato"             "panda"              "got it"            
+[391] "sky"                "all"                "shut"              
+[394] "change"             "shoulder"           "driving"           
+[397] "off"                "cooking"            "elbow"             
+[400] "found it"           "on"                 "belly button"      
+[403] "family"             "moon"               "watch (v)"         
+[406] "polar bear"         "camera"             "pumpkin"           
+[409] "bounce"             "see"                "thumb"             
+[412] "playground"         "ice"                "leopard"           
+[415] "swing"              "push"               "messy"             
+[418] "goat"               "ride"               "camel"             
+[421] "carpet"             "sound"              "fast"              
+[424] "napkin"             "tickle"             "soft"              
+[427] "fox"                "crayon"             "cut"               
+[430] "cry"                "play"               "rocket"            
+[433] "pot"                "floor"              "two"               
+[436] "dry"                "bottle"             "new"               
+[439] "spicy"              "spin"              
+```
+
+---
+# Length, Detecting Strings, &amp; Counting Strings
+
+``` r
+ds %&gt;% mutate(word_length = str_length(word), 
+              has_b = str_detect(word, "b"), 
+              num_b = str_count(word, "b"))
+```
+
+```
+# A tibble: 440 × 5
+   age   word        word_length has_b num_b
+   &lt;chr&gt; &lt;chr&gt;             &lt;int&gt; &lt;lgl&gt; &lt;int&gt;
+ 1 12    book                  4 TRUE      1
+ 2 12.5  dad                   3 FALSE     0
+ 3 13.5  cat                   3 FALSE     0
+ 4 14    baby                  4 TRUE      2
+ 5 14.5  socks/shoes          11 FALSE     0
+ 6 15    banana                6 TRUE      1
+ 7 15.5  cheese                6 FALSE     0
+ 8 16    shoes                 5 FALSE     0
+ 9 16.5  monkey                6 FALSE     0
+10 17    hello                 5 FALSE     0
+# ℹ 430 more rows
+```
+
+---
+# Regular Expressions (regex)
+
+- A **pattern language** for matching text, used in `stringr` functions like `str_detect()`, `str_extract()`, `str_replace_all()`
+- In R strings, a backslash must be doubled: `"\\d"`, `"\\."`
+.pull-left[
+.bold[Characters and classes]
+- `.` any character
+- `\\d` digit, `\\w` word character, `\\s` space
+- `[aeiou]` any one of these
+- `[^aeiou]` anything but these
+- `[:alpha:]`, `[:digit:]`, `[:punct:]` anything in this class
+]
+.pull-right[
+.bold[Anchors]
+- `^` start of string
+- `$` end of string
+- `\\b` word boundary
+]
+
+---
+# Regular Expressions (regex)
+
+.pull-left[
+.bold[Quantifiers]
+- `?` 0 or 1
+- `*` 0 or more
+- `+` 1 or more
+- `{3}` exactly 3, `{2,4}` 2 to 4
+]
+.pull-right[
+.bold[Alternatives and groups]
+- `a|b` a or b
+- `(ab)+` group, then repeat
+- `\\.` a literal period (escape special characters)
+]
+.content-box-blue[
+&lt;svg viewBox="0 0 496 512" style="height:1em;display:inline-block;vertical-align:-.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; [RStudio regex cheatsheet](https://rstudio.github.io/cheatsheets/regex.pdf)
+]
+---
+count: false
+ 
+# Matching Patterns
+.panel1-patterns-rotate[
+
+``` r
+*ds %&gt;% mutate(contains_punct = str_detect(word, "[:punct:]"))
+```
+]
+ 
+.panel2-patterns-rotate[
+
+```
+# A tibble: 440 × 3
+   age   word        contains_punct
+   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;         
+ 1 12    book        FALSE         
+ 2 12.5  dad         FALSE         
+ 3 13.5  cat         FALSE         
+ 4 14    baby        FALSE         
+ 5 14.5  socks/shoes TRUE          
+ 6 15    banana      FALSE         
+ 7 15.5  cheese      FALSE         
+ 8 16    shoes       FALSE         
+ 9 16.5  monkey      FALSE         
+10 17    hello       FALSE         
+# ℹ 430 more rows
+```
+]
+
+---
+count: false
+ 
+# Matching Patterns
+.panel1-patterns-rotate[
+
+``` r
+*ds %&gt;% mutate(word_cleaned = str_remove_all(word, "[:punct:]"))
+```
+]
+ 
+.panel2-patterns-rotate[
+
+```
+# A tibble: 440 × 3
+   age   word        word_cleaned
+   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;       
+ 1 12    book        book        
+ 2 12.5  dad         dad         
+ 3 13.5  cat         cat         
+ 4 14    baby        baby        
+ 5 14.5  socks/shoes socksshoes  
+ 6 15    banana      banana      
+ 7 15.5  cheese      cheese      
+ 8 16    shoes       shoes       
+ 9 16.5  monkey      monkey      
+10 17    hello       hello       
+# ℹ 430 more rows
+```
+]
+
+---
+count: false
+ 
+# Matching Patterns
+.panel1-patterns-rotate[
+
+``` r
+*ds %&gt;% mutate(word_cleaned = str_replace_all(word, "[:punct:]"," "))
+```
+]
+ 
+.panel2-patterns-rotate[
+
+```
+# A tibble: 440 × 3
+   age   word        word_cleaned
+   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;       
+ 1 12    book        book        
+ 2 12.5  dad         dad         
+ 3 13.5  cat         cat         
+ 4 14    baby        baby        
+ 5 14.5  socks/shoes socks shoes 
+ 6 15    banana      banana      
+ 7 15.5  cheese      cheese      
+ 8 16    shoes       shoes       
+ 9 16.5  monkey      monkey      
+10 17    hello       hello       
+# ℹ 430 more rows
+```
+]
+
+---
+count: false
+ 
+# Matching Patterns
+.panel1-patterns-rotate[
+
+``` r
+*ds %&gt;% mutate(vowel_count = str_count(word, "[aeiou]"))
+```
+]
+ 
+.panel2-patterns-rotate[
+
+```
+# A tibble: 440 × 3
+   age   word        vowel_count
+   &lt;chr&gt; &lt;chr&gt;             &lt;int&gt;
+ 1 12    book                  2
+ 2 12.5  dad                   1
+ 3 13.5  cat                   1
+ 4 14    baby                  1
+ 5 14.5  socks/shoes           3
+ 6 15    banana                3
+ 7 15.5  cheese                3
+ 8 16    shoes                 2
+ 9 16.5  monkey                2
+10 17    hello                 2
+# ℹ 430 more rows
+```
+]
+
+&lt;style&gt;
+.panel1-patterns-rotate {
+  color: black;
+  width: 90.4615384615385%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-patterns-rotate {
+  color: black;
+  width: 7.53846153846154%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-patterns-rotate {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+
+``` r
+fnames &lt;- list.files(path="data_raw", full.names = T)
+print(fnames)
+```
+
+```
+ [1] "data_raw/vocab12.5.csv" "data_raw/vocab12.csv"   "data_raw/vocab13.5.csv"
+ [4] "data_raw/vocab14.5.csv" "data_raw/vocab14.csv"   "data_raw/vocab15.5.csv"
+ [7] "data_raw/vocab15.csv"   "data_raw/vocab16.5.csv" "data_raw/vocab16.csv"  
+[10] "data_raw/vocab17.5.csv" "data_raw/vocab17.csv"   "data_raw/vocab18.5.csv"
+[13] "data_raw/vocab18.csv"   "data_raw/vocab19.5.csv" "data_raw/vocab19.csv"  
+[16] "data_raw/vocab20.5.csv" "data_raw/vocab20.csv"   "data_raw/vocab21.5.csv"
+[19] "data_raw/vocab21.csv"   "data_raw/vocab22.5.csv" "data_raw/vocab22.csv"  
+[22] "data_raw/vocab23.5.csv" "data_raw/vocab23.csv"   "data_raw/vocab24.csv"  
+```
+
+---
+
+count: false
+ 
+# Matching Patterns
+.panel1-morepatterns-rotate[
+
+``` r
+fnames &lt;- list.files(path="data_raw", full.names = T)
+*str_split(fnames, "/")
+```
+]
+ 
+.panel2-morepatterns-rotate[
+
+```
+[[1]]
+[1] "data_raw"      "vocab12.5.csv"
+
+[[2]]
+[1] "data_raw"    "vocab12.csv"
+
+[[3]]
+[1] "data_raw"      "vocab13.5.csv"
+
+[[4]]
+[1] "data_raw"      "vocab14.5.csv"
+
+[[5]]
+[1] "data_raw"    "vocab14.csv"
+
+[[6]]
+[1] "data_raw"      "vocab15.5.csv"
+
+[[7]]
+[1] "data_raw"    "vocab15.csv"
+
+[[8]]
+[1] "data_raw"      "vocab16.5.csv"
+
+[[9]]
+[1] "data_raw"    "vocab16.csv"
+
+[[10]]
+[1] "data_raw"      "vocab17.5.csv"
+
+[[11]]
+[1] "data_raw"    "vocab17.csv"
+
+[[12]]
+[1] "data_raw"      "vocab18.5.csv"
+
+[[13]]
+[1] "data_raw"    "vocab18.csv"
+
+[[14]]
+[1] "data_raw"      "vocab19.5.csv"
+
+[[15]]
+[1] "data_raw"    "vocab19.csv"
+
+[[16]]
+[1] "data_raw"      "vocab20.5.csv"
+
+[[17]]
+[1] "data_raw"    "vocab20.csv"
+
+[[18]]
+[1] "data_raw"      "vocab21.5.csv"
+
+[[19]]
+[1] "data_raw"    "vocab21.csv"
+
+[[20]]
+[1] "data_raw"      "vocab22.5.csv"
+
+[[21]]
+[1] "data_raw"    "vocab22.csv"
+
+[[22]]
+[1] "data_raw"      "vocab23.5.csv"
+
+[[23]]
+[1] "data_raw"    "vocab23.csv"
+
+[[24]]
+[1] "data_raw"    "vocab24.csv"
+```
+]
+
+---
+count: false
+ 
+# Matching Patterns
+.panel1-morepatterns-rotate[
+
+``` r
+fnames &lt;- list.files(path="data_raw", full.names = T)
+*str_replace_all(fnames, "data_raw/|.csv|vocab","")
+```
+]
+ 
+.panel2-morepatterns-rotate[
+
+```
+ [1] "12.5" "12"   "13.5" "14.5" "14"   "15.5" "15"   "16.5" "16"   "17.5"
+[11] "17"   "18.5" "18"   "19.5" "19"   "20.5" "20"   "21.5" "21"   "22.5"
+[21] "22"   "23.5" "23"   "24"  
+```
+]
+
+---
+count: false
+ 
+# Matching Patterns
+.panel1-morepatterns-rotate[
+
+``` r
+fnames &lt;- list.files(path="data_raw", full.names = T)
+*str_extract_all(fnames, "\\d{2}.\\d{1}|\\d{2}", simplify = T)
+```
+]
+ 
+.panel2-morepatterns-rotate[
+
+```
+      [,1]  
+ [1,] "12.5"
+ [2,] "12"  
+ [3,] "13.5"
+ [4,] "14.5"
+ [5,] "14"  
+ [6,] "15.5"
+ [7,] "15"  
+ [8,] "16.5"
+ [9,] "16"  
+[10,] "17.5"
+[11,] "17"  
+[12,] "18.5"
+[13,] "18"  
+[14,] "19.5"
+[15,] "19"  
+[16,] "20.5"
+[17,] "20"  
+[18,] "21.5"
+[19,] "21"  
+[20,] "22.5"
+[21,] "22"  
+[22,] "23.5"
+[23,] "23"  
+[24,] "24"  
+```
+]
+
+---
+count: false
+ 
+# Matching Patterns
+.panel1-morepatterns-rotate[
+
+``` r
+fnames &lt;- list.files(path="data_raw", full.names = T)
+*str_extract_all(fnames, "\\.[:alpha:]{1,4}", simplify = T)
+```
+]
+ 
+.panel2-morepatterns-rotate[
+
+```
+      [,1]  
+ [1,] ".csv"
+ [2,] ".csv"
+ [3,] ".csv"
+ [4,] ".csv"
+ [5,] ".csv"
+ [6,] ".csv"
+ [7,] ".csv"
+ [8,] ".csv"
+ [9,] ".csv"
+[10,] ".csv"
+[11,] ".csv"
+[12,] ".csv"
+[13,] ".csv"
+[14,] ".csv"
+[15,] ".csv"
+[16,] ".csv"
+[17,] ".csv"
+[18,] ".csv"
+[19,] ".csv"
+[20,] ".csv"
+[21,] ".csv"
+[22,] ".csv"
+[23,] ".csv"
+[24,] ".csv"
+```
+]
+
+---
+count: false
+ 
+# Matching Patterns
+.panel1-morepatterns-rotate[
+
+``` r
+fnames &lt;- list.files(path="data_raw", full.names = T)
+*str_extract_all(ds$word, boundary("word"), simplify = T)
+```
+]
+ 
+.panel2-morepatterns-rotate[
+
+```
+       [,1]         [,2]       
+  [1,] "book"       ""         
+  [2,] "dad"        ""         
+  [3,] "cat"        ""         
+  [4,] "baby"       ""         
+  [5,] "socks"      "shoes"    
+  [6,] "banana"     ""         
+  [7,] "cheese"     ""         
+  [8,] "shoes"      ""         
+  [9,] "monkey"     ""         
+ [10,] "hello"      ""         
+ [11,] "bear"       ""         
+ [12,] "milk"       "drink"    
+ [13,] "cleanup"    ""         
+ [14,] "grandpa"    ""         
+ [15,] "mouth"      ""         
+ [16,] "coffee"     ""         
+ [17,] "agua"       ""         
+ [18,] "octopus"    ""         
+ [19,] "wrist"      "watch"    
+ [20,] "shower"     ""         
+ [21,] "hyena"      ""         
+ [22,] "heart"      ""         
+ [23,] "singing"    ""         
+ [24,] "top"        ""         
+ [25,] "ball"       ""         
+ [26,] "dog"        "animal"   
+ [27,] "llama"      ""         
+ [28,] "turkey"     ""         
+ [29,] "berry"      ""         
+ [30,] "apple"      ""         
+ [31,] "oh"         "no"       
+ [32,] "go"         ""         
+ [33,] "car"        ""         
+ [34,] "that"       ""         
+ [35,] "more"       ""         
+ [36,] "peacock"    ""         
+ [37,] "cup"        ""         
+ [38,] "hide"       ""         
+ [39,] "too"        ""         
+ [40,] "blanket"    ""         
+ [41,] "peanut"     "butter"   
+ [42,] "running"    ""         
+ [43,] "empty"      ""         
+ [44,] "that"       "one"      
+ [45,] "sandal"     ""         
+ [46,] "bye"        "bye"      
+ [47,] "beep"       ""         
+ [48,] "hi"         ""         
+ [49,] "box"        ""         
+ [50,] "night"      "night"    
+ [51,] "jacket"     ""         
+ [52,] "dinosaur"   ""         
+ [53,] "wow"        ""         
+ [54,] "snack"      "food"     
+ [55,] "wash"       ""         
+ [56,] "stroller"   ""         
+ [57,] "shark"      ""         
+ [58,] "grandma"    ""         
+ [59,] "face"       ""         
+ [60,] "lemon"      ""         
+ [61,] "potty"      ""         
+ [62,] "the"        "end"      
+ [63,] "over"       "there"    
+ [64,] "make"       ""         
+ [65,] "diaper"     ""         
+ [66,] "bubble"     ""         
+ [67,] "fish"       ""         
+ [68,] "tea"        ""         
+ [69,] "peekaboo"   ""         
+ [70,] "mama"       ""         
+ [71,] "keys"       ""         
+ [72,] "yellow"     ""         
+ [73,] "pasta"      ""         
+ [74,] "spoon"      ""         
+ [75,] "light"      ""         
+ [76,] "button"     ""         
+ [77,] "penis"      ""         
+ [78,] "finger"     ""         
+ [79,] "this"       "one"      
+ [80,] "both"       ""         
+ [81,] "teeth"      ""         
+ [82,] "mmmm"       ""         
+ [83,] "lion"       ""         
+ [84,] "google"     ""         
+ [85,] "trash"      ""         
+ [86,] "cow"        ""         
+ [87,] "broccoli"   ""         
+ [88,] "yogurt"     ""         
+ [89,] "outside"    ""         
+ [90,] "toy"        ""         
+ [91,] "train"      ""         
+ [92,] "spaghetti"  ""         
+ [93,] "stairs"     ""         
+ [94,] "black"      ""         
+ [95,] "wipe"       ""         
+ [96,] "loud"       ""         
+ [97,] "uhoh"       ""         
+ [98,] "stick"      ""         
+ [99,] "hat"        ""         
+[100,] "elephant"   ""         
+[101,] "no"         ""         
+[102,] "yeah"       ""         
+[103,] "zebra"      ""         
+[104,] "circle"     ""         
+[105,] "lap"        ""         
+[106,] "towel"      ""         
+[107,] "back"       ""         
+[108,] "oatmeal"    ""         
+[109,] "xylophone"  ""         
+[110,] "crib"       ""         
+[111,] "where"      ""         
+[112,] "sticker"    ""         
+[113,] "cookie"     ""         
+[114,] "eating"     "sound"    
+[115,] "bee"        ""         
+[116,] "tree"       ""         
+[117,] "high"       "five"     
+[118,] "eat"        ""         
+[119,] "plate"      ""         
+[120,] "plane"      ""         
+[121,] "olive"      ""         
+[122,] "pepper"     "vegetable"
+[123,] "cough"      ""         
+[124,] "dolphin"    ""         
+[125,] "lay"        "down"     
+[126,] "poop"       ""         
+[127,] "done"       ""         
+[128,] "rabbit"     ""         
+[129,] "fist"       "bump"     
+[130,] "up"         ""         
+[131,] "tray"       ""         
+[132,] "people"     ""         
+[133,] "ice"        "cream"    
+[134,] "animal"     ""         
+[135,] "window"     ""         
+[136,] "letter"     ""         
+[137,] "walrus"     ""         
+[138,] "nose"       ""         
+[139,] "hippo"      ""         
+[140,] "tissue"     ""         
+[141,] "bread"      ""         
+[142,] "girl"       ""         
+[143,] "orange"     "color"    
+[144,] "frog"       ""         
+[145,] "rice"       ""         
+[146,] "art"        ""         
+[147,] "marker"     ""         
+[148,] "number"     ""         
+[149,] "kicking"    ""         
+[150,] "bag"        ""         
+[151,] "gentle"     ""         
+[152,] "pig"        ""         
+[153,] "pear"       ""         
+[154,] "horse"      ""         
+[155,] "here"       ""         
+[156,] "soap"       ""         
+[157,] "pee"        ""         
+[158,] "mine"       ""         
+[159,] "drum"       ""         
+[160,] "goes"       ""         
+[161,] "shorts"     ""         
+[162,] "gentle"     ""         
+[163,] "owl"        ""         
+[164,] "bird"       ""         
+[165,] "cereal"     ""         
+[166,] "flower"     ""         
+[167,] "school"     ""         
+[168,] "mirror"     ""         
+[169,] "finger"     "nail"     
+[170,] "lip"        ""         
+[171,] "music"      ""         
+[172,] "hold"       ""         
+[173,] "bite"       ""         
+[174,] "thank"      "you"      
+[175,] "zebra"      ""         
+[176,] "squirrel"   ""         
+[177,] "spider"     ""         
+[178,] "kiwi"       ""         
+[179,] "read"       ""         
+[180,] "picture"    ""         
+[181,] "bless"      "you"      
+[182,] "spatula"    ""         
+[183,] "clock"      ""         
+[184,] "happy"      ""         
+[185,] "racoon"     ""         
+[186,] "house"      ""         
+[187,] "pancake"    ""         
+[188,] "bumblebee"  ""         
+[189,] "watermelon" ""         
+[190,] "wheel"      ""         
+[191,] "computer"   ""         
+[192,] "snake"      ""         
+[193,] "wet"        ""         
+[194,] "dark"       ""         
+[195,] "curtain"    ""         
+[196,] "Jonah"      ""         
+[197,] "paper"      ""         
+[198,] "cheek"      ""         
+[199,] "shirt"      ""         
+[200,] "big"        ""         
+[201,] "roll"       "v"        
+[202,] "guitar"     ""         
+[203,] "zuchinni"   ""         
+[204,] "broken"     ""         
+[205,] "rhino"      ""         
+[206,] "pork"       ""         
+[207,] "belly"      ""         
+[208,] "help"       ""         
+[209,] "sheep"      ""         
+[210,] "dip"        ""         
+[211,] "butterfly"  ""         
+[212,] "bless"      "you"      
+[213,] "skateboard" ""         
+[214,] "woof"       ""         
+[215,] "move"       ""         
+[216,] "cap"        ""         
+[217,] "juice"      ""         
+[218,] "cracker"    ""         
+[219,] "down"       ""         
+[220,] "bamba"      ""         
+[221,] "do"         "it"       
+[222,] "little"     ""         
+[223,] "hot"        ""         
+[224,] "alligator"  ""         
+[225,] "pocket"     ""         
+[226,] "clip"       ""         
+[227,] "everybody"  ""         
+[228,] "close"      ""         
+[229,] "bib"        ""         
+[230,] "slide"      ""         
+[231,] "laundry"    ""         
+[232,] "away"       ""         
+[233,] "boat"       ""         
+[234,] "green"      ""         
+[235,] "stop"       ""         
+[236,] "meow"       ""         
+[237,] "bed"        ""         
+[238,] "gone"       ""         
+[239,] "fit"        ""         
+[240,] "wash"       ""         
+[241,] "open"       ""         
+[242,] "toes"       ""         
+[243,] "penguin"    ""         
+[244,] "fork"       ""         
+[245,] "red"        ""         
+[246,] "piece"      ""         
+[247,] "oink"       ""         
+[248,] "pepper"     "spice"    
+[249,] "garbage"    ""         
+[250,] "working"    ""         
+[251,] "yay"        ""         
+[252,] "cheers"     ""         
+[253,] "bus"        ""         
+[254,] "feet"       ""         
+[255,] "balloon"    ""         
+[256,] "duckie"     ""         
+[257,] "roar"       ""         
+[258,] "vacuum"     ""         
+[259,] "upside"     "down"     
+[260,] "ravioli"    ""         
+[261,] "sleep"      "sack"     
+[262,] "egg"        ""         
+[263,] "pants"      ""         
+[264,] "goose"      ""         
+[265,] "clap"       ""         
+[266,] "mail"       ""         
+[267,] "moo"        ""         
+[268,] "friend"     ""         
+[269,] "knife"      ""         
+[270,] "farm"       ""         
+[271,] "couch"      ""         
+[272,] "color"      ""         
+[273,] "cactus"     ""         
+[274,] "drink"      ""         
+[275,] "taco"       ""         
+[276,] "tortilla"   ""         
+[277,] "castle"     ""         
+[278,] "dolphin"    ""         
+[279,] "please"     ""         
+[280,] "right"      "there"    
+[281,] "chicken"    ""         
+[282,] "chair"      ""         
+[283,] "hand"       ""         
+[284,] "towel"      ""         
+[285,] "sweep"      ""         
+[286,] "breakfast"  ""         
+[287,] "crab"       ""         
+[288,] "count"      ""         
+[289,] "market"     ""         
+[290,] "booger"     ""         
+[291,] "carrot"     ""         
+[292,] "orange"     "fruit"    
+[293,] "rail"       ""         
+[294,] "robot"      ""         
+[295,] "chili"      ""         
+[296,] "star"       ""         
+[297,] "noodle"     ""         
+[298,] "castle"     ""         
+[299,] "bathroom"   ""         
+[300,] "cheers"     ""         
+[301,] "ear"        ""         
+[302,] "rock"       ""         
+[303,] "shopping"   ""         
+[304,] "tower"      ""         
+[305,] "alright"    ""         
+[306,] "green"      "bean"     
+[307,] "wiggle"     ""         
+[308,] "eye"        "gunk"     
+[309,] "avocado"    ""         
+[310,] "exercise"   ""         
+[311,] "jumping"    ""         
+[312,] "tail"       ""         
+[313,] "tent"       ""         
+[314,] "snail"      ""         
+[315,] "blueberry"  ""         
+[316,] "loud"       ""         
+[317,] "nectarine"  ""         
+[318,] "hug"        ""         
+[319,] "glasses"    ""         
+[320,] "home"       ""         
+[321,] "brush"      ""         
+[322,] "guitar"     "pick"     
+[323,] "bike"       ""         
+[324,] "pajamas"    ""         
+[325,] "pouch"      ""         
+[326,] "grape"      ""         
+[327,] "footloose"  ""         
+[328,] "page"       ""         
+[329,] "phone"      ""         
+[330,] "puzzle"     ""         
+[331,] "stove"      ""         
+[332,] "reach"      ""         
+[333,] "throw"      ""         
+[334,] "kitchen"    ""         
+[335,] "kiss"       ""         
+[336,] "swim"       ""         
+[337,] "climb"      ""         
+[338,] "happy"      ""         
+[339,] "haircut"    ""         
+[340,] "walk"       ""         
+[341,] "leaf"       ""         
+[342,] "park"       ""         
+[343,] "white"      ""         
+[344,] "that"       "way"      
+[345,] "teacher"    ""         
+[346,] "elbow"      ""         
+[347,] "hair"       ""         
+[348,] "table"      ""         
+[349,] "umbrella"   ""         
+[350,] "coaster"    ""         
+[351,] "bug"        ""         
+[352,] "show"       ""         
+[353,] "fall"       "down"     
+[354,] "boy"        ""         
+[355,] "pull"       ""         
+[356,] "gorilla"    "sound"    
+[357,] "basket"     ""         
+[358,] "toast"      ""         
+[359,] "three"      ""         
+[360,] "this"       ""         
+[361,] "purple"     ""         
+[362,] "neigh"      ""         
+[363,] "magnet"     ""         
+[364,] "upstairs"   ""         
+[365,] "like"       ""         
+[366,] "turn"       ""         
+[367,] "pillow"     ""         
+[368,] "baa"        ""         
+[369,] "kale"       ""         
+[370,] "plum"       ""         
+[371,] "excuse"     "me"       
+[372,] "get"        ""         
+[373,] "out"        ""         
+[374,] "button"     ""         
+[375,] "time"       ""         
+[376,] "tiger"      ""         
+[377,] "barn"       ""         
+[378,] "pink"       ""         
+[379,] "nurse"      ""         
+[380,] "tv"         ""         
+[381,] "dishes"     ""         
+[382,] "sauce"      ""         
+[383,] "catch"      ""         
+[384,] "sun"        ""         
+[385,] "sheet"      ""         
+[386,] "rooster"    ""         
+[387,] "dishwasher" ""         
+[388,] "tomato"     ""         
+[389,] "panda"      ""         
+[390,] "got"        "it"       
+[391,] "sky"        ""         
+[392,] "all"        ""         
+[393,] "shut"       ""         
+[394,] "change"     ""         
+[395,] "shoulder"   ""         
+[396,] "driving"    ""         
+[397,] "off"        ""         
+[398,] "cooking"    ""         
+[399,] "elbow"      ""         
+[400,] "found"      "it"       
+[401,] "on"         ""         
+[402,] "belly"      "button"   
+[403,] "family"     ""         
+[404,] "moon"       ""         
+[405,] "watch"      "v"        
+[406,] "polar"      "bear"     
+[407,] "camera"     ""         
+[408,] "pumpkin"    ""         
+[409,] "bounce"     ""         
+[410,] "see"        ""         
+[411,] "thumb"      ""         
+[412,] "playground" ""         
+[413,] "ice"        ""         
+[414,] "leopard"    ""         
+[415,] "swing"      ""         
+[416,] "push"       ""         
+[417,] "messy"      ""         
+[418,] "goat"       ""         
+[419,] "ride"       ""         
+[420,] "camel"      ""         
+[421,] "carpet"     ""         
+[422,] "sound"      ""         
+[423,] "fast"       ""         
+[424,] "napkin"     ""         
+[425,] "tickle"     ""         
+[426,] "soft"       ""         
+[427,] "fox"        ""         
+[428,] "crayon"     ""         
+[429,] "cut"        ""         
+[430,] "cry"        ""         
+[431,] "play"       ""         
+[432,] "rocket"     ""         
+[433,] "pot"        ""         
+[434,] "floor"      ""         
+[435,] "two"        ""         
+[436,] "dry"        ""         
+[437,] "bottle"     ""         
+[438,] "new"        ""         
+[439,] "spicy"      ""         
+[440,] "spin"       ""         
+```
+]
+
+&lt;style&gt;
+.panel1-morepatterns-rotate {
+  color: black;
+  width: 90.4615384615385%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-morepatterns-rotate {
+  color: black;
+  width: 7.53846153846154%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-morepatterns-rotate {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+count: false
+ 
+# Combining Strings
+.panel1-combiningstrings-rotate[
+
+``` r
+age &lt;- seq(from = 12, to = 24, by = .5)
+*paste0("data_raw/vocab", age, ".csv")
+```
+]
+ 
+.panel2-combiningstrings-rotate[
+
+```
+ [1] "data_raw/vocab12.csv"   "data_raw/vocab12.5.csv" "data_raw/vocab13.csv"  
+ [4] "data_raw/vocab13.5.csv" "data_raw/vocab14.csv"   "data_raw/vocab14.5.csv"
+ [7] "data_raw/vocab15.csv"   "data_raw/vocab15.5.csv" "data_raw/vocab16.csv"  
+[10] "data_raw/vocab16.5.csv" "data_raw/vocab17.csv"   "data_raw/vocab17.5.csv"
+[13] "data_raw/vocab18.csv"   "data_raw/vocab18.5.csv" "data_raw/vocab19.csv"  
+[16] "data_raw/vocab19.5.csv" "data_raw/vocab20.csv"   "data_raw/vocab20.5.csv"
+[19] "data_raw/vocab21.csv"   "data_raw/vocab21.5.csv" "data_raw/vocab22.csv"  
+[22] "data_raw/vocab22.5.csv" "data_raw/vocab23.csv"   "data_raw/vocab23.5.csv"
+[25] "data_raw/vocab24.csv"  
+```
+]
+
+---
+count: false
+ 
+# Combining Strings
+.panel1-combiningstrings-rotate[
+
+``` r
+age &lt;- seq(from = 12, to = 24, by = .5)
+*str_glue("data_raw/vocab{age}.csv")
+```
+]
+ 
+.panel2-combiningstrings-rotate[
+
+```
+data_raw/vocab12.csv
+data_raw/vocab12.5.csv
+data_raw/vocab13.csv
+data_raw/vocab13.5.csv
+data_raw/vocab14.csv
+data_raw/vocab14.5.csv
+data_raw/vocab15.csv
+data_raw/vocab15.5.csv
+data_raw/vocab16.csv
+data_raw/vocab16.5.csv
+data_raw/vocab17.csv
+data_raw/vocab17.5.csv
+data_raw/vocab18.csv
+data_raw/vocab18.5.csv
+data_raw/vocab19.csv
+data_raw/vocab19.5.csv
+data_raw/vocab20.csv
+data_raw/vocab20.5.csv
+data_raw/vocab21.csv
+data_raw/vocab21.5.csv
+data_raw/vocab22.csv
+data_raw/vocab22.5.csv
+data_raw/vocab23.csv
+data_raw/vocab23.5.csv
+data_raw/vocab24.csv
+```
+]
+
+&lt;style&gt;
+.panel1-combiningstrings-rotate {
+  color: black;
+  width: 90.4615384615385%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-combiningstrings-rotate {
+  color: black;
+  width: 7.53846153846154%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-combiningstrings-rotate {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+# Logical (T/F)
+
+- Logical data are usually created by comparisons or tests in R rather than data we collected
+  * Created by operators like `&gt;`,`&lt;`,`==`,`!=`,`&gt;=`, `%in%`, `is.na()`, `str_detect()`, etc.
+  * Also inside mutate(), filter(), etc.
+
+- FALSE = 0, TRUE = 1
+  * sum() counts matches and mean() gives a proportion of TRUEs
+
+---
+
+count: false
+# Logicals from Text
+
+``` r
+*contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+*contains_b
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+*typeof(contains_b)
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+*sum(contains_b)
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+sum(contains_b)
+*mean(contains_b)
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+sum(contains_b)
+mean(contains_b)
+*!contains_b
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+sum(contains_b)
+mean(contains_b)
+!contains_b
+*ds$word[contains_b]
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+sum(contains_b)
+mean(contains_b)
+!contains_b
+ds$word[contains_b]
+*ds %&gt;% mutate(contains_b = contains_b)
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+sum(contains_b)
+mean(contains_b)
+!contains_b
+ds$word[contains_b]
+ds %&gt;% mutate(contains_b = contains_b)
+*ds %&gt;% filter(contains_b)
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+sum(contains_b)
+mean(contains_b)
+!contains_b
+ds$word[contains_b]
+ds %&gt;% mutate(contains_b = contains_b)
+ds %&gt;% filter(contains_b)
+*ds %&gt;% mutate(b_and_vowels = contains_b &amp; str_detect(word, "[aeiou]"))
+```
+
+---
+count: false
+# Logicals from Text
+
+``` r
+contains_b &lt;- str_detect(ds$word, "b")  # TRUE if the word contains b
+contains_b
+typeof(contains_b)
+sum(contains_b)
+mean(contains_b)
+!contains_b
+ds$word[contains_b]
+ds %&gt;% mutate(contains_b = contains_b)
+ds %&gt;% filter(contains_b)
+ds %&gt;% mutate(b_and_vowels = contains_b &amp; str_detect(word, "[aeiou]"))
+*ds &lt;- ds %&gt;% mutate(b_or_startswithd = contains_b | str_starts(word, "d"))
+```
+
+&lt;style&gt;
+.panel1-logicals-auto {
+  color: black;
+  width: 98%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-logicals-auto {
+  color: black;
+  width: 0%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-logicals-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+---
+# Vectors and Lists: Collections of Values
+
 - Vectors are type-homogeneous
+
   * Numeric vectors, `c(1,2,3,4,5)`, `1:5`
   * Character vectors,  `c("Hello", "Goodbye")`
   * Logical vectors, `c(T, T, T, F, T, F)`
   * Vector items can be named `c(x = 1, y = 2)`
+
 - Lists are type-heterogeneous
+
   * Mix types, `list("1", 1, TRUE, 1:5)`
   * Tibbles are lists of vectors/lists of the same length
 
@@ -1315,1347 +2701,25 @@ $z
 
 
 
-
 ---
-# Character data (strings)
-
-- At minimum, working with characters is needed to deal with file paths
-
-- String functions let you clean up messy text input
-
-- Understanding how to construct and format strings can help you avoid hard-coding things like graph labels and output tables
-
-- Learning how to wrangle strings and exploit patterns helps write more efficient code (e.g., selecting and mutating with `contains()`, `starts_with()`, etc.)
-
-- The `stringr` package has a suite of helper functions for common string operations
-
-
----
-class: center, middle
-background-image: url("stringr.png")
-background-size: contain
-
----
-# Jonah's first words
-
-``` r
-ds$word
-```
-
-```
-  [1] "book"               "dad"                "cat"               
-  [4] "baby"               "socks/shoes"        "banana"            
-  [7] "cheese"             "shoes"              "monkey"            
- [10] "hello"              "bear"               "milk/drink"        
- [13] "cleanup"            "grandpa"            "mouth"             
- [16] "coffee"             "agua"               "octopus"           
- [19] "(wrist) watch"      "shower"             "hyena"             
- [22] "heart"              "singing"            "top"               
- [25] "ball"               "dog (animal)"       "llama"             
- [28] "turkey"             "berry"              "apple"             
- [31] "oh no"              "go"                 "car"               
- [34] "that"               "more"               "peacock"           
- [37] "cup"                "hide"               "too"               
- [40] "blanket"            "peanut butter"      "running"           
- [43] "empty"              "that one"           "sandal"            
- [46] "bye bye"            "beep"               "hi"                
- [49] "box"                "night-night"        "jacket"            
- [52] "dinosaur"           "wow"                "snack/food"        
- [55] "wash"               "stroller"           "shark"             
- [58] "grandma"            "face"               "lemon"             
- [61] "potty"              "the end"            "over there"        
- [64] "make"               "diaper"             "bubble"            
- [67] "fish"               "tea"                "peekaboo"          
- [70] "mama"               "keys"               "yellow"            
- [73] "pasta"              "spoon"              "light"             
- [76] "button"             "penis"              "finger"            
- [79] "this one"           "both"               "teeth"             
- [82] "mmmm"               "lion"               "google"            
- [85] "trash"              "cow"                "broccoli"          
- [88] "yogurt"             "outside"            "toy"               
- [91] "train"              "spaghetti"          "stairs"            
- [94] "black"              "wipe"               "loud"              
- [97] "uhoh"               "stick"              "hat"               
-[100] "elephant"           "no"                 "yeah"              
-[103] "zebra"              "circle"             "lap"               
-[106] "towel"              "back"               "oatmeal"           
-[109] "xylophone"          "crib"               "where"             
-[112] "sticker"            "cookie"             "[eating sound]"    
-[115] "bee"                "tree"               "high five"         
-[118] "eat"                "plate"              "plane"             
-[121] "olive"              "pepper (vegetable)" "cough"             
-[124] "dolphin"            "lay down"           "poop"              
-[127] "done"               "rabbit"             "(fist) bump"       
-[130] "up"                 "tray"               "people"            
-[133] "ice cream"          "animal"             "window"            
-[136] "letter"             "walrus"             "nose"              
-[139] "hippo"              "tissue"             "bread"             
-[142] "girl"               "orange (color)"     "frog"              
-[145] "rice"               "art"                "marker"            
-[148] "number"             "kicking"            "bag"               
-[151] "gentle"             "pig"                "pear"              
-[154] "horse"              "here"               "soap"              
-[157] "pee"                "mine"               "drum"              
-[160] "goes"               "shorts"             "gentle"            
-[163] "owl"                "bird"               "cereal"            
-[166] "flower"             "school"             "mirror"            
-[169] "(finger) nail"      "lip"                "music"             
-[172] "hold"               "bite"               "thank you"         
-[175] "zebra"              "squirrel"           "spider"            
-[178] "kiwi"               "read"               "picture"           
-[181] "bless you"          "spatula"            "clock"             
-[184] "happy"              "racoon"             "house"             
-[187] "pancake"            "bumblebee"          "watermelon"        
-[190] "wheel"              "computer"           "snake"             
-[193] "wet"                "dark"               "curtain"           
-[196] "Jonah"              "paper"              "cheek"             
-[199] "shirt"              "big"                "roll (v)"          
-[202] "guitar"             "zuchinni"           "broken"            
-[205] "rhino"              "pork"               "belly"             
-[208] "help"               "sheep"              "dip"               
-[211] "butterfly"          "bless you"          "skateboard"        
-[214] "woof"               "move"               "cap"               
-[217] "juice"              "cracker"            "down"              
-[220] "bamba"              "do it"              "little"            
-[223] "hot"                "alligator"          "pocket"            
-[226] "clip"               "everybody"          "close"             
-[229] "bib"                "slide"              "laundry"           
-[232] "away"               "boat"               "green"             
-[235] "stop"               "meow"               "bed"               
-[238] "gone"               "fit"                "wash"              
-[241] "open"               "toes"               "penguin"           
-[244] "fork"               "red"                "piece"             
-[247] "oink"               "pepper (spice)"     "garbage"           
-[250] "working"            "yay"                "cheers"            
-[253] "bus"                "feet"               "balloon"           
-[256] "duckie"             "roar"               "vacuum"            
-[259] "upside down"        "ravioli"            "sleep sack"        
-[262] "egg"                "pants"              "goose"             
-[265] "clap"               "mail"               "moo"               
-[268] "friend"             "knife"              "farm"              
-[271] "couch"              "color"              "cactus"            
-[274] "drink"              "taco"               "tortilla"          
-[277] "castle"             "dolphin"            "please"            
-[280] "right there"        "chicken"            "chair"             
-[283] "hand"               "towel"              "sweep"             
-[286] "breakfast"          "crab"               "count"             
-[289] "market"             "booger"             "carrot"            
-[292] "orange (fruit)"     "rail"               "robot"             
-[295] "chili"              "star"               "noodle"            
-[298] "castle"             "bathroom"           "cheers"            
-[301] "ear"                "rock"               "shopping"          
-[304] "tower"              "alright"            "green bean"        
-[307] "wiggle"             "(eye) gunk"         "avocado"           
-[310] "exercise"           "jumping"            "tail"              
-[313] "tent"               "snail"              "blueberry"         
-[316] "loud"               "nectarine"          "hug"               
-[319] "glasses"            "home"               "brush"             
-[322] "(guitar) pick"      "bike"               "pajamas"           
-[325] "pouch"              "grape"              "footloose"         
-[328] "page"               "phone"              "puzzle"            
-[331] "stove"              "reach"              "throw"             
-[334] "kitchen"            "kiss"               "swim"              
-[337] "climb"              "happy"              "haircut"           
-[340] "walk"               "leaf"               "park"              
-[343] "white"              "that way"           "teacher"           
-[346] "elbow"              "hair"               "table"             
-[349] "umbrella"           "coaster"            "bug"               
-[352] "show"               "fall down"          "boy"               
-[355] "pull"               "[gorilla sound]"    "basket"            
-[358] "toast"              "three"              "this"              
-[361] "purple"             "neigh"              "magnet"            
-[364] "upstairs"           "like"               "turn"              
-[367] "pillow"             "baa"                "kale"              
-[370] "plum"               "excuse me"          "get"               
-[373] "out"                "button"             "time"              
-[376] "tiger"              "barn"               "pink"              
-[379] "nurse"              "tv"                 "dishes"            
-[382] "sauce"              "catch"              "sun"               
-[385] "sheet"              "rooster"            "dishwasher"        
-[388] "tomato"             "panda"              "got it"            
-[391] "sky"                "all"                "shut"              
-[394] "change"             "shoulder"           "driving"           
-[397] "off"                "cooking"            "elbow"             
-[400] "found it"           "on"                 "belly button"      
-[403] "family"             "moon"               "watch (v)"         
-[406] "polar bear"         "camera"             "pumpkin"           
-[409] "bounce"             "see"                "thumb"             
-[412] "playground"         "ice"                "leopard"           
-[415] "swing"              "push"               "messy"             
-[418] "goat"               "ride"               "camel"             
-[421] "carpet"             "sound"              "fast"              
-[424] "napkin"             "tickle"             "soft"              
-[427] "fox"                "crayon"             "cut"               
-[430] "cry"                "play"               "rocket"            
-[433] "pot"                "floor"              "two"               
-[436] "dry"                "bottle"             "new"               
-[439] "spicy"              "spin"              
-```
-
----
-# Length, containing strings, counting strings
-
-``` r
-ds %&gt;% mutate(word_len = str_length(word), 
-              has_b = str_detect(word, "b"), 
-              num_b = str_count(word, "b"))
-```
-
-```
-# A tibble: 440 × 5
-   age   word        word_len has_b num_b
-   &lt;chr&gt; &lt;chr&gt;          &lt;int&gt; &lt;lgl&gt; &lt;int&gt;
- 1 12    book               4 TRUE      1
- 2 12.5  dad                3 FALSE     0
- 3 13.5  cat                3 FALSE     0
- 4 14    baby               4 TRUE      2
- 5 14.5  socks/shoes       11 FALSE     0
- 6 15    banana             6 TRUE      1
- 7 15.5  cheese             6 FALSE     0
- 8 16    shoes              5 FALSE     0
- 9 16.5  monkey             6 FALSE     0
-10 17    hello              5 FALSE     0
-# ℹ 430 more rows
-```
-
----
-class: center, middle
-background-image: url("regx.png")
-background-size: contain
-
----
-count: false
- 
-# Matching patterns
-.panel1-patterns-rotate[
-
-``` r
-*ds %&gt;% mutate(word_cleaned = str_remove_all(word, "[:punct:]"))
-# if the goal was to detect three-letter words this code does not work
-ds %&gt;% mutate(is_three_letter = str_detect(word, "\\b\\w{3}\\b"))
-```
-]
- 
-.panel2-patterns-rotate[
-
-```
-# A tibble: 440 × 3
-   age   word        word_cleaned
-   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;       
- 1 12    book        book        
- 2 12.5  dad         dad         
- 3 13.5  cat         cat         
- 4 14    baby        baby        
- 5 14.5  socks/shoes socksshoes  
- 6 15    banana      banana      
- 7 15.5  cheese      cheese      
- 8 16    shoes       shoes       
- 9 16.5  monkey      monkey      
-10 17    hello       hello       
-# ℹ 430 more rows
-```
-
-```
-# A tibble: 440 × 3
-   age   word        is_three_letter
-   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;          
- 1 12    book        FALSE          
- 2 12.5  dad         TRUE           
- 3 13.5  cat         TRUE           
- 4 14    baby        FALSE          
- 5 14.5  socks/shoes FALSE          
- 6 15    banana      FALSE          
- 7 15.5  cheese      FALSE          
- 8 16    shoes       FALSE          
- 9 16.5  monkey      FALSE          
-10 17    hello       FALSE          
-# ℹ 430 more rows
-```
-]
-
----
-count: false
- 
-# Matching patterns
-.panel1-patterns-rotate[
-
-``` r
-*ds %&gt;% mutate(word_cleaned = str_replace_all(word, "[:punct:]"," "))
-# if the goal was to detect three-letter words this code does not work
-ds %&gt;% mutate(is_three_letter = str_detect(word, "\\b\\w{3}\\b"))
-```
-]
- 
-.panel2-patterns-rotate[
-
-```
-# A tibble: 440 × 3
-   age   word        word_cleaned
-   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;       
- 1 12    book        book        
- 2 12.5  dad         dad         
- 3 13.5  cat         cat         
- 4 14    baby        baby        
- 5 14.5  socks/shoes socks shoes 
- 6 15    banana      banana      
- 7 15.5  cheese      cheese      
- 8 16    shoes       shoes       
- 9 16.5  monkey      monkey      
-10 17    hello       hello       
-# ℹ 430 more rows
-```
-
-```
-# A tibble: 440 × 3
-   age   word        is_three_letter
-   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;          
- 1 12    book        FALSE          
- 2 12.5  dad         TRUE           
- 3 13.5  cat         TRUE           
- 4 14    baby        FALSE          
- 5 14.5  socks/shoes FALSE          
- 6 15    banana      FALSE          
- 7 15.5  cheese      FALSE          
- 8 16    shoes       FALSE          
- 9 16.5  monkey      FALSE          
-10 17    hello       FALSE          
-# ℹ 430 more rows
-```
-]
-
----
-count: false
- 
-# Matching patterns
-.panel1-patterns-rotate[
-
-``` r
-*ds %&gt;% mutate(vowel_count = str_count(word, "[aeiou]"))
-# if the goal was to detect three-letter words this code does not work
-ds %&gt;% mutate(is_three_letter = str_detect(word, "\\b\\w{3}\\b"))
-```
-]
- 
-.panel2-patterns-rotate[
-
-```
-# A tibble: 440 × 3
-   age   word        vowel_count
-   &lt;chr&gt; &lt;chr&gt;             &lt;int&gt;
- 1 12    book                  2
- 2 12.5  dad                   1
- 3 13.5  cat                   1
- 4 14    baby                  1
- 5 14.5  socks/shoes           3
- 6 15    banana                3
- 7 15.5  cheese                3
- 8 16    shoes                 2
- 9 16.5  monkey                2
-10 17    hello                 2
-# ℹ 430 more rows
-```
-
-```
-# A tibble: 440 × 3
-   age   word        is_three_letter
-   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;          
- 1 12    book        FALSE          
- 2 12.5  dad         TRUE           
- 3 13.5  cat         TRUE           
- 4 14    baby        FALSE          
- 5 14.5  socks/shoes FALSE          
- 6 15    banana      FALSE          
- 7 15.5  cheese      FALSE          
- 8 16    shoes       FALSE          
- 9 16.5  monkey      FALSE          
-10 17    hello       FALSE          
-# ℹ 430 more rows
-```
-]
-
----
-count: false
- 
-# Matching patterns
-.panel1-patterns-rotate[
-
-``` r
-*#ds %&gt;% mutate(is_three_letter = str_detect(word, "[:alnum:{3}]")) #ROTATE  #ds %&gt;% mutate(is_three_letter = str_detect(word, "[:alnum:{3}]"))
-# if the goal was to detect three-letter words this code does not work
-ds %&gt;% mutate(is_three_letter = str_detect(word, "\\b\\w{3}\\b"))
-```
-]
- 
-.panel2-patterns-rotate[
-
-```
-# A tibble: 440 × 3
-   age   word        is_three_letter
-   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;          
- 1 12    book        FALSE          
- 2 12.5  dad         TRUE           
- 3 13.5  cat         TRUE           
- 4 14    baby        FALSE          
- 5 14.5  socks/shoes FALSE          
- 6 15    banana      FALSE          
- 7 15.5  cheese      FALSE          
- 8 16    shoes       FALSE          
- 9 16.5  monkey      FALSE          
-10 17    hello       FALSE          
-# ℹ 430 more rows
-```
-]
-
-&lt;style&gt;
-.panel1-patterns-rotate {
-  color: black;
-  width: 90.4615384615385%;
-  hight: 32%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-patterns-rotate {
-  color: black;
-  width: 7.53846153846154%;
-  hight: 32%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-patterns-rotate {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
-
-
----
-
-``` r
-fnames &lt;- list.files(path="data_raw", full.names = T)
-print(fnames)
-```
-
-```
- [1] "data_raw/vocab12.5.csv" "data_raw/vocab12.csv"   "data_raw/vocab13.5.csv"
- [4] "data_raw/vocab14.5.csv" "data_raw/vocab14.csv"   "data_raw/vocab15.5.csv"
- [7] "data_raw/vocab15.csv"   "data_raw/vocab16.5.csv" "data_raw/vocab16.csv"  
-[10] "data_raw/vocab17.5.csv" "data_raw/vocab17.csv"   "data_raw/vocab18.5.csv"
-[13] "data_raw/vocab18.csv"   "data_raw/vocab19.5.csv" "data_raw/vocab19.csv"  
-[16] "data_raw/vocab20.5.csv" "data_raw/vocab20.csv"   "data_raw/vocab21.5.csv"
-[19] "data_raw/vocab21.csv"   "data_raw/vocab22.5.csv" "data_raw/vocab22.csv"  
-[22] "data_raw/vocab23.5.csv" "data_raw/vocab23.csv"   "data_raw/vocab24.csv"  
-```
-
----
-
-count: false
- 
-# Matching patterns
-.panel1-morepatterns-rotate[
-
-``` r
-fnames &lt;- list.files(path="data_raw", full.names = T)
-*str_split(fnames, "/")
-```
-]
- 
-.panel2-morepatterns-rotate[
-
-```
-[[1]]
-[1] "data_raw"      "vocab12.5.csv"
-
-[[2]]
-[1] "data_raw"    "vocab12.csv"
-
-[[3]]
-[1] "data_raw"      "vocab13.5.csv"
-
-[[4]]
-[1] "data_raw"      "vocab14.5.csv"
-
-[[5]]
-[1] "data_raw"    "vocab14.csv"
-
-[[6]]
-[1] "data_raw"      "vocab15.5.csv"
-
-[[7]]
-[1] "data_raw"    "vocab15.csv"
-
-[[8]]
-[1] "data_raw"      "vocab16.5.csv"
-
-[[9]]
-[1] "data_raw"    "vocab16.csv"
-
-[[10]]
-[1] "data_raw"      "vocab17.5.csv"
-
-[[11]]
-[1] "data_raw"    "vocab17.csv"
-
-[[12]]
-[1] "data_raw"      "vocab18.5.csv"
-
-[[13]]
-[1] "data_raw"    "vocab18.csv"
-
-[[14]]
-[1] "data_raw"      "vocab19.5.csv"
-
-[[15]]
-[1] "data_raw"    "vocab19.csv"
-
-[[16]]
-[1] "data_raw"      "vocab20.5.csv"
-
-[[17]]
-[1] "data_raw"    "vocab20.csv"
-
-[[18]]
-[1] "data_raw"      "vocab21.5.csv"
-
-[[19]]
-[1] "data_raw"    "vocab21.csv"
-
-[[20]]
-[1] "data_raw"      "vocab22.5.csv"
-
-[[21]]
-[1] "data_raw"    "vocab22.csv"
-
-[[22]]
-[1] "data_raw"      "vocab23.5.csv"
-
-[[23]]
-[1] "data_raw"    "vocab23.csv"
-
-[[24]]
-[1] "data_raw"    "vocab24.csv"
-```
-]
-
----
-count: false
- 
-# Matching patterns
-.panel1-morepatterns-rotate[
-
-``` r
-fnames &lt;- list.files(path="data_raw", full.names = T)
-*str_replace_all(fnames, "data_raw/|.csv|vocab","")
-```
-]
- 
-.panel2-morepatterns-rotate[
-
-```
- [1] "12.5" "12"   "13.5" "14.5" "14"   "15.5" "15"   "16.5" "16"   "17.5"
-[11] "17"   "18.5" "18"   "19.5" "19"   "20.5" "20"   "21.5" "21"   "22.5"
-[21] "22"   "23.5" "23"   "24"  
-```
-]
-
----
-count: false
- 
-# Matching patterns
-.panel1-morepatterns-rotate[
-
-``` r
-fnames &lt;- list.files(path="data_raw", full.names = T)
-*str_extract_all(fnames, "\\d{2}.\\d{1}|\\d{2}", simplify = T)
-```
-]
- 
-.panel2-morepatterns-rotate[
-
-```
-      [,1]  
- [1,] "12.5"
- [2,] "12"  
- [3,] "13.5"
- [4,] "14.5"
- [5,] "14"  
- [6,] "15.5"
- [7,] "15"  
- [8,] "16.5"
- [9,] "16"  
-[10,] "17.5"
-[11,] "17"  
-[12,] "18.5"
-[13,] "18"  
-[14,] "19.5"
-[15,] "19"  
-[16,] "20.5"
-[17,] "20"  
-[18,] "21.5"
-[19,] "21"  
-[20,] "22.5"
-[21,] "22"  
-[22,] "23.5"
-[23,] "23"  
-[24,] "24"  
-```
-]
-
----
-count: false
- 
-# Matching patterns
-.panel1-morepatterns-rotate[
-
-``` r
-fnames &lt;- list.files(path="data_raw", full.names = T)
-*str_extract_all(fnames, "\\.[:alpha:]{1,4}", simplify = T)
-```
-]
- 
-.panel2-morepatterns-rotate[
-
-```
-      [,1]  
- [1,] ".csv"
- [2,] ".csv"
- [3,] ".csv"
- [4,] ".csv"
- [5,] ".csv"
- [6,] ".csv"
- [7,] ".csv"
- [8,] ".csv"
- [9,] ".csv"
-[10,] ".csv"
-[11,] ".csv"
-[12,] ".csv"
-[13,] ".csv"
-[14,] ".csv"
-[15,] ".csv"
-[16,] ".csv"
-[17,] ".csv"
-[18,] ".csv"
-[19,] ".csv"
-[20,] ".csv"
-[21,] ".csv"
-[22,] ".csv"
-[23,] ".csv"
-[24,] ".csv"
-```
-]
-
----
-count: false
- 
-# Matching patterns
-.panel1-morepatterns-rotate[
-
-``` r
-fnames &lt;- list.files(path="data_raw", full.names = T)
-*str_extract_all(ds$word, boundary("word"), simplify = T)
-```
-]
- 
-.panel2-morepatterns-rotate[
-
-```
-       [,1]         [,2]       
-  [1,] "book"       ""         
-  [2,] "dad"        ""         
-  [3,] "cat"        ""         
-  [4,] "baby"       ""         
-  [5,] "socks"      "shoes"    
-  [6,] "banana"     ""         
-  [7,] "cheese"     ""         
-  [8,] "shoes"      ""         
-  [9,] "monkey"     ""         
- [10,] "hello"      ""         
- [11,] "bear"       ""         
- [12,] "milk"       "drink"    
- [13,] "cleanup"    ""         
- [14,] "grandpa"    ""         
- [15,] "mouth"      ""         
- [16,] "coffee"     ""         
- [17,] "agua"       ""         
- [18,] "octopus"    ""         
- [19,] "wrist"      "watch"    
- [20,] "shower"     ""         
- [21,] "hyena"      ""         
- [22,] "heart"      ""         
- [23,] "singing"    ""         
- [24,] "top"        ""         
- [25,] "ball"       ""         
- [26,] "dog"        "animal"   
- [27,] "llama"      ""         
- [28,] "turkey"     ""         
- [29,] "berry"      ""         
- [30,] "apple"      ""         
- [31,] "oh"         "no"       
- [32,] "go"         ""         
- [33,] "car"        ""         
- [34,] "that"       ""         
- [35,] "more"       ""         
- [36,] "peacock"    ""         
- [37,] "cup"        ""         
- [38,] "hide"       ""         
- [39,] "too"        ""         
- [40,] "blanket"    ""         
- [41,] "peanut"     "butter"   
- [42,] "running"    ""         
- [43,] "empty"      ""         
- [44,] "that"       "one"      
- [45,] "sandal"     ""         
- [46,] "bye"        "bye"      
- [47,] "beep"       ""         
- [48,] "hi"         ""         
- [49,] "box"        ""         
- [50,] "night"      "night"    
- [51,] "jacket"     ""         
- [52,] "dinosaur"   ""         
- [53,] "wow"        ""         
- [54,] "snack"      "food"     
- [55,] "wash"       ""         
- [56,] "stroller"   ""         
- [57,] "shark"      ""         
- [58,] "grandma"    ""         
- [59,] "face"       ""         
- [60,] "lemon"      ""         
- [61,] "potty"      ""         
- [62,] "the"        "end"      
- [63,] "over"       "there"    
- [64,] "make"       ""         
- [65,] "diaper"     ""         
- [66,] "bubble"     ""         
- [67,] "fish"       ""         
- [68,] "tea"        ""         
- [69,] "peekaboo"   ""         
- [70,] "mama"       ""         
- [71,] "keys"       ""         
- [72,] "yellow"     ""         
- [73,] "pasta"      ""         
- [74,] "spoon"      ""         
- [75,] "light"      ""         
- [76,] "button"     ""         
- [77,] "penis"      ""         
- [78,] "finger"     ""         
- [79,] "this"       "one"      
- [80,] "both"       ""         
- [81,] "teeth"      ""         
- [82,] "mmmm"       ""         
- [83,] "lion"       ""         
- [84,] "google"     ""         
- [85,] "trash"      ""         
- [86,] "cow"        ""         
- [87,] "broccoli"   ""         
- [88,] "yogurt"     ""         
- [89,] "outside"    ""         
- [90,] "toy"        ""         
- [91,] "train"      ""         
- [92,] "spaghetti"  ""         
- [93,] "stairs"     ""         
- [94,] "black"      ""         
- [95,] "wipe"       ""         
- [96,] "loud"       ""         
- [97,] "uhoh"       ""         
- [98,] "stick"      ""         
- [99,] "hat"        ""         
-[100,] "elephant"   ""         
-[101,] "no"         ""         
-[102,] "yeah"       ""         
-[103,] "zebra"      ""         
-[104,] "circle"     ""         
-[105,] "lap"        ""         
-[106,] "towel"      ""         
-[107,] "back"       ""         
-[108,] "oatmeal"    ""         
-[109,] "xylophone"  ""         
-[110,] "crib"       ""         
-[111,] "where"      ""         
-[112,] "sticker"    ""         
-[113,] "cookie"     ""         
-[114,] "eating"     "sound"    
-[115,] "bee"        ""         
-[116,] "tree"       ""         
-[117,] "high"       "five"     
-[118,] "eat"        ""         
-[119,] "plate"      ""         
-[120,] "plane"      ""         
-[121,] "olive"      ""         
-[122,] "pepper"     "vegetable"
-[123,] "cough"      ""         
-[124,] "dolphin"    ""         
-[125,] "lay"        "down"     
-[126,] "poop"       ""         
-[127,] "done"       ""         
-[128,] "rabbit"     ""         
-[129,] "fist"       "bump"     
-[130,] "up"         ""         
-[131,] "tray"       ""         
-[132,] "people"     ""         
-[133,] "ice"        "cream"    
-[134,] "animal"     ""         
-[135,] "window"     ""         
-[136,] "letter"     ""         
-[137,] "walrus"     ""         
-[138,] "nose"       ""         
-[139,] "hippo"      ""         
-[140,] "tissue"     ""         
-[141,] "bread"      ""         
-[142,] "girl"       ""         
-[143,] "orange"     "color"    
-[144,] "frog"       ""         
-[145,] "rice"       ""         
-[146,] "art"        ""         
-[147,] "marker"     ""         
-[148,] "number"     ""         
-[149,] "kicking"    ""         
-[150,] "bag"        ""         
-[151,] "gentle"     ""         
-[152,] "pig"        ""         
-[153,] "pear"       ""         
-[154,] "horse"      ""         
-[155,] "here"       ""         
-[156,] "soap"       ""         
-[157,] "pee"        ""         
-[158,] "mine"       ""         
-[159,] "drum"       ""         
-[160,] "goes"       ""         
-[161,] "shorts"     ""         
-[162,] "gentle"     ""         
-[163,] "owl"        ""         
-[164,] "bird"       ""         
-[165,] "cereal"     ""         
-[166,] "flower"     ""         
-[167,] "school"     ""         
-[168,] "mirror"     ""         
-[169,] "finger"     "nail"     
-[170,] "lip"        ""         
-[171,] "music"      ""         
-[172,] "hold"       ""         
-[173,] "bite"       ""         
-[174,] "thank"      "you"      
-[175,] "zebra"      ""         
-[176,] "squirrel"   ""         
-[177,] "spider"     ""         
-[178,] "kiwi"       ""         
-[179,] "read"       ""         
-[180,] "picture"    ""         
-[181,] "bless"      "you"      
-[182,] "spatula"    ""         
-[183,] "clock"      ""         
-[184,] "happy"      ""         
-[185,] "racoon"     ""         
-[186,] "house"      ""         
-[187,] "pancake"    ""         
-[188,] "bumblebee"  ""         
-[189,] "watermelon" ""         
-[190,] "wheel"      ""         
-[191,] "computer"   ""         
-[192,] "snake"      ""         
-[193,] "wet"        ""         
-[194,] "dark"       ""         
-[195,] "curtain"    ""         
-[196,] "Jonah"      ""         
-[197,] "paper"      ""         
-[198,] "cheek"      ""         
-[199,] "shirt"      ""         
-[200,] "big"        ""         
-[201,] "roll"       "v"        
-[202,] "guitar"     ""         
-[203,] "zuchinni"   ""         
-[204,] "broken"     ""         
-[205,] "rhino"      ""         
-[206,] "pork"       ""         
-[207,] "belly"      ""         
-[208,] "help"       ""         
-[209,] "sheep"      ""         
-[210,] "dip"        ""         
-[211,] "butterfly"  ""         
-[212,] "bless"      "you"      
-[213,] "skateboard" ""         
-[214,] "woof"       ""         
-[215,] "move"       ""         
-[216,] "cap"        ""         
-[217,] "juice"      ""         
-[218,] "cracker"    ""         
-[219,] "down"       ""         
-[220,] "bamba"      ""         
-[221,] "do"         "it"       
-[222,] "little"     ""         
-[223,] "hot"        ""         
-[224,] "alligator"  ""         
-[225,] "pocket"     ""         
-[226,] "clip"       ""         
-[227,] "everybody"  ""         
-[228,] "close"      ""         
-[229,] "bib"        ""         
-[230,] "slide"      ""         
-[231,] "laundry"    ""         
-[232,] "away"       ""         
-[233,] "boat"       ""         
-[234,] "green"      ""         
-[235,] "stop"       ""         
-[236,] "meow"       ""         
-[237,] "bed"        ""         
-[238,] "gone"       ""         
-[239,] "fit"        ""         
-[240,] "wash"       ""         
-[241,] "open"       ""         
-[242,] "toes"       ""         
-[243,] "penguin"    ""         
-[244,] "fork"       ""         
-[245,] "red"        ""         
-[246,] "piece"      ""         
-[247,] "oink"       ""         
-[248,] "pepper"     "spice"    
-[249,] "garbage"    ""         
-[250,] "working"    ""         
-[251,] "yay"        ""         
-[252,] "cheers"     ""         
-[253,] "bus"        ""         
-[254,] "feet"       ""         
-[255,] "balloon"    ""         
-[256,] "duckie"     ""         
-[257,] "roar"       ""         
-[258,] "vacuum"     ""         
-[259,] "upside"     "down"     
-[260,] "ravioli"    ""         
-[261,] "sleep"      "sack"     
-[262,] "egg"        ""         
-[263,] "pants"      ""         
-[264,] "goose"      ""         
-[265,] "clap"       ""         
-[266,] "mail"       ""         
-[267,] "moo"        ""         
-[268,] "friend"     ""         
-[269,] "knife"      ""         
-[270,] "farm"       ""         
-[271,] "couch"      ""         
-[272,] "color"      ""         
-[273,] "cactus"     ""         
-[274,] "drink"      ""         
-[275,] "taco"       ""         
-[276,] "tortilla"   ""         
-[277,] "castle"     ""         
-[278,] "dolphin"    ""         
-[279,] "please"     ""         
-[280,] "right"      "there"    
-[281,] "chicken"    ""         
-[282,] "chair"      ""         
-[283,] "hand"       ""         
-[284,] "towel"      ""         
-[285,] "sweep"      ""         
-[286,] "breakfast"  ""         
-[287,] "crab"       ""         
-[288,] "count"      ""         
-[289,] "market"     ""         
-[290,] "booger"     ""         
-[291,] "carrot"     ""         
-[292,] "orange"     "fruit"    
-[293,] "rail"       ""         
-[294,] "robot"      ""         
-[295,] "chili"      ""         
-[296,] "star"       ""         
-[297,] "noodle"     ""         
-[298,] "castle"     ""         
-[299,] "bathroom"   ""         
-[300,] "cheers"     ""         
-[301,] "ear"        ""         
-[302,] "rock"       ""         
-[303,] "shopping"   ""         
-[304,] "tower"      ""         
-[305,] "alright"    ""         
-[306,] "green"      "bean"     
-[307,] "wiggle"     ""         
-[308,] "eye"        "gunk"     
-[309,] "avocado"    ""         
-[310,] "exercise"   ""         
-[311,] "jumping"    ""         
-[312,] "tail"       ""         
-[313,] "tent"       ""         
-[314,] "snail"      ""         
-[315,] "blueberry"  ""         
-[316,] "loud"       ""         
-[317,] "nectarine"  ""         
-[318,] "hug"        ""         
-[319,] "glasses"    ""         
-[320,] "home"       ""         
-[321,] "brush"      ""         
-[322,] "guitar"     "pick"     
-[323,] "bike"       ""         
-[324,] "pajamas"    ""         
-[325,] "pouch"      ""         
-[326,] "grape"      ""         
-[327,] "footloose"  ""         
-[328,] "page"       ""         
-[329,] "phone"      ""         
-[330,] "puzzle"     ""         
-[331,] "stove"      ""         
-[332,] "reach"      ""         
-[333,] "throw"      ""         
-[334,] "kitchen"    ""         
-[335,] "kiss"       ""         
-[336,] "swim"       ""         
-[337,] "climb"      ""         
-[338,] "happy"      ""         
-[339,] "haircut"    ""         
-[340,] "walk"       ""         
-[341,] "leaf"       ""         
-[342,] "park"       ""         
-[343,] "white"      ""         
-[344,] "that"       "way"      
-[345,] "teacher"    ""         
-[346,] "elbow"      ""         
-[347,] "hair"       ""         
-[348,] "table"      ""         
-[349,] "umbrella"   ""         
-[350,] "coaster"    ""         
-[351,] "bug"        ""         
-[352,] "show"       ""         
-[353,] "fall"       "down"     
-[354,] "boy"        ""         
-[355,] "pull"       ""         
-[356,] "gorilla"    "sound"    
-[357,] "basket"     ""         
-[358,] "toast"      ""         
-[359,] "three"      ""         
-[360,] "this"       ""         
-[361,] "purple"     ""         
-[362,] "neigh"      ""         
-[363,] "magnet"     ""         
-[364,] "upstairs"   ""         
-[365,] "like"       ""         
-[366,] "turn"       ""         
-[367,] "pillow"     ""         
-[368,] "baa"        ""         
-[369,] "kale"       ""         
-[370,] "plum"       ""         
-[371,] "excuse"     "me"       
-[372,] "get"        ""         
-[373,] "out"        ""         
-[374,] "button"     ""         
-[375,] "time"       ""         
-[376,] "tiger"      ""         
-[377,] "barn"       ""         
-[378,] "pink"       ""         
-[379,] "nurse"      ""         
-[380,] "tv"         ""         
-[381,] "dishes"     ""         
-[382,] "sauce"      ""         
-[383,] "catch"      ""         
-[384,] "sun"        ""         
-[385,] "sheet"      ""         
-[386,] "rooster"    ""         
-[387,] "dishwasher" ""         
-[388,] "tomato"     ""         
-[389,] "panda"      ""         
-[390,] "got"        "it"       
-[391,] "sky"        ""         
-[392,] "all"        ""         
-[393,] "shut"       ""         
-[394,] "change"     ""         
-[395,] "shoulder"   ""         
-[396,] "driving"    ""         
-[397,] "off"        ""         
-[398,] "cooking"    ""         
-[399,] "elbow"      ""         
-[400,] "found"      "it"       
-[401,] "on"         ""         
-[402,] "belly"      "button"   
-[403,] "family"     ""         
-[404,] "moon"       ""         
-[405,] "watch"      "v"        
-[406,] "polar"      "bear"     
-[407,] "camera"     ""         
-[408,] "pumpkin"    ""         
-[409,] "bounce"     ""         
-[410,] "see"        ""         
-[411,] "thumb"      ""         
-[412,] "playground" ""         
-[413,] "ice"        ""         
-[414,] "leopard"    ""         
-[415,] "swing"      ""         
-[416,] "push"       ""         
-[417,] "messy"      ""         
-[418,] "goat"       ""         
-[419,] "ride"       ""         
-[420,] "camel"      ""         
-[421,] "carpet"     ""         
-[422,] "sound"      ""         
-[423,] "fast"       ""         
-[424,] "napkin"     ""         
-[425,] "tickle"     ""         
-[426,] "soft"       ""         
-[427,] "fox"        ""         
-[428,] "crayon"     ""         
-[429,] "cut"        ""         
-[430,] "cry"        ""         
-[431,] "play"       ""         
-[432,] "rocket"     ""         
-[433,] "pot"        ""         
-[434,] "floor"      ""         
-[435,] "two"        ""         
-[436,] "dry"        ""         
-[437,] "bottle"     ""         
-[438,] "new"        ""         
-[439,] "spicy"      ""         
-[440,] "spin"       ""         
-```
-]
-
-&lt;style&gt;
-.panel1-morepatterns-rotate {
-  color: black;
-  width: 90.4615384615385%;
-  hight: 32%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-morepatterns-rotate {
-  color: black;
-  width: 7.53846153846154%;
-  hight: 32%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-morepatterns-rotate {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
-
-
----
-count: false
- 
-# Combining strings
-.panel1-combiningstrings-rotate[
-
-``` r
-age &lt;- seq(from = 12, to = 24, by = .5)
-*paste0("data_raw/vocab", age, ".csv")
-```
-]
- 
-.panel2-combiningstrings-rotate[
-
-```
- [1] "data_raw/vocab12.csv"   "data_raw/vocab12.5.csv" "data_raw/vocab13.csv"  
- [4] "data_raw/vocab13.5.csv" "data_raw/vocab14.csv"   "data_raw/vocab14.5.csv"
- [7] "data_raw/vocab15.csv"   "data_raw/vocab15.5.csv" "data_raw/vocab16.csv"  
-[10] "data_raw/vocab16.5.csv" "data_raw/vocab17.csv"   "data_raw/vocab17.5.csv"
-[13] "data_raw/vocab18.csv"   "data_raw/vocab18.5.csv" "data_raw/vocab19.csv"  
-[16] "data_raw/vocab19.5.csv" "data_raw/vocab20.csv"   "data_raw/vocab20.5.csv"
-[19] "data_raw/vocab21.csv"   "data_raw/vocab21.5.csv" "data_raw/vocab22.csv"  
-[22] "data_raw/vocab22.5.csv" "data_raw/vocab23.csv"   "data_raw/vocab23.5.csv"
-[25] "data_raw/vocab24.csv"  
-```
-]
-
----
-count: false
- 
-# Combining strings
-.panel1-combiningstrings-rotate[
-
-``` r
-age &lt;- seq(from = 12, to = 24, by = .5)
-*str_glue("data_raw/vocab{age}.csv")
-```
-]
- 
-.panel2-combiningstrings-rotate[
-
-```
-data_raw/vocab12.csv
-data_raw/vocab12.5.csv
-data_raw/vocab13.csv
-data_raw/vocab13.5.csv
-data_raw/vocab14.csv
-data_raw/vocab14.5.csv
-data_raw/vocab15.csv
-data_raw/vocab15.5.csv
-data_raw/vocab16.csv
-data_raw/vocab16.5.csv
-data_raw/vocab17.csv
-data_raw/vocab17.5.csv
-data_raw/vocab18.csv
-data_raw/vocab18.5.csv
-data_raw/vocab19.csv
-data_raw/vocab19.5.csv
-data_raw/vocab20.csv
-data_raw/vocab20.5.csv
-data_raw/vocab21.csv
-data_raw/vocab21.5.csv
-data_raw/vocab22.csv
-data_raw/vocab22.5.csv
-data_raw/vocab23.csv
-data_raw/vocab23.5.csv
-data_raw/vocab24.csv
-```
-]
-
----
-count: false
- 
-# Combining strings
-.panel1-combiningstrings-rotate[
-
-``` r
-age &lt;- seq(from = 12, to = 24, by = .5)
-*str_glue("Tabea last modified these slides at {now()}")
-```
-]
- 
-.panel2-combiningstrings-rotate[
-
-```
-Tabea last modified these slides at 2026-10-16 13:19:39.10065
-```
-]
-
----
-count: false
- 
-# Combining strings
-.panel1-combiningstrings-rotate[
-
-``` r
-age &lt;- seq(from = 12, to = 24, by = .5)
-*str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 3)
-```
-]
- 
-.panel2-combiningstrings-rotate[
-
-```
-Here is pi to 3 digits: 3.14
-```
-]
-
----
-count: false
- 
-# Combining strings
-.panel1-combiningstrings-rotate[
-
-``` r
-age &lt;- seq(from = 12, to = 24, by = .5)
-*str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 4)
-```
-]
- 
-.panel2-combiningstrings-rotate[
-
-```
-Here is pi to 4 digits: 3.142
-```
-]
-
----
-count: false
- 
-# Combining strings
-.panel1-combiningstrings-rotate[
-
-``` r
-age &lt;- seq(from = 12, to = 24, by = .5)
-*str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 5)
-```
-]
- 
-.panel2-combiningstrings-rotate[
-
-```
-Here is pi to 5 digits: 3.1416
-```
-]
-
----
-count: false
- 
-# Combining strings
-.panel1-combiningstrings-rotate[
-
-``` r
-age &lt;- seq(from = 12, to = 24, by = .5)
-*str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 6)
-```
-]
- 
-.panel2-combiningstrings-rotate[
-
-```
-Here is pi to 6 digits: 3.14159
-```
-]
-
-&lt;style&gt;
-.panel1-combiningstrings-rotate {
-  color: black;
-  width: 90.4615384615385%;
-  hight: 32%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-combiningstrings-rotate {
-  color: black;
-  width: 7.53846153846154%;
-  hight: 32%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-combiningstrings-rotate {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: none;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
----
-# Working with dates and times
+# Working with Dates and Times
 - Correctly parse dates/times from character data
 
 - Calculate differences between dates/times (e.g., ages, task length)
 
 - Determine local time using time zones
 
-- Lots of options within the `lubridate` package
 
 
 
 ---
 count: false
  
-# Parsing dates
+# Parsing Dates
 .panel1-parse-rotate[
 
 ``` r
-dates  # ROTATE
+dates
 *dates %&gt;% mutate(dates1_parsed = ymd(dates1))
 ```
 ]
@@ -2686,11 +2750,11 @@ dates  # ROTATE
 ---
 count: false
  
-# Parsing dates
+# Parsing Dates
 .panel1-parse-rotate[
 
 ``` r
-dates  # ROTATE
+dates
 *dates %&gt;% mutate(dates2_parsed = mdy(dates2))
 ```
 ]
@@ -2721,11 +2785,11 @@ dates  # ROTATE
 ---
 count: false
  
-# Parsing dates
+# Parsing Dates
 .panel1-parse-rotate[
 
 ``` r
-dates  # ROTATE
+dates
 *dates %&gt;% mutate(dates3_parsed = parse_date(dates3, format = "%B %d, %Y"))
 ```
 ]
@@ -2785,7 +2849,7 @@ dates  # ROTATE
 
 
 ---
-# Time is weird
+# Time is Weird
 
 - Leap days and leap seconds mean that physical time is not the same as calendar time
   * lubridate `durations` represent physical time
@@ -3149,7 +3213,7 @@ t2 &lt;- as_datetime("2022-01-27 13:39:28", tz = "America/New_York")
 t2-t1
 t3 &lt;- as_datetime("2021-10-15 10:39:28", tz = "America/Los_Angeles")
 t3
-*as.period(interval(start = t3, end = t1), unit = "days")
+*t4 &lt;- as_datetime(now())
 ```
 ]
  
@@ -3169,10 +3233,6 @@ Time difference of 0 secs
 
 ```
 [1] "2021-10-15 10:39:28 PDT"
-```
-
-```
-[1] "104d 1H 0M 0S"
 ```
 ]
 
@@ -3190,8 +3250,8 @@ t2 &lt;- as_datetime("2022-01-27 13:39:28", tz = "America/New_York")
 t2-t1
 t3 &lt;- as_datetime("2021-10-15 10:39:28", tz = "America/Los_Angeles")
 t3
-as.period(interval(start = t3, end = t1), unit = "days")
-*with_tz(t3, "America/New_York")
+t4 &lt;- as_datetime(now())
+*t4
 ```
 ]
  
@@ -3214,11 +3274,7 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "104d 1H 0M 0S"
-```
-
-```
-[1] "2021-10-15 13:39:28 EDT"
+[1] "2026-10-19 11:52:15 PDT"
 ```
 ]
 
@@ -3236,9 +3292,9 @@ t2 &lt;- as_datetime("2022-01-27 13:39:28", tz = "America/New_York")
 t2-t1
 t3 &lt;- as_datetime("2021-10-15 10:39:28", tz = "America/Los_Angeles")
 t3
-as.period(interval(start = t3, end = t1), unit = "days")
-with_tz(t3, "America/New_York")
-*force_tz(t3, "America/New_York")
+t4 &lt;- as_datetime(now())
+t4
+*as.period(interval(start = t1, end = t4), unit = "days")
 ```
 ]
  
@@ -3261,15 +3317,120 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "104d 1H 0M 0S"
+[1] "2026-10-19 11:52:15 PDT"
 ```
 
 ```
-[1] "2021-10-15 13:39:28 EDT"
+[1] "1726d 0H 12M 47.2731530666351S"
+```
+]
+
+---
+count: false
+ 
+# Time Zones
+.panel1-tz-auto[
+
+``` r
+t1 &lt;- as_datetime("2022-01-27 10:39:28", tz = "America/Los_Angeles")
+t1
+tz(t1)
+t2 &lt;- as_datetime("2022-01-27 13:39:28", tz = "America/New_York")
+t2-t1
+t3 &lt;- as_datetime("2021-10-15 10:39:28", tz = "America/Los_Angeles")
+t3
+t4 &lt;- as_datetime(now())
+t4
+as.period(interval(start = t1, end = t4), unit = "days")
+*with_tz(t4, "America/New_York")
+```
+]
+ 
+.panel2-tz-auto[
+
+```
+[1] "2022-01-27 10:39:28 PST"
 ```
 
 ```
-[1] "2021-10-15 10:39:28 EDT"
+[1] "America/Los_Angeles"
+```
+
+```
+Time difference of 0 secs
+```
+
+```
+[1] "2021-10-15 10:39:28 PDT"
+```
+
+```
+[1] "2026-10-19 11:52:15 PDT"
+```
+
+```
+[1] "1726d 0H 12M 47.3762099742889S"
+```
+
+```
+[1] "2026-10-19 14:52:15 EDT"
+```
+]
+
+---
+count: false
+ 
+# Time Zones
+.panel1-tz-auto[
+
+``` r
+t1 &lt;- as_datetime("2022-01-27 10:39:28", tz = "America/Los_Angeles")
+t1
+tz(t1)
+t2 &lt;- as_datetime("2022-01-27 13:39:28", tz = "America/New_York")
+t2-t1
+t3 &lt;- as_datetime("2021-10-15 10:39:28", tz = "America/Los_Angeles")
+t3
+t4 &lt;- as_datetime(now())
+t4
+as.period(interval(start = t1, end = t4), unit = "days")
+with_tz(t4, "America/New_York")
+*force_tz(t4, "America/New_York")
+```
+]
+ 
+.panel2-tz-auto[
+
+```
+[1] "2022-01-27 10:39:28 PST"
+```
+
+```
+[1] "America/Los_Angeles"
+```
+
+```
+Time difference of 0 secs
+```
+
+```
+[1] "2021-10-15 10:39:28 PDT"
+```
+
+```
+[1] "2026-10-19 11:52:15 PDT"
+```
+
+```
+[1] "1726d 0H 12M 47.4542779922485S"
+```
+
+```
+[1] "2026-10-19 14:52:15 EDT"
+```
+
+```
+[1] "2026-10-19 11:52:15 EDT"
 ```
 ]
 
@@ -3305,7 +3466,7 @@ Time difference of 0 secs
 
 
 ---
-# Factors represent categories
+# Factors Represent Categories
 
 ``` r
 x &lt;- c(1, 1, 2, 3, 1, 4)
@@ -3322,8 +3483,8 @@ Levels: rarely neutral frequently
 - levels are ordered, which carries forward to output, modeling, graphics, etc.
 
 - factors work as dummy codes; use as.numeric(factor) to treat as a continuous variable in models
-
 ---
+
 count: false
  
 # Factors
@@ -3844,6 +4005,2005 @@ count: false
 &lt;/style&gt;
 
 
+
+
+---
+class: inverse, center, middle
+# Part 2: Tidying Data
+---
+# Why do data need to be wrangled and tidied?
+
+- Data files are often created without the foresight of how they might be used by computers
+  * Instead, they are made to look nice for humans
+
+- We need to tidy data to make it convenient for programming
+  * Format is dictated by analyses
+  * You may need multiple formats
+---
+# Tidy Data (Wickham, 2014)
+
+- Each variable is a column
+  * Variable: “All values that measure the same underlying attribute”
+- Each observation is a row
+  * Observation: Unit for which all variables were measured (person, session, trial, etc.)
+- Each type of observational unit is a table
+  * e.g., participant questionnaire vs trial-by-trial data
+---
+count: false
+ 
+# Dataset Preparations
+.panel1-selectcols-rotate[
+
+``` r
+print(relig_income, n = 5)
+*relig_income %&gt;% select(religion, contains("$"))
+```
+]
+ 
+.panel2-selectcols-rotate[
+
+```
+# A tibble: 18 × 11
+  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 Agnostic       27        34        60        81        76       137        122
+2 Atheist        12        27        37        52        35        70         73
+3 Buddhist       27        21        30        34        33        58         62
+4 Catholic      418       617       732       670       638      1116        949
+5 Don’t kn…      15        14        15        11        10        35         21
+# ℹ 13 more rows
+# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+#   `Don't know/refused` &lt;dbl&gt;
+```
+
+```
+# A tibble: 18 × 9
+   religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+   &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Agnostic      27        34        60        81        76       137        122
+ 2 Atheist       12        27        37        52        35        70         73
+ 3 Buddhist      27        21        30        34        33        58         62
+ 4 Catholic     418       617       732       670       638      1116        949
+ 5 Don’t k…      15        14        15        11        10        35         21
+ 6 Evangel…     575       869      1064       982       881      1486        949
+ 7 Hindu          1         9         7         9        11        34         47
+ 8 Histori…     228       244       236       238       197       223        131
+ 9 Jehovah…      20        27        24        24        21        30         15
+10 Jewish        19        19        25        25        30        95         69
+11 Mainlin…     289       495       619       655       651      1107        939
+12 Mormon        29        40        48        51        56       112         85
+13 Muslim         6         7         9        10         9        23         16
+14 Orthodox      13        17        23        32        32        47         38
+15 Other C…       9         7        11        13        13        14         18
+16 Other F…      20        33        40        46        49        63         46
+17 Other W…       5         2         3         4         2         7          3
+18 Unaffil…     217       299       374       365       341       528        407
+# ℹ 1 more variable: `$100-150k` &lt;dbl&gt;
+```
+]
+
+---
+count: false
+ 
+# Dataset Preparations
+.panel1-selectcols-rotate[
+
+``` r
+print(relig_income, n = 5)
+*relig_income %&gt;% select(religion, starts_with("$"))
+```
+]
+ 
+.panel2-selectcols-rotate[
+
+```
+# A tibble: 18 × 11
+  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 Agnostic       27        34        60        81        76       137        122
+2 Atheist        12        27        37        52        35        70         73
+3 Buddhist       27        21        30        34        33        58         62
+4 Catholic      418       617       732       670       638      1116        949
+5 Don’t kn…      15        14        15        11        10        35         21
+# ℹ 13 more rows
+# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+#   `Don't know/refused` &lt;dbl&gt;
+```
+
+```
+# A tibble: 18 × 8
+   religion         `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Agnostic                34        60        81        76       137        122
+ 2 Atheist                 27        37        52        35        70         73
+ 3 Buddhist                21        30        34        33        58         62
+ 4 Catholic               617       732       670       638      1116        949
+ 5 Don’t know/refu…        14        15        11        10        35         21
+ 6 Evangelical Prot       869      1064       982       881      1486        949
+ 7 Hindu                    9         7         9        11        34         47
+ 8 Historically Bl…       244       236       238       197       223        131
+ 9 Jehovah's Witne…        27        24        24        21        30         15
+10 Jewish                  19        25        25        30        95         69
+11 Mainline Prot          495       619       655       651      1107        939
+12 Mormon                  40        48        51        56       112         85
+13 Muslim                   7         9        10         9        23         16
+14 Orthodox                17        23        32        32        47         38
+15 Other Christian          7        11        13        13        14         18
+16 Other Faiths            33        40        46        49        63         46
+17 Other World Rel…         2         3         4         2         7          3
+18 Unaffiliated           299       374       365       341       528        407
+# ℹ 1 more variable: `$100-150k` &lt;dbl&gt;
+```
+]
+
+---
+count: false
+ 
+# Dataset Preparations
+.panel1-selectcols-rotate[
+
+``` r
+print(relig_income, n = 5)
+*relig_income %&gt;% select(religion, contains("k"))
+```
+]
+ 
+.panel2-selectcols-rotate[
+
+```
+# A tibble: 18 × 11
+  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 Agnostic       27        34        60        81        76       137        122
+2 Atheist        12        27        37        52        35        70         73
+3 Buddhist       27        21        30        34        33        58         62
+4 Catholic      418       617       732       670       638      1116        949
+5 Don’t kn…      15        14        15        11        10        35         21
+# ℹ 13 more rows
+# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+#   `Don't know/refused` &lt;dbl&gt;
+```
+
+```
+# A tibble: 18 × 11
+   religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+   &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Agnostic      27        34        60        81        76       137        122
+ 2 Atheist       12        27        37        52        35        70         73
+ 3 Buddhist      27        21        30        34        33        58         62
+ 4 Catholic     418       617       732       670       638      1116        949
+ 5 Don’t k…      15        14        15        11        10        35         21
+ 6 Evangel…     575       869      1064       982       881      1486        949
+ 7 Hindu          1         9         7         9        11        34         47
+ 8 Histori…     228       244       236       238       197       223        131
+ 9 Jehovah…      20        27        24        24        21        30         15
+10 Jewish        19        19        25        25        30        95         69
+11 Mainlin…     289       495       619       655       651      1107        939
+12 Mormon        29        40        48        51        56       112         85
+13 Muslim         6         7         9        10         9        23         16
+14 Orthodox      13        17        23        32        32        47         38
+15 Other C…       9         7        11        13        13        14         18
+16 Other F…      20        33        40        46        49        63         46
+17 Other W…       5         2         3         4         2         7          3
+18 Unaffil…     217       299       374       365       341       528        407
+# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+#   `Don't know/refused` &lt;dbl&gt;
+```
+]
+
+---
+count: false
+ 
+# Dataset Preparations
+.panel1-selectcols-rotate[
+
+``` r
+print(relig_income, n = 5)
+*relig_income %&gt;% select(religion, starts_with("$"), ends_with("k"))
+```
+]
+ 
+.panel2-selectcols-rotate[
+
+```
+# A tibble: 18 × 11
+  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 Agnostic       27        34        60        81        76       137        122
+2 Atheist        12        27        37        52        35        70         73
+3 Buddhist       27        21        30        34        33        58         62
+4 Catholic      418       617       732       670       638      1116        949
+5 Don’t kn…      15        14        15        11        10        35         21
+# ℹ 13 more rows
+# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+#   `Don't know/refused` &lt;dbl&gt;
+```
+
+```
+# A tibble: 18 × 10
+   religion         `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Agnostic                34        60        81        76       137        122
+ 2 Atheist                 27        37        52        35        70         73
+ 3 Buddhist                21        30        34        33        58         62
+ 4 Catholic               617       732       670       638      1116        949
+ 5 Don’t know/refu…        14        15        11        10        35         21
+ 6 Evangelical Prot       869      1064       982       881      1486        949
+ 7 Hindu                    9         7         9        11        34         47
+ 8 Historically Bl…       244       236       238       197       223        131
+ 9 Jehovah's Witne…        27        24        24        21        30         15
+10 Jewish                  19        25        25        30        95         69
+11 Mainline Prot          495       619       655       651      1107        939
+12 Mormon                  40        48        51        56       112         85
+13 Muslim                   7         9        10         9        23         16
+14 Orthodox                17        23        32        32        47         38
+15 Other Christian          7        11        13        13        14         18
+16 Other Faiths            33        40        46        49        63         46
+17 Other World Rel…         2         3         4         2         7          3
+18 Unaffiliated           299       374       365       341       528        407
+# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&lt;$10k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;
+```
+]
+
+&lt;style&gt;
+.panel1-selectcols-rotate {
+  color: black;
+  width: 87.1111111111111%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-selectcols-rotate {
+  color: black;
+  width: 10.8888888888889%;
+  hight: 32%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-selectcols-rotate {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: none;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+class: inverse, center, middle
+# Dataset Transformations 
+---
+
+count: false
+ 
+# Multiple Columns -&gt; One Variable 
+.panel1-pivot-longer-auto[
+
+``` r
+*ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv')
+```
+]
+ 
+.panel2-pivot-longer-auto[
+
+]
+
+---
+count: false
+ 
+# Multiple Columns -&gt; One Variable 
+.panel1-pivot-longer-auto[
+
+``` r
+ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
+* mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+```
+]
+ 
+.panel2-pivot-longer-auto[
+
+]
+
+---
+count: false
+ 
+# Multiple Columns -&gt; One Variable 
+.panel1-pivot-longer-auto[
+
+``` r
+ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
+  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+*ds %&gt;% print(n = 25)
+```
+]
+ 
+.panel2-pivot-longer-auto[
+
+```
+# A tibble: 51 × 27
+   id    dob        age_12  age_12.5 age_13 age_13.5 age_14 age_14.5     age_15
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;lgl&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
+ 1 Jonah 2017-08-30 book    dad      NA     cat      baby   socks/shoes  banana
+ 2 Jonah 2017-08-30 ball    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   dog (animal) llama 
+ 3 Jonah 2017-08-30 bye bye &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 4 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 5 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 6 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 7 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+# ℹ 26 more rows
+# ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
+#   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
+#   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
+#   age_22 &lt;chr&gt;, age_22.5 &lt;chr&gt;, age_23 &lt;chr&gt;, age_23.5 &lt;chr&gt;, age_24 &lt;chr&gt;
+```
+]
+
+---
+count: false
+ 
+# Multiple Columns -&gt; One Variable 
+.panel1-pivot-longer-auto[
+
+``` r
+ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
+  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+ds %&gt;% print(n = 25)
+*ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
+```
+]
+ 
+.panel2-pivot-longer-auto[
+
+```
+# A tibble: 51 × 27
+   id    dob        age_12  age_12.5 age_13 age_13.5 age_14 age_14.5     age_15
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;lgl&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
+ 1 Jonah 2017-08-30 book    dad      NA     cat      baby   socks/shoes  banana
+ 2 Jonah 2017-08-30 ball    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   dog (animal) llama 
+ 3 Jonah 2017-08-30 bye bye &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 4 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 5 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 6 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 7 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+# ℹ 26 more rows
+# ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
+#   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
+#   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
+#   age_22 &lt;chr&gt;, age_22.5 &lt;chr&gt;, age_23 &lt;chr&gt;, age_23.5 &lt;chr&gt;, age_24 &lt;chr&gt;
+```
+
+```
+# A tibble: 1,275 × 4
+   id    dob        age      word       
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;      
+ 1 Jonah 2017-08-30 age_12   book       
+ 2 Jonah 2017-08-30 age_12.5 dad        
+ 3 Jonah 2017-08-30 age_13   &lt;NA&gt;       
+ 4 Jonah 2017-08-30 age_13.5 cat        
+ 5 Jonah 2017-08-30 age_14   baby       
+ 6 Jonah 2017-08-30 age_14.5 socks/shoes
+ 7 Jonah 2017-08-30 age_15   banana     
+ 8 Jonah 2017-08-30 age_15.5 cheese     
+ 9 Jonah 2017-08-30 age_16   shoes      
+10 Jonah 2017-08-30 age_16.5 monkey     
+# ℹ 1,265 more rows
+```
+]
+
+---
+count: false
+ 
+# Multiple Columns -&gt; One Variable 
+.panel1-pivot-longer-auto[
+
+``` r
+ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
+  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+ds %&gt;% print(n = 25)
+ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
+*ds %&gt;% pivot_longer(-(id:dob), names_to = "age",
+*                   names_prefix = "age_", values_to = "word")
+```
+]
+ 
+.panel2-pivot-longer-auto[
+
+```
+# A tibble: 51 × 27
+   id    dob        age_12  age_12.5 age_13 age_13.5 age_14 age_14.5     age_15
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;lgl&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
+ 1 Jonah 2017-08-30 book    dad      NA     cat      baby   socks/shoes  banana
+ 2 Jonah 2017-08-30 ball    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   dog (animal) llama 
+ 3 Jonah 2017-08-30 bye bye &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 4 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 5 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 6 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 7 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+# ℹ 26 more rows
+# ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
+#   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
+#   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
+#   age_22 &lt;chr&gt;, age_22.5 &lt;chr&gt;, age_23 &lt;chr&gt;, age_23.5 &lt;chr&gt;, age_24 &lt;chr&gt;
+```
+
+```
+# A tibble: 1,275 × 4
+   id    dob        age      word       
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;      
+ 1 Jonah 2017-08-30 age_12   book       
+ 2 Jonah 2017-08-30 age_12.5 dad        
+ 3 Jonah 2017-08-30 age_13   &lt;NA&gt;       
+ 4 Jonah 2017-08-30 age_13.5 cat        
+ 5 Jonah 2017-08-30 age_14   baby       
+ 6 Jonah 2017-08-30 age_14.5 socks/shoes
+ 7 Jonah 2017-08-30 age_15   banana     
+ 8 Jonah 2017-08-30 age_15.5 cheese     
+ 9 Jonah 2017-08-30 age_16   shoes      
+10 Jonah 2017-08-30 age_16.5 monkey     
+# ℹ 1,265 more rows
+```
+
+```
+# A tibble: 1,275 × 4
+   id    dob        age   word       
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;      
+ 1 Jonah 2017-08-30 12    book       
+ 2 Jonah 2017-08-30 12.5  dad        
+ 3 Jonah 2017-08-30 13    &lt;NA&gt;       
+ 4 Jonah 2017-08-30 13.5  cat        
+ 5 Jonah 2017-08-30 14    baby       
+ 6 Jonah 2017-08-30 14.5  socks/shoes
+ 7 Jonah 2017-08-30 15    banana     
+ 8 Jonah 2017-08-30 15.5  cheese     
+ 9 Jonah 2017-08-30 16    shoes      
+10 Jonah 2017-08-30 16.5  monkey     
+# ℹ 1,265 more rows
+```
+]
+
+---
+count: false
+ 
+# Multiple Columns -&gt; One Variable 
+.panel1-pivot-longer-auto[
+
+``` r
+ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
+  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+ds %&gt;% print(n = 25)
+ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
+ds %&gt;% pivot_longer(-(id:dob), names_to = "age",
+                    names_prefix = "age_", values_to = "word")
+*ds %&gt;% pivot_longer(-(id:dob), names_to = "age",
+*                   values_to = "word", values_drop_na = T, names_prefix = "age_")
+```
+]
+ 
+.panel2-pivot-longer-auto[
+
+```
+# A tibble: 51 × 27
+   id    dob        age_12  age_12.5 age_13 age_13.5 age_14 age_14.5     age_15
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;lgl&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
+ 1 Jonah 2017-08-30 book    dad      NA     cat      baby   socks/shoes  banana
+ 2 Jonah 2017-08-30 ball    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   dog (animal) llama 
+ 3 Jonah 2017-08-30 bye bye &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 4 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 5 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 6 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 7 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+ 9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
+# ℹ 26 more rows
+# ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
+#   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
+#   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
+#   age_22 &lt;chr&gt;, age_22.5 &lt;chr&gt;, age_23 &lt;chr&gt;, age_23.5 &lt;chr&gt;, age_24 &lt;chr&gt;
+```
+
+```
+# A tibble: 1,275 × 4
+   id    dob        age      word       
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;      
+ 1 Jonah 2017-08-30 age_12   book       
+ 2 Jonah 2017-08-30 age_12.5 dad        
+ 3 Jonah 2017-08-30 age_13   &lt;NA&gt;       
+ 4 Jonah 2017-08-30 age_13.5 cat        
+ 5 Jonah 2017-08-30 age_14   baby       
+ 6 Jonah 2017-08-30 age_14.5 socks/shoes
+ 7 Jonah 2017-08-30 age_15   banana     
+ 8 Jonah 2017-08-30 age_15.5 cheese     
+ 9 Jonah 2017-08-30 age_16   shoes      
+10 Jonah 2017-08-30 age_16.5 monkey     
+# ℹ 1,265 more rows
+```
+
+```
+# A tibble: 1,275 × 4
+   id    dob        age   word       
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;      
+ 1 Jonah 2017-08-30 12    book       
+ 2 Jonah 2017-08-30 12.5  dad        
+ 3 Jonah 2017-08-30 13    &lt;NA&gt;       
+ 4 Jonah 2017-08-30 13.5  cat        
+ 5 Jonah 2017-08-30 14    baby       
+ 6 Jonah 2017-08-30 14.5  socks/shoes
+ 7 Jonah 2017-08-30 15    banana     
+ 8 Jonah 2017-08-30 15.5  cheese     
+ 9 Jonah 2017-08-30 16    shoes      
+10 Jonah 2017-08-30 16.5  monkey     
+# ℹ 1,265 more rows
+```
+
+```
+# A tibble: 440 × 4
+   id    dob        age   word       
+   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;      
+ 1 Jonah 2017-08-30 12    book       
+ 2 Jonah 2017-08-30 12.5  dad        
+ 3 Jonah 2017-08-30 13.5  cat        
+ 4 Jonah 2017-08-30 14    baby       
+ 5 Jonah 2017-08-30 14.5  socks/shoes
+ 6 Jonah 2017-08-30 15    banana     
+ 7 Jonah 2017-08-30 15.5  cheese     
+ 8 Jonah 2017-08-30 16    shoes      
+ 9 Jonah 2017-08-30 16.5  monkey     
+10 Jonah 2017-08-30 17    hello      
+# ℹ 430 more rows
+```
+]
+
+&lt;style&gt;
+.panel1-pivot-longer-auto {
+  color: black;
+  width: 65.3333333333333%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-pivot-longer-auto {
+  color: black;
+  width: 32.6666666666667%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-pivot-longer-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+ 
+
+---
+
+count: false
+ 
+# One Column -&gt; Multiple variables
+.panel1-pivot-wider-auto[
+
+``` r
+*ds &lt;- read_delim(list.files(path = "data_headers", full.names = T),
+*                col_names = c("field", "value"), col_types = c("cc"),
+*                delim = " ", n_max = 8, id = "filename")
+```
+]
+ 
+.panel2-pivot-wider-auto[
+
+]
+
+---
+count: false
+ 
+# One Column -&gt; Multiple variables
+.panel1-pivot-wider-auto[
+
+``` r
+ds &lt;- read_delim(list.files(path = "data_headers", full.names = T),
+                 col_names = c("field", "value"), col_types = c("cc"),
+                 delim = " ", n_max = 8, id = "filename")
+*print(ds)
+```
+]
+ 
+.panel2-pivot-wider-auto[
+
+```
+# A tibble: 96 × 3
+   filename                field       value
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt;
+ 1 data_headers/6191_1.txt Participant 6191 
+ 2 data_headers/6191_1.txt Age         25   
+ 3 data_headers/6191_1.txt Sex         male 
+ 4 data_headers/6191_1.txt Order       1    
+ 5 data_headers/6191_1.txt FirstSpeed  4    
+ 6 data_headers/6191_1.txt Block       1    
+ 7 data_headers/6191_1.txt speed       4    
+ 8 data_headers/6191_1.txt condition   near 
+ 9 data_headers/6191_2.txt Participant 6191 
+10 data_headers/6191_2.txt Age         25   
+# ℹ 86 more rows
+```
+]
+
+---
+count: false
+ 
+# One Column -&gt; Multiple variables
+.panel1-pivot-wider-auto[
+
+``` r
+ds &lt;- read_delim(list.files(path = "data_headers", full.names = T),
+                 col_names = c("field", "value"), col_types = c("cc"),
+                 delim = " ", n_max = 8, id = "filename")
+print(ds)
+
+*ds &lt;- ds %&gt;% pivot_wider(id_cols = "filename",
+*                        names_from = "field",
+*                        values_from = "value")
+```
+]
+ 
+.panel2-pivot-wider-auto[
+
+```
+# A tibble: 96 × 3
+   filename                field       value
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt;
+ 1 data_headers/6191_1.txt Participant 6191 
+ 2 data_headers/6191_1.txt Age         25   
+ 3 data_headers/6191_1.txt Sex         male 
+ 4 data_headers/6191_1.txt Order       1    
+ 5 data_headers/6191_1.txt FirstSpeed  4    
+ 6 data_headers/6191_1.txt Block       1    
+ 7 data_headers/6191_1.txt speed       4    
+ 8 data_headers/6191_1.txt condition   near 
+ 9 data_headers/6191_2.txt Participant 6191 
+10 data_headers/6191_2.txt Age         25   
+# ℹ 86 more rows
+```
+]
+
+---
+count: false
+ 
+# One Column -&gt; Multiple variables
+.panel1-pivot-wider-auto[
+
+``` r
+ds &lt;- read_delim(list.files(path = "data_headers", full.names = T),
+                 col_names = c("field", "value"), col_types = c("cc"),
+                 delim = " ", n_max = 8, id = "filename")
+print(ds)
+
+ds &lt;- ds %&gt;% pivot_wider(id_cols = "filename",
+                         names_from = "field",
+                         values_from = "value")
+*ds
+```
+]
+ 
+.panel2-pivot-wider-auto[
+
+```
+# A tibble: 96 × 3
+   filename                field       value
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt;
+ 1 data_headers/6191_1.txt Participant 6191 
+ 2 data_headers/6191_1.txt Age         25   
+ 3 data_headers/6191_1.txt Sex         male 
+ 4 data_headers/6191_1.txt Order       1    
+ 5 data_headers/6191_1.txt FirstSpeed  4    
+ 6 data_headers/6191_1.txt Block       1    
+ 7 data_headers/6191_1.txt speed       4    
+ 8 data_headers/6191_1.txt condition   near 
+ 9 data_headers/6191_2.txt Participant 6191 
+10 data_headers/6191_2.txt Age         25   
+# ℹ 86 more rows
+```
+
+```
+# A tibble: 12 × 9
+   filename       Participant Age   Sex   Order FirstSpeed Block speed condition
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+ 1 data_headers/… 6191        25    male  1     4          1     4     near     
+ 2 data_headers/… 6191        25    male  1     4          2     7     far      
+ 3 data_headers/… 6191        25    male  1     4          3     4     mid      
+ 4 data_headers/… 6191        25    male  1     4          4     7     near     
+ 5 data_headers/… 6191        25    male  1     4          5     4     far      
+ 6 data_headers/… 6191        25    male  1     4          6     7     mid      
+ 7 data_headers/… 6192        21    male  2     4          1     4     mid      
+ 8 data_headers/… 6192        21    male  2     4          2     7     near     
+ 9 data_headers/… 6192        21    male  2     4          3     4     far      
+10 data_headers/… 6192        21    male  2     4          4     7     mid      
+11 data_headers/… 6192        21    male  2     4          5     4     near     
+12 data_headers/… 6192        21    male  2     4          6     7     far      
+```
+]
+
+&lt;style&gt;
+.panel1-pivot-wider-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-pivot-wider-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-pivot-wider-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+ 
+
+---
+count: false
+ 
+# One Variable -&gt; Multiple Variables
+.panel1-separate-auto[
+
+``` r
+*ds
+```
+]
+ 
+.panel2-separate-auto[
+
+```
+# A tibble: 12 × 9
+   filename       Participant Age   Sex   Order FirstSpeed Block speed condition
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+ 1 data_headers/… 6191        25    male  1     4          1     4     near     
+ 2 data_headers/… 6191        25    male  1     4          2     7     far      
+ 3 data_headers/… 6191        25    male  1     4          3     4     mid      
+ 4 data_headers/… 6191        25    male  1     4          4     7     near     
+ 5 data_headers/… 6191        25    male  1     4          5     4     far      
+ 6 data_headers/… 6191        25    male  1     4          6     7     mid      
+ 7 data_headers/… 6192        21    male  2     4          1     4     mid      
+ 8 data_headers/… 6192        21    male  2     4          2     7     near     
+ 9 data_headers/… 6192        21    male  2     4          3     4     far      
+10 data_headers/… 6192        21    male  2     4          4     7     mid      
+11 data_headers/… 6192        21    male  2     4          5     4     near     
+12 data_headers/… 6192        21    male  2     4          6     7     far      
+```
+]
+
+---
+count: false
+ 
+# One Variable -&gt; Multiple Variables
+.panel1-separate-auto[
+
+``` r
+ds
+*ds %&gt;% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
+```
+]
+ 
+.panel2-separate-auto[
+
+```
+# A tibble: 12 × 9
+   filename       Participant Age   Sex   Order FirstSpeed Block speed condition
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+ 1 data_headers/… 6191        25    male  1     4          1     4     near     
+ 2 data_headers/… 6191        25    male  1     4          2     7     far      
+ 3 data_headers/… 6191        25    male  1     4          3     4     mid      
+ 4 data_headers/… 6191        25    male  1     4          4     7     near     
+ 5 data_headers/… 6191        25    male  1     4          5     4     far      
+ 6 data_headers/… 6191        25    male  1     4          6     7     mid      
+ 7 data_headers/… 6192        21    male  2     4          1     4     mid      
+ 8 data_headers/… 6192        21    male  2     4          2     7     near     
+ 9 data_headers/… 6192        21    male  2     4          3     4     far      
+10 data_headers/… 6192        21    male  2     4          4     7     mid      
+11 data_headers/… 6192        21    male  2     4          5     4     near     
+12 data_headers/… 6192        21    male  2     4          6     7     far      
+```
+
+```
+# A tibble: 12 × 10
+   dir      file  Participant Age   Sex   Order FirstSpeed Block speed condition
+   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+ 1 data_he… 6191… 6191        25    male  1     4          1     4     near     
+ 2 data_he… 6191… 6191        25    male  1     4          2     7     far      
+ 3 data_he… 6191… 6191        25    male  1     4          3     4     mid      
+ 4 data_he… 6191… 6191        25    male  1     4          4     7     near     
+ 5 data_he… 6191… 6191        25    male  1     4          5     4     far      
+ 6 data_he… 6191… 6191        25    male  1     4          6     7     mid      
+ 7 data_he… 6192… 6192        21    male  2     4          1     4     mid      
+ 8 data_he… 6192… 6192        21    male  2     4          2     7     near     
+ 9 data_he… 6192… 6192        21    male  2     4          3     4     far      
+10 data_he… 6192… 6192        21    male  2     4          4     7     mid      
+11 data_he… 6192… 6192        21    male  2     4          5     4     near     
+12 data_he… 6192… 6192        21    male  2     4          6     7     far      
+```
+]
+
+&lt;style&gt;
+.panel1-separate-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-separate-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-separate-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+---
+# Multiple Variables -&gt; One Variable
+-unite()
+---
+
+count: false
+ 
+# Binding Columns
+.panel1-bindcols-auto[
+
+``` r
+*star_wars_numeric &lt;- starwars %&gt;% select(where(is.numeric))  #87x3
+```
+]
+ 
+.panel2-bindcols-auto[
+
+]
+
+---
+count: false
+ 
+# Binding Columns
+.panel1-bindcols-auto[
+
+``` r
+star_wars_numeric &lt;- starwars %&gt;% select(where(is.numeric))  #87x3
+*star_wars_numeric
+```
+]
+ 
+.panel2-bindcols-auto[
+
+```
+# A tibble: 87 × 3
+   height  mass birth_year
+    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1    172    77       19  
+ 2    167    75      112  
+ 3     96    32       33  
+ 4    202   136       41.9
+ 5    150    49       19  
+ 6    178   120       52  
+ 7    165    75       47  
+ 8     97    32       NA  
+ 9    183    84       24  
+10    182    77       57  
+# ℹ 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Binding Columns
+.panel1-bindcols-auto[
+
+``` r
+star_wars_numeric &lt;- starwars %&gt;% select(where(is.numeric))  #87x3
+star_wars_numeric
+*star_wars_char &lt;- starwars %&gt;% select(where(is.character))  #87x8
+```
+]
+ 
+.panel2-bindcols-auto[
+
+```
+# A tibble: 87 × 3
+   height  mass birth_year
+    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1    172    77       19  
+ 2    167    75      112  
+ 3     96    32       33  
+ 4    202   136       41.9
+ 5    150    49       19  
+ 6    178   120       52  
+ 7    165    75       47  
+ 8     97    32       NA  
+ 9    183    84       24  
+10    182    77       57  
+# ℹ 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Binding Columns
+.panel1-bindcols-auto[
+
+``` r
+star_wars_numeric &lt;- starwars %&gt;% select(where(is.numeric))  #87x3
+star_wars_numeric
+star_wars_char &lt;- starwars %&gt;% select(where(is.character))  #87x8
+*star_wars_char
+```
+]
+ 
+.panel2-bindcols-auto[
+
+```
+# A tibble: 87 × 3
+   height  mass birth_year
+    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1    172    77       19  
+ 2    167    75      112  
+ 3     96    32       33  
+ 4    202   136       41.9
+ 5    150    49       19  
+ 6    178   120       52  
+ 7    165    75       47  
+ 8     97    32       NA  
+ 9    183    84       24  
+10    182    77       57  
+# ℹ 77 more rows
+```
+
+```
+# A tibble: 87 × 8
+   name           hair_color skin_color eye_color sex   gender homeworld species
+   &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
+ 1 Luke Skywalker blond      fair       blue      male  mascu… Tatooine  Human  
+ 2 C-3PO          &lt;NA&gt;       gold       yellow    none  mascu… Tatooine  Droid  
+ 3 R2-D2          &lt;NA&gt;       white, bl… red       none  mascu… Naboo     Droid  
+ 4 Darth Vader    none       white      yellow    male  mascu… Tatooine  Human  
+ 5 Leia Organa    brown      light      brown     fema… femin… Alderaan  Human  
+ 6 Owen Lars      brown, gr… light      blue      male  mascu… Tatooine  Human  
+ 7 Beru Whitesun… brown      light      blue      fema… femin… Tatooine  Human  
+ 8 R5-D4          &lt;NA&gt;       white, red red       none  mascu… Tatooine  Droid  
+ 9 Biggs Darklig… black      light      brown     male  mascu… Tatooine  Human  
+10 Obi-Wan Kenobi auburn, w… fair       blue-gray male  mascu… Stewjon   Human  
+# ℹ 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Binding Columns
+.panel1-bindcols-auto[
+
+``` r
+star_wars_numeric &lt;- starwars %&gt;% select(where(is.numeric))  #87x3
+star_wars_numeric
+star_wars_char &lt;- starwars %&gt;% select(where(is.character))  #87x8
+star_wars_char
+*star_wars_combined &lt;- bind_cols(star_wars_numeric, star_wars_char)  #87x11
+```
+]
+ 
+.panel2-bindcols-auto[
+
+```
+# A tibble: 87 × 3
+   height  mass birth_year
+    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1    172    77       19  
+ 2    167    75      112  
+ 3     96    32       33  
+ 4    202   136       41.9
+ 5    150    49       19  
+ 6    178   120       52  
+ 7    165    75       47  
+ 8     97    32       NA  
+ 9    183    84       24  
+10    182    77       57  
+# ℹ 77 more rows
+```
+
+```
+# A tibble: 87 × 8
+   name           hair_color skin_color eye_color sex   gender homeworld species
+   &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
+ 1 Luke Skywalker blond      fair       blue      male  mascu… Tatooine  Human  
+ 2 C-3PO          &lt;NA&gt;       gold       yellow    none  mascu… Tatooine  Droid  
+ 3 R2-D2          &lt;NA&gt;       white, bl… red       none  mascu… Naboo     Droid  
+ 4 Darth Vader    none       white      yellow    male  mascu… Tatooine  Human  
+ 5 Leia Organa    brown      light      brown     fema… femin… Alderaan  Human  
+ 6 Owen Lars      brown, gr… light      blue      male  mascu… Tatooine  Human  
+ 7 Beru Whitesun… brown      light      blue      fema… femin… Tatooine  Human  
+ 8 R5-D4          &lt;NA&gt;       white, red red       none  mascu… Tatooine  Droid  
+ 9 Biggs Darklig… black      light      brown     male  mascu… Tatooine  Human  
+10 Obi-Wan Kenobi auburn, w… fair       blue-gray male  mascu… Stewjon   Human  
+# ℹ 77 more rows
+```
+]
+
+---
+count: false
+ 
+# Binding Columns
+.panel1-bindcols-auto[
+
+``` r
+star_wars_numeric &lt;- starwars %&gt;% select(where(is.numeric))  #87x3
+star_wars_numeric
+star_wars_char &lt;- starwars %&gt;% select(where(is.character))  #87x8
+star_wars_char
+star_wars_combined &lt;- bind_cols(star_wars_numeric, star_wars_char)  #87x11
+*star_wars_combined
+```
+]
+ 
+.panel2-bindcols-auto[
+
+```
+# A tibble: 87 × 3
+   height  mass birth_year
+    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1    172    77       19  
+ 2    167    75      112  
+ 3     96    32       33  
+ 4    202   136       41.9
+ 5    150    49       19  
+ 6    178   120       52  
+ 7    165    75       47  
+ 8     97    32       NA  
+ 9    183    84       24  
+10    182    77       57  
+# ℹ 77 more rows
+```
+
+```
+# A tibble: 87 × 8
+   name           hair_color skin_color eye_color sex   gender homeworld species
+   &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
+ 1 Luke Skywalker blond      fair       blue      male  mascu… Tatooine  Human  
+ 2 C-3PO          &lt;NA&gt;       gold       yellow    none  mascu… Tatooine  Droid  
+ 3 R2-D2          &lt;NA&gt;       white, bl… red       none  mascu… Naboo     Droid  
+ 4 Darth Vader    none       white      yellow    male  mascu… Tatooine  Human  
+ 5 Leia Organa    brown      light      brown     fema… femin… Alderaan  Human  
+ 6 Owen Lars      brown, gr… light      blue      male  mascu… Tatooine  Human  
+ 7 Beru Whitesun… brown      light      blue      fema… femin… Tatooine  Human  
+ 8 R5-D4          &lt;NA&gt;       white, red red       none  mascu… Tatooine  Droid  
+ 9 Biggs Darklig… black      light      brown     male  mascu… Tatooine  Human  
+10 Obi-Wan Kenobi auburn, w… fair       blue-gray male  mascu… Stewjon   Human  
+# ℹ 77 more rows
+```
+
+```
+# A tibble: 87 × 11
+   height  mass birth_year name     hair_color skin_color eye_color sex   gender
+    &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; 
+ 1    172    77       19   Luke Sk… blond      fair       blue      male  mascu…
+ 2    167    75      112   C-3PO    &lt;NA&gt;       gold       yellow    none  mascu…
+ 3     96    32       33   R2-D2    &lt;NA&gt;       white, bl… red       none  mascu…
+ 4    202   136       41.9 Darth V… none       white      yellow    male  mascu…
+ 5    150    49       19   Leia Or… brown      light      brown     fema… femin…
+ 6    178   120       52   Owen La… brown, gr… light      blue      male  mascu…
+ 7    165    75       47   Beru Wh… brown      light      blue      fema… femin…
+ 8     97    32       NA   R5-D4    &lt;NA&gt;       white, red red       none  mascu…
+ 9    183    84       24   Biggs D… black      light      brown     male  mascu…
+10    182    77       57   Obi-Wan… auburn, w… fair       blue-gray male  mascu…
+# ℹ 77 more rows
+# ℹ 2 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;
+```
+]
+
+&lt;style&gt;
+.panel1-bindcols-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-bindcols-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-bindcols-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+ 
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+*s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+```
+]
+ 
+.panel2-bindrows-auto[
+
+]
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+*s1
+```
+]
+ 
+.panel2-bindrows-auto[
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Qui-Gon …    193    89 brown      fair       blue              92 male  mascu…
+2 R4-P17        96    NA none       silver, r… red, blue         NA none  femin…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+]
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s1
+*s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+```
+]
+ 
+.panel2-bindrows-auto[
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 R5-D4         97    32 &lt;NA&gt;       white, red red             NA   none  mascu…
+2 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+]
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s1
+s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+*s2
+```
+]
+ 
+.panel2-bindrows-auto[
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Wat Tamb…    193    48 none       green, gr… unknown           NA male  mascu…
+2 Bib Fort…    180    NA none       pale       pink              NA male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Yoda          66    17 white      green      brown            896 male  mascu…
+2 Captain …     NA    NA none       none       unknown           NA fema… femin…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+]
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s1
+s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s2
+*s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+```
+]
+ 
+.panel2-bindrows-auto[
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Owen Lars    178   120 brown, gr… light      blue              52 male  mascu…
+2 Bossk        190   113 none       green      red               53 male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Qui-Gon …    193    89 brown      fair       blue              92 male  mascu…
+2 Arvel Cr…     NA    NA brown      fair       brown             NA male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+]
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s1
+s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s2
+s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+*s3
+```
+]
+ 
+.panel2-bindrows-auto[
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Lando Ca…    177    79 black      dark       brown             31 male  mascu…
+2 Dud Bolt      94    45 none       blue, grey yellow            NA male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Padmé Am…    185    45 brown      light      brown             46 fema… femin…
+2 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Zam Wese…    168    55 blonde     fair, gre… yellow            NA fema… femin…
+2 BB8           NA    NA none       none       black             NA none  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+]
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s1
+s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s2
+s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s3
+*star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
+```
+]
+ 
+.panel2-bindrows-auto[
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 R5-D4         97    32 &lt;NA&gt;       white, red red               NA none  mascu…
+2 Nien Nunb    160    68 none       grey       black             NA male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Darth Ma…    175    80 none       red        yellow            54 male  mascu…
+2 Quarsh P…    183    NA black      dark       brown             62 male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name   height  mass hair_color skin_color  eye_color birth_year sex   gender  
+  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   
+1 Yoda       66    17 white      green       brown            896 male  masculi…
+2 R4-P17     96    NA none       silver, red red, blue         NA none  feminine
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+]
+
+---
+count: false
+ 
+# Binding Rows
+.panel1-bindrows-auto[
+
+``` r
+s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s1
+s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s2
+s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
+s3
+star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
+*star_wars_combined
+```
+]
+ 
+.panel2-bindrows-auto[
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascu…
+2 Dooku        193  80   white      fair       brown          102   male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Ric Olié     183    NA brown      fair       blue              NA male  mascu…
+2 Zam Wese…    168    55 blonde     fair, gre… yellow            NA fema… femin…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Gasgano      122    NA none       white, bl… black             NA male  mascu…
+2 Gregar T…    185    85 black      dark       brown             NA &lt;NA&gt;  &lt;NA&gt;  
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 6 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascu…
+2 Dooku        193  80   white      fair       brown          102   male  mascu…
+3 Ric Olié     183  NA   brown      fair       blue            NA   male  mascu…
+4 Zam Wese…    168  55   blonde     fair, gre… yellow          NA   fema… femin…
+5 Gasgano      122  NA   none       white, bl… black           NA   male  mascu…
+6 Gregar T…    185  85   black      dark       brown           NA   &lt;NA&gt;  &lt;NA&gt;  
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+]
+
+&lt;style&gt;
+.panel1-bindrows-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-bindrows-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-bindrows-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+ 
+
+---
+
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+*fnames &lt;- list.files(path = "data_headers", full.names = T)
+```
+]
+ 
+.panel2-join-auto[
+
+]
+
+---
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+fnames &lt;- list.files(path = "data_headers", full.names = T)
+*header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+```
+]
+ 
+.panel2-join-auto[
+
+]
+
+---
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+fnames &lt;- list.files(path = "data_headers", full.names = T)
+header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+*trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+```
+]
+ 
+.panel2-join-auto[
+
+]
+
+---
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+fnames &lt;- list.files(path = "data_headers", full.names = T)
+header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+*header
+```
+]
+ 
+.panel2-join-auto[
+
+```
+# A tibble: 12 × 8
+   filename                Participant Age   Sex   Order FirstSpeed Block speed
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
+ 1 data_headers/6191_1.txt 6191        25    male  1     4          1     4    
+ 2 data_headers/6191_2.txt 6191        25    male  1     4          2     7    
+ 3 data_headers/6191_3.txt 6191        25    male  1     4          3     4    
+ 4 data_headers/6191_4.txt 6191        25    male  1     4          4     7    
+ 5 data_headers/6191_5.txt 6191        25    male  1     4          5     4    
+ 6 data_headers/6191_6.txt 6191        25    male  1     4          6     7    
+ 7 data_headers/6192_1.txt 6192        21    male  2     4          1     4    
+ 8 data_headers/6192_2.txt 6192        21    male  2     4          2     7    
+ 9 data_headers/6192_3.txt 6192        21    male  2     4          3     4    
+10 data_headers/6192_4.txt 6192        21    male  2     4          4     7    
+11 data_headers/6192_5.txt 6192        21    male  2     4          5     4    
+12 data_headers/6192_6.txt 6192        21    male  2     4          6     7    
+```
+]
+
+---
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+fnames &lt;- list.files(path = "data_headers", full.names = T)
+header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+header
+*trials
+```
+]
+ 
+.panel2-join-auto[
+
+```
+# A tibble: 12 × 8
+   filename                Participant Age   Sex   Order FirstSpeed Block speed
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
+ 1 data_headers/6191_1.txt 6191        25    male  1     4          1     4    
+ 2 data_headers/6191_2.txt 6191        25    male  1     4          2     7    
+ 3 data_headers/6191_3.txt 6191        25    male  1     4          3     4    
+ 4 data_headers/6191_4.txt 6191        25    male  1     4          4     7    
+ 5 data_headers/6191_5.txt 6191        25    male  1     4          5     4    
+ 6 data_headers/6191_6.txt 6191        25    male  1     4          6     7    
+ 7 data_headers/6192_1.txt 6192        21    male  2     4          1     4    
+ 8 data_headers/6192_2.txt 6192        21    male  2     4          2     7    
+ 9 data_headers/6192_3.txt 6192        21    male  2     4          3     4    
+10 data_headers/6192_4.txt 6192        21    male  2     4          4     7    
+11 data_headers/6192_5.txt 6192        21    male  2     4          5     4    
+12 data_headers/6192_6.txt 6192        21    male  2     4          6     7    
+```
+
+```
+# A tibble: 240 × 5
+   filename                trial_num speed_actual speed_resp correct
+   &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;  
+ 1 data_headers/6191_1.txt         1 fas          slower     FALSE  
+ 2 data_headers/6191_1.txt         2 fas          faster     TRUE   
+ 3 data_headers/6191_1.txt         3 fas          faster     TRUE   
+ 4 data_headers/6191_1.txt         4 fas          slower     FALSE  
+ 5 data_headers/6191_1.txt         5 fas          faster     TRUE   
+ 6 data_headers/6191_1.txt         6 slo          slower     TRUE   
+ 7 data_headers/6191_1.txt         7 fas          faster     TRUE   
+ 8 data_headers/6191_1.txt         8 slo          slower     TRUE   
+ 9 data_headers/6191_1.txt         9 slo          slower     TRUE   
+10 data_headers/6191_1.txt        10 slo          faster     FALSE  
+# ℹ 230 more rows
+```
+]
+
+---
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+fnames &lt;- list.files(path = "data_headers", full.names = T)
+header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+header
+trials
+*left_join(header, trials, by = "filename")
+```
+]
+ 
+.panel2-join-auto[
+
+```
+# A tibble: 12 × 8
+   filename                Participant Age   Sex   Order FirstSpeed Block speed
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
+ 1 data_headers/6191_1.txt 6191        25    male  1     4          1     4    
+ 2 data_headers/6191_2.txt 6191        25    male  1     4          2     7    
+ 3 data_headers/6191_3.txt 6191        25    male  1     4          3     4    
+ 4 data_headers/6191_4.txt 6191        25    male  1     4          4     7    
+ 5 data_headers/6191_5.txt 6191        25    male  1     4          5     4    
+ 6 data_headers/6191_6.txt 6191        25    male  1     4          6     7    
+ 7 data_headers/6192_1.txt 6192        21    male  2     4          1     4    
+ 8 data_headers/6192_2.txt 6192        21    male  2     4          2     7    
+ 9 data_headers/6192_3.txt 6192        21    male  2     4          3     4    
+10 data_headers/6192_4.txt 6192        21    male  2     4          4     7    
+11 data_headers/6192_5.txt 6192        21    male  2     4          5     4    
+12 data_headers/6192_6.txt 6192        21    male  2     4          6     7    
+```
+
+```
+# A tibble: 240 × 5
+   filename                trial_num speed_actual speed_resp correct
+   &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;  
+ 1 data_headers/6191_1.txt         1 fas          slower     FALSE  
+ 2 data_headers/6191_1.txt         2 fas          faster     TRUE   
+ 3 data_headers/6191_1.txt         3 fas          faster     TRUE   
+ 4 data_headers/6191_1.txt         4 fas          slower     FALSE  
+ 5 data_headers/6191_1.txt         5 fas          faster     TRUE   
+ 6 data_headers/6191_1.txt         6 slo          slower     TRUE   
+ 7 data_headers/6191_1.txt         7 fas          faster     TRUE   
+ 8 data_headers/6191_1.txt         8 slo          slower     TRUE   
+ 9 data_headers/6191_1.txt         9 slo          slower     TRUE   
+10 data_headers/6191_1.txt        10 slo          faster     FALSE  
+# ℹ 230 more rows
+```
+
+```
+# A tibble: 240 × 12
+   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 data_headers/… 6191        25    male  1     4          1     4             1
+ 2 data_headers/… 6191        25    male  1     4          1     4             2
+ 3 data_headers/… 6191        25    male  1     4          1     4             3
+ 4 data_headers/… 6191        25    male  1     4          1     4             4
+ 5 data_headers/… 6191        25    male  1     4          1     4             5
+ 6 data_headers/… 6191        25    male  1     4          1     4             6
+ 7 data_headers/… 6191        25    male  1     4          1     4             7
+ 8 data_headers/… 6191        25    male  1     4          1     4             8
+ 9 data_headers/… 6191        25    male  1     4          1     4             9
+10 data_headers/… 6191        25    male  1     4          1     4            10
+# ℹ 230 more rows
+# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
+```
+]
+
+---
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+fnames &lt;- list.files(path = "data_headers", full.names = T)
+header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+header
+trials
+left_join(header, trials, by = "filename")
+*left_join(slice_sample(header, n = 5), trials, by = "filename")
+```
+]
+ 
+.panel2-join-auto[
+
+```
+# A tibble: 12 × 8
+   filename                Participant Age   Sex   Order FirstSpeed Block speed
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
+ 1 data_headers/6191_1.txt 6191        25    male  1     4          1     4    
+ 2 data_headers/6191_2.txt 6191        25    male  1     4          2     7    
+ 3 data_headers/6191_3.txt 6191        25    male  1     4          3     4    
+ 4 data_headers/6191_4.txt 6191        25    male  1     4          4     7    
+ 5 data_headers/6191_5.txt 6191        25    male  1     4          5     4    
+ 6 data_headers/6191_6.txt 6191        25    male  1     4          6     7    
+ 7 data_headers/6192_1.txt 6192        21    male  2     4          1     4    
+ 8 data_headers/6192_2.txt 6192        21    male  2     4          2     7    
+ 9 data_headers/6192_3.txt 6192        21    male  2     4          3     4    
+10 data_headers/6192_4.txt 6192        21    male  2     4          4     7    
+11 data_headers/6192_5.txt 6192        21    male  2     4          5     4    
+12 data_headers/6192_6.txt 6192        21    male  2     4          6     7    
+```
+
+```
+# A tibble: 240 × 5
+   filename                trial_num speed_actual speed_resp correct
+   &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;  
+ 1 data_headers/6191_1.txt         1 fas          slower     FALSE  
+ 2 data_headers/6191_1.txt         2 fas          faster     TRUE   
+ 3 data_headers/6191_1.txt         3 fas          faster     TRUE   
+ 4 data_headers/6191_1.txt         4 fas          slower     FALSE  
+ 5 data_headers/6191_1.txt         5 fas          faster     TRUE   
+ 6 data_headers/6191_1.txt         6 slo          slower     TRUE   
+ 7 data_headers/6191_1.txt         7 fas          faster     TRUE   
+ 8 data_headers/6191_1.txt         8 slo          slower     TRUE   
+ 9 data_headers/6191_1.txt         9 slo          slower     TRUE   
+10 data_headers/6191_1.txt        10 slo          faster     FALSE  
+# ℹ 230 more rows
+```
+
+```
+# A tibble: 240 × 12
+   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 data_headers/… 6191        25    male  1     4          1     4             1
+ 2 data_headers/… 6191        25    male  1     4          1     4             2
+ 3 data_headers/… 6191        25    male  1     4          1     4             3
+ 4 data_headers/… 6191        25    male  1     4          1     4             4
+ 5 data_headers/… 6191        25    male  1     4          1     4             5
+ 6 data_headers/… 6191        25    male  1     4          1     4             6
+ 7 data_headers/… 6191        25    male  1     4          1     4             7
+ 8 data_headers/… 6191        25    male  1     4          1     4             8
+ 9 data_headers/… 6191        25    male  1     4          1     4             9
+10 data_headers/… 6191        25    male  1     4          1     4            10
+# ℹ 230 more rows
+# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
+```
+
+```
+# A tibble: 100 × 12
+   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 data_headers/… 6191        25    male  1     4          6     7             1
+ 2 data_headers/… 6191        25    male  1     4          6     7             2
+ 3 data_headers/… 6191        25    male  1     4          6     7             3
+ 4 data_headers/… 6191        25    male  1     4          6     7             4
+ 5 data_headers/… 6191        25    male  1     4          6     7             5
+ 6 data_headers/… 6191        25    male  1     4          6     7             6
+ 7 data_headers/… 6191        25    male  1     4          6     7             7
+ 8 data_headers/… 6191        25    male  1     4          6     7             8
+ 9 data_headers/… 6191        25    male  1     4          6     7             9
+10 data_headers/… 6191        25    male  1     4          6     7            10
+# ℹ 90 more rows
+# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
+```
+]
+
+---
+count: false
+ 
+# Joining Data
+.panel1-join-auto[
+
+``` r
+fnames &lt;- list.files(path = "data_headers", full.names = T)
+header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
+trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+header
+trials
+left_join(header, trials, by = "filename")
+left_join(slice_sample(header, n = 5), trials, by = "filename")
+*left_join(slice_sample(trials, n = 5), header, by = "filename")
+```
+]
+ 
+.panel2-join-auto[
+
+```
+# A tibble: 12 × 8
+   filename                Participant Age   Sex   Order FirstSpeed Block speed
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
+ 1 data_headers/6191_1.txt 6191        25    male  1     4          1     4    
+ 2 data_headers/6191_2.txt 6191        25    male  1     4          2     7    
+ 3 data_headers/6191_3.txt 6191        25    male  1     4          3     4    
+ 4 data_headers/6191_4.txt 6191        25    male  1     4          4     7    
+ 5 data_headers/6191_5.txt 6191        25    male  1     4          5     4    
+ 6 data_headers/6191_6.txt 6191        25    male  1     4          6     7    
+ 7 data_headers/6192_1.txt 6192        21    male  2     4          1     4    
+ 8 data_headers/6192_2.txt 6192        21    male  2     4          2     7    
+ 9 data_headers/6192_3.txt 6192        21    male  2     4          3     4    
+10 data_headers/6192_4.txt 6192        21    male  2     4          4     7    
+11 data_headers/6192_5.txt 6192        21    male  2     4          5     4    
+12 data_headers/6192_6.txt 6192        21    male  2     4          6     7    
+```
+
+```
+# A tibble: 240 × 5
+   filename                trial_num speed_actual speed_resp correct
+   &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;  
+ 1 data_headers/6191_1.txt         1 fas          slower     FALSE  
+ 2 data_headers/6191_1.txt         2 fas          faster     TRUE   
+ 3 data_headers/6191_1.txt         3 fas          faster     TRUE   
+ 4 data_headers/6191_1.txt         4 fas          slower     FALSE  
+ 5 data_headers/6191_1.txt         5 fas          faster     TRUE   
+ 6 data_headers/6191_1.txt         6 slo          slower     TRUE   
+ 7 data_headers/6191_1.txt         7 fas          faster     TRUE   
+ 8 data_headers/6191_1.txt         8 slo          slower     TRUE   
+ 9 data_headers/6191_1.txt         9 slo          slower     TRUE   
+10 data_headers/6191_1.txt        10 slo          faster     FALSE  
+# ℹ 230 more rows
+```
+
+```
+# A tibble: 240 × 12
+   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 data_headers/… 6191        25    male  1     4          1     4             1
+ 2 data_headers/… 6191        25    male  1     4          1     4             2
+ 3 data_headers/… 6191        25    male  1     4          1     4             3
+ 4 data_headers/… 6191        25    male  1     4          1     4             4
+ 5 data_headers/… 6191        25    male  1     4          1     4             5
+ 6 data_headers/… 6191        25    male  1     4          1     4             6
+ 7 data_headers/… 6191        25    male  1     4          1     4             7
+ 8 data_headers/… 6191        25    male  1     4          1     4             8
+ 9 data_headers/… 6191        25    male  1     4          1     4             9
+10 data_headers/… 6191        25    male  1     4          1     4            10
+# ℹ 230 more rows
+# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
+```
+
+```
+# A tibble: 100 × 12
+   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
+ 1 data_headers/… 6192        21    male  2     4          1     4             1
+ 2 data_headers/… 6192        21    male  2     4          1     4             2
+ 3 data_headers/… 6192        21    male  2     4          1     4             3
+ 4 data_headers/… 6192        21    male  2     4          1     4             4
+ 5 data_headers/… 6192        21    male  2     4          1     4             5
+ 6 data_headers/… 6192        21    male  2     4          1     4             6
+ 7 data_headers/… 6192        21    male  2     4          1     4             7
+ 8 data_headers/… 6192        21    male  2     4          1     4             8
+ 9 data_headers/… 6192        21    male  2     4          1     4             9
+10 data_headers/… 6192        21    male  2     4          1     4            10
+# ℹ 90 more rows
+# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
+```
+
+```
+# A tibble: 5 × 12
+  filename     trial_num speed_actual speed_resp correct Participant Age   Sex  
+  &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
+1 data_header…         4 fas          faster     TRUE    6192        21    male 
+2 data_header…        18 slo          slower     TRUE    6192        21    male 
+3 data_header…         1 fas          faster     TRUE    6191        25    male 
+4 data_header…         9 slo          slower     TRUE    6191        25    male 
+5 data_header…         4 slo          slower     TRUE    6191        25    male 
+# ℹ 4 more variables: Order &lt;chr&gt;, FirstSpeed &lt;chr&gt;, Block &lt;chr&gt;, speed &lt;chr&gt;
+```
+]
+
+&lt;style&gt;
+.panel1-join-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-join-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-join-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+ 
 
 
 

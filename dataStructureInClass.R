@@ -1,7 +1,57 @@
 # What packages do we need?
-install.packages("lubridate") #Make sure it is the most recent version
 library(tidyverse)
-library(lubridate) 
+
+# Character data (strings)
+
+# Just reading/cleaning data for the example...we come back to pivoting later
+ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
+  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
+ds <- ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", values_drop_na = T, names_prefix = "age_") %>%
+  select(-id, -dob)
+
+# Jonah's first words
+
+ds$word
+
+# Length, containing strings, counting strings
+
+ds %>% mutate(word_length = str_length(word), 
+              has_b = str_detect(word, "b"), 
+              num_b = str_count(word, "b"))
+
+# Matching patterns
+
+ds %>% mutate(contains_punct = str_detect(word, "[:punct:]")) 
+ds %>% mutate(word_cleaned = str_remove_all(word, "[:punct:]")) 
+ds %>% mutate(word_cleaned = str_replace_all(word, "[:punct:]"," ")) 
+ds %>% mutate(vowel_count = str_count(word, "[aeiou]")) 
+
+fnames <- list.files(path="data_raw", full.names = T)
+str_split(fnames, "/") 
+str_replace_all(fnames, "data_raw/|.csv|vocab","") 
+str_extract_all(fnames, "\\d{2}.\\d{1}|\\d{2}", simplify = T) 
+str_extract_all(fnames, "\\.[:alpha:]{1,4}", simplify = T) 
+str_extract_all(ds$word, boundary("word"), simplify = T) 
+
+# Combining strings
+
+age <- seq(from = 12, to = 24, by = .5) 
+paste0("data_raw/vocab", age, ".csv") 
+str_glue("data_raw/vocab{age}.csv") 
+
+# Logicals from text
+
+contains_b <- str_detect(ds$word, "b") # TRUE if the word contains b
+contains_b 
+typeof(contains_b) 
+sum(contains_b) 
+mean(contains_b) 
+!contains_b 
+ds$word[contains_b] 
+ds %>% mutate(contains_b = contains_b) 
+ds %>% filter(contains_b) 
+ds %>% mutate(b_and_vowels = contains_b & str_detect(word, "[aeiou]"))
+ds <- ds %>% mutate(b_or_startswithd = contains_b | str_starts(word, "d"))  
 
 # Vectors
 
@@ -39,51 +89,6 @@ model <- lm(height ~ mass, data = starwars)
 typeof(model)
 model$coefficients
 
-# Character data (strings)
-
-# Just reading/cleaning data for the example...we come back to pivoting later
-ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
-  mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-ds <- ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", values_drop_na = T, names_prefix = "age_") %>%
-  select(-id, -dob)
-
-# Jonah's first words
-
-ds$word
-
-# Length, containing strings, counting strings
-
-ds %>% mutate(word_len = str_length(word), 
-              has_b = str_detect(word, "b"), 
-              num_b = str_count(word, "b"))
-
-# Matching patterns
-
-ds %>% mutate(word_cleaned = str_remove_all(word, "[:punct:]")) 
-ds %>% mutate(word_cleaned = str_replace_all(word, "[:punct:]"," ")) 
-ds %>% mutate(vowel_count = str_count(word, "[aeiou]")) 
-#ds %>% mutate(is_three_letter = str_detect(word, "[:alnum:{3}]")) #ROTATE
-# if the goal was to detect three-letter words this code does not work
-ds %>% mutate(is_three_letter = str_detect(word, "\\b\\w{3}\\b"))
-
-fnames <- list.files(path="data_raw", full.names = T)
-str_split(fnames, "/") 
-str_replace_all(fnames, "data_raw/|.csv|vocab","") 
-str_extract_all(fnames, "\\d{2}.\\d{1}|\\d{2}", simplify = T) 
-str_extract_all(fnames, "\\.[:alpha:]{1,4}", simplify = T) 
-str_extract_all(fnames, "(?<=\\/)[:alpha:]+", simplify = T) 
-str_extract_all(ds$word, boundary("word"), simplify = T) 
-
-# Combining strings
-
-age <- seq(from = 12, to = 24, by = .5) 
-paste0("data_raw/vocab", age, ".csv") 
-str_glue("data_raw/vocab{age}.csv") 
-str_glue("Today's date is {today()} and the time is {now()}") 
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 3) 
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 4) 
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 5) 
-str_glue("Here is pi to {x} digits: {format(pi, digits = x)}", x = 6) 
 
 # Working with dates and times
 
@@ -93,7 +98,7 @@ dates <- tibble(dates1 = c("2017-09-01", "2016-09-01", "2015-09-01", "2014-09-01
 
 # Parsing dates
 
-dates # ROTATE
+dates
 dates %>% mutate(dates1_parsed = ymd(dates1)) 
 dates %>% mutate(dates2_parsed = mdy(dates2)) 
 dates %>% mutate(dates3_parsed = parse_date(dates3, format = "%B %d, %Y")) 
@@ -125,9 +130,11 @@ t2 <- as_datetime("2022-01-27 13:39:28", tz = "America/New_York")
 t2-t1
 t3 <- as_datetime("2021-10-15 10:39:28", tz = "America/Los_Angeles")
 t3
-as.period(interval(start = t3, end = t1), unit = "days")
-with_tz(t3, "America/New_York")
-force_tz(t3, "America/New_York")
+t4 <- as_datetime(now())
+t4
+as.period(interval(start = t1, end = t4), unit = "days")
+with_tz(t4, "America/New_York")
+force_tz(t4, "America/New_York")
 
 # Factors represent categories
 
@@ -140,8 +147,8 @@ x
 ds <- starwars
 unique(ds$eye_color)
 ds <- ds %>% mutate(eye_f = factor(eye_color))
-fct_count(ds$eye_f, sort = T)
-fct_count(ds$eye_f, prop = T)
+fct_count(ds$eye_f, sort = T) %>% slice_head(n = 5)
+fct_count(ds$eye_f, prop = T) %>% slice_head(n = 5)
 
 # Setting factors levels
 
@@ -159,14 +166,11 @@ fct_count(fct_rev(ds$eye_f))
 fct_count(fct_infreq(ds$eye_f)) 
 fct_count(factor(ds$eye_f, levels = c("red", "brown", "blue"))) 
 
-#Types of un-tidy data: Column names are variables
+### Tidying Data
 
-relig_income
+# Data Transformations
 
-#Solution: tidyr's pivot_longer() function
-
-relig_income %>% 
-  pivot_longer(cols = -religion, names_to = "income", values_to = "count")
+# Multiple Columns -> One Variable 
 
 ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
@@ -177,11 +181,11 @@ ds %>% pivot_longer(-(id:dob), names_to = "age",
 ds %>% pivot_longer(-(id:dob), names_to = "age", 
                     values_to = "word", values_drop_na = T, names_prefix = "age_")
 
+# One Column -> Multiple variables
 
-# Types of untidy data: Multiple variables in one column
 ds <- read_delim(list.files(path = "data_headers", full.names = T),
                  col_names = c("field", "value"), col_types = c("cc"), 
-                 delim = " ", n_max = 7, id = "filename")
+                 delim = " ", n_max = 8, id = "filename")
 print(ds)
 
 ds <- ds %>% pivot_wider(id_cols = "filename", 
@@ -189,14 +193,9 @@ ds <- ds %>% pivot_wider(id_cols = "filename",
                          values_from = "value")
 ds
 
-# Types of untidy data: Multiple variables in each cell
+# One Variable -> Multiple Variables
 
-# Use separate to pull out the pieces of the filename
-ds %>% separate(filename, into = c("dir_part1", "dir_part2", "ppt_file","ppt_block","exten"))
-ds %>% separate(filename, into = c(NA, NA, "ppt_file","ppt_block",NA))
-ds %>% separate(filename, into = c(NA, NA, "ppt_file","ppt_block",NA)) %>% 
-  mutate(across(-Sex, as.numeric))
-ds %>% separate(filename, into = c("dir","file"), sep = "/")
+ds %>% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
 
 # Binding Columns
 
