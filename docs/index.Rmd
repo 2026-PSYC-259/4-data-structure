@@ -478,11 +478,12 @@ ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
 ds %>% pivot_longer(-(id:dob), names_to = "age", 
                     names_prefix = "age_", values_to = "word")
 ds %>% pivot_longer(-(id:dob), names_to = "age", 
-                    values_to = "word", values_drop_na = T, names_prefix = "age_")
+                    values_to = "word", 
+                    values_drop_na = T, names_prefix = "age_")
 ```
 ---
 
-`r chunk_reveal("pivot-wider", break_type = "auto", widths = c(1, 1), title = "# One Column -> Multiple variables")`
+`r chunk_reveal("pivot-wider", break_type = "auto", widths = c(2, 1), title = "# One Column -> Multiple variables")`
  
 ```{r pivot-wider, include = FALSE}
 ds <- read_delim(list.files(path = "data_headers", full.names = T),
@@ -496,18 +497,25 @@ ds <- ds %>% pivot_wider(id_cols = "filename",
 ds
 ```
 ---
-`r chunk_reveal("separate", break_type = "auto", widths = c(1, 1), title = "# One Variable -> Multiple Variables")`
+`r chunk_reveal("separate", break_type = "auto", widths = c(2, 1), title = "# One Variable -> Multiple Variables")`
 ```{r separate, include = FALSE}
 ds 
-ds %>% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
+ds %>% separate_wider_delim(filename, 
+delim = "/", names = c("dir", "file"))
 ```
 
 ---
-# Multiple Variables -> One Variable
+`r chunk_reveal("unite", break_type = "auto", widths = c(2, 1), title = "# Multiple Variables -> One Variable")`
+```{r unite, include = FALSE}
+ds 
+ds %>% unite(col = "block_speed_condition", 
+Block, speed, condition, sep = "_")
+```
+
 -unite()
 ---
 
-`r chunk_reveal("bindcols", break_type = "auto", widths = c(1, 1), title = "# Binding Columns")`
+`r chunk_reveal("bindcols", break_type = "auto", widths = c(2, 1), title = "# Binding Columns")`
  
 ```{r bindcols, include = FALSE}
 star_wars_numeric <- starwars %>% select(where(is.numeric)) #87x3
@@ -518,7 +526,7 @@ star_wars_combined <- bind_cols(star_wars_numeric, star_wars_char) #87x11
 star_wars_combined
 ```
 ---
-`r chunk_reveal("bindrows", break_type = "auto", widths = c(1, 1), title = "# Binding Rows")`
+`r chunk_reveal("bindrows", break_type = "auto", widths = c(2, 1), title = "# Binding Rows")`
  
 ```{r bindrows, include = FALSE}
 s1 <- starwars %>% slice_sample(n = 2) #2x14
@@ -532,7 +540,7 @@ star_wars_combined
 ```
 ---
 
-`r chunk_reveal("join", break_type = "auto", widths = c(1, 1), title = "# Joining Data")`
+`r chunk_reveal("join", break_type = "auto", widths = c(2, 1), title = "# Joining Data")`
  
 ```{r join, include = FALSE}
 fnames <- list.files(path = "data_headers", full.names = T)

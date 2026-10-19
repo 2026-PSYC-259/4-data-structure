@@ -197,6 +197,10 @@ ds
 
 ds %>% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
 
+# Multiple Variables -> One Variable
+
+ds %>% unite(col = "block_speed_condition", Block, speed, condition, sep = "_")
+
 # Binding Columns
 
 star_wars_numeric <- starwars %>% select(where(is.numeric)) #87x3
