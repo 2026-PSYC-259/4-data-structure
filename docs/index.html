@@ -3274,7 +3274,7 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 11:52:15 PDT"
+[1] "2026-10-19 12:27:26 PDT"
 ```
 ]
 
@@ -3317,11 +3317,11 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 11:52:15 PDT"
+[1] "2026-10-19 12:27:26 PDT"
 ```
 
 ```
-[1] "1726d 0H 12M 47.2731530666351S"
+[1] "1726d 0H 47M 58.8691999912262S"
 ```
 ]
 
@@ -3365,15 +3365,15 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 11:52:15 PDT"
+[1] "2026-10-19 12:27:27 PDT"
 ```
 
 ```
-[1] "1726d 0H 12M 47.3762099742889S"
+[1] "1726d 0H 47M 59.0142838954926S"
 ```
 
 ```
-[1] "2026-10-19 14:52:15 EDT"
+[1] "2026-10-19 15:27:27 EDT"
 ```
 ]
 
@@ -3418,19 +3418,19 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 11:52:15 PDT"
+[1] "2026-10-19 12:27:27 PDT"
 ```
 
 ```
-[1] "1726d 0H 12M 47.4542779922485S"
+[1] "1726d 0H 47M 59.1997010707855S"
 ```
 
 ```
-[1] "2026-10-19 14:52:15 EDT"
+[1] "2026-10-19 15:27:27 EDT"
 ```
 
 ```
-[1] "2026-10-19 11:52:15 EDT"
+[1] "2026-10-19 12:27:27 EDT"
 ```
 ]
 
@@ -5269,8 +5269,8 @@ s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Qui-Gon …    193    89 brown      fair       blue              92 male  mascu…
-2 R4-P17        96    NA none       silver, r… red, blue         NA none  femin…
+1 Obi-Wan …    182    77 auburn, w… fair       blue-gray         57 male  mascu…
+2 Ben Quad…    163    65 none       grey, gre… orange            NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5295,8 +5295,8 @@ s1
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 R5-D4         97    32 &lt;NA&gt;       white, red red             NA   none  mascu…
-2 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
+1 Taun We      213    NA none       grey       black             NA fema… femin…
+2 Yarael P…    264    NA none       white      yellow            NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5322,8 +5322,8 @@ s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Wat Tamb…    193    48 none       green, gr… unknown           NA male  mascu…
-2 Bib Fort…    180    NA none       pale       pink              NA male  mascu…
+1 Han Solo     180    80 brown      fair       brown             29 male  mascu…
+2 Obi-Wan …    182    77 auburn, w… fair       blue-gray         57 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5332,8 +5332,8 @@ s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Yoda          66    17 white      green      brown            896 male  mascu…
-2 Captain …     NA    NA none       none       unknown           NA fema… femin…
+1 Jabba De…    175  1358 &lt;NA&gt;       green-tan… orange           600 herm… mascu…
+2 Yoda          66    17 white      green      brown            896 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5360,8 +5360,8 @@ s2
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Owen Lars    178   120 brown, gr… light      blue              52 male  mascu…
-2 Bossk        190   113 none       green      red               53 male  mascu…
+1 Shaak Ti     178    57 none       red, blue… black             NA fema… femin…
+2 Kit Fisto    196    87 none       green      black             NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5370,8 +5370,8 @@ s2
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Qui-Gon …    193    89 brown      fair       blue              92 male  mascu…
-2 Arvel Cr…     NA    NA brown      fair       brown             NA male  mascu…
+1 Palpatine    170  75   grey       pale       yellow            82 male  mascu…
+2 Luminara…    170  56.2 black      yellow     blue              58 fema… femin…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5399,8 +5399,8 @@ s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Lando Ca…    177    79 black      dark       brown             31 male  mascu…
-2 Dud Bolt      94    45 none       blue, grey yellow            NA male  mascu…
+1 Sebulba      112    40 none       grey, red  orange            NA male  mascu…
+2 Rugor Na…    206    NA none       green      orange            NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5409,8 +5409,8 @@ s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Padmé Am…    185    45 brown      light      brown             46 fema… femin…
-2 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
+1 Gregar T…    185    85 black      dark       brown             NA &lt;NA&gt;  &lt;NA&gt;  
+2 San Hill     191    NA none       grey       gold              NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5419,8 +5419,8 @@ s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Zam Wese…    168    55 blonde     fair, gre… yellow            NA fema… femin…
-2 BB8           NA    NA none       none       black             NA none  mascu…
+1 Yoda          66    17 white      green      brown            896 male  mascu…
+2 Mon Moth…    150    NA auburn     fair       blue              48 fema… femin…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5449,8 +5449,8 @@ s3
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 R5-D4         97    32 &lt;NA&gt;       white, red red               NA none  mascu…
-2 Nien Nunb    160    68 none       grey       black             NA male  mascu…
+1 Nien Nunb    160    68 none       grey       black             NA male  mascu…
+2 Jabba De…    175  1358 &lt;NA&gt;       green-tan… orange           600 herm… mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5459,18 +5459,18 @@ s3
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Darth Ma…    175    80 none       red        yellow            54 male  mascu…
-2 Quarsh P…    183    NA black      dark       brown             62 male  mascu…
+1 Kit Fisto    196    87 none       green      black             NA male  mascu…
+2 Lama Su      229    88 none       grey       black             NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 
 ```
 # A tibble: 2 × 14
-  name   height  mass hair_color skin_color  eye_color birth_year sex   gender  
-  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   
-1 Yoda       66    17 white      green       brown            896 male  masculi…
-2 R4-P17     96    NA none       silver, red red, blue         NA none  feminine
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascu…
+2 Gregar T…    185  85   black      dark       brown           NA   &lt;NA&gt;  &lt;NA&gt;  
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5500,8 +5500,8 @@ star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascu…
-2 Dooku        193  80   white      fair       brown          102   male  mascu…
+1 Lando Ca…    177    79 black      dark       brown             31 male  mascu…
+2 Quarsh P…    183    NA black      dark       brown             62 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5510,8 +5510,8 @@ star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Ric Olié     183    NA brown      fair       blue              NA male  mascu…
-2 Zam Wese…    168    55 blonde     fair, gre… yellow            NA fema… femin…
+1 Ben Quad…    163    65 none       grey, gre… orange            NA male  mascu…
+2 Beru Whi…    165    75 brown      light      blue              47 fema… femin…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5520,8 +5520,8 @@ star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Gasgano      122    NA none       white, bl… black             NA male  mascu…
-2 Gregar T…    185    85 black      dark       brown             NA &lt;NA&gt;  &lt;NA&gt;  
+1 Taun We      213    NA none       grey       black             NA fema… femin…
+2 Lando Ca…    177    79 black      dark       brown             31 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5530,12 +5530,12 @@ star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
 # A tibble: 6 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascu…
-2 Dooku        193  80   white      fair       brown          102   male  mascu…
-3 Ric Olié     183  NA   brown      fair       blue            NA   male  mascu…
-4 Zam Wese…    168  55   blonde     fair, gre… yellow          NA   fema… femin…
-5 Gasgano      122  NA   none       white, bl… black           NA   male  mascu…
-6 Gregar T…    185  85   black      dark       brown           NA   &lt;NA&gt;  &lt;NA&gt;  
+1 Lando Ca…    177    79 black      dark       brown             31 male  mascu…
+2 Quarsh P…    183    NA black      dark       brown             62 male  mascu…
+3 Ben Quad…    163    65 none       grey, gre… orange            NA male  mascu…
+4 Beru Whi…    165    75 brown      light      blue              47 fema… femin…
+5 Taun We      213    NA none       grey       black             NA fema… femin…
+6 Lando Ca…    177    79 black      dark       brown             31 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5856,16 +5856,16 @@ left_join(header, trials, by = "filename")
 # A tibble: 100 × 12
    filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
    &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 data_headers/… 6191        25    male  1     4          6     7             1
- 2 data_headers/… 6191        25    male  1     4          6     7             2
- 3 data_headers/… 6191        25    male  1     4          6     7             3
- 4 data_headers/… 6191        25    male  1     4          6     7             4
- 5 data_headers/… 6191        25    male  1     4          6     7             5
- 6 data_headers/… 6191        25    male  1     4          6     7             6
- 7 data_headers/… 6191        25    male  1     4          6     7             7
- 8 data_headers/… 6191        25    male  1     4          6     7             8
- 9 data_headers/… 6191        25    male  1     4          6     7             9
-10 data_headers/… 6191        25    male  1     4          6     7            10
+ 1 data_headers/… 6191        25    male  1     4          2     7             1
+ 2 data_headers/… 6191        25    male  1     4          2     7             2
+ 3 data_headers/… 6191        25    male  1     4          2     7             3
+ 4 data_headers/… 6191        25    male  1     4          2     7             4
+ 5 data_headers/… 6191        25    male  1     4          2     7             5
+ 6 data_headers/… 6191        25    male  1     4          2     7             6
+ 7 data_headers/… 6191        25    male  1     4          2     7             7
+ 8 data_headers/… 6191        25    male  1     4          2     7             8
+ 9 data_headers/… 6191        25    male  1     4          2     7             9
+10 data_headers/… 6191        25    male  1     4          2     7            10
 # ℹ 90 more rows
 # ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
 ```
@@ -5948,16 +5948,16 @@ left_join(slice_sample(header, n = 5), trials, by = "filename")
 # A tibble: 100 × 12
    filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
    &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 data_headers/… 6192        21    male  2     4          1     4             1
- 2 data_headers/… 6192        21    male  2     4          1     4             2
- 3 data_headers/… 6192        21    male  2     4          1     4             3
- 4 data_headers/… 6192        21    male  2     4          1     4             4
- 5 data_headers/… 6192        21    male  2     4          1     4             5
- 6 data_headers/… 6192        21    male  2     4          1     4             6
- 7 data_headers/… 6192        21    male  2     4          1     4             7
- 8 data_headers/… 6192        21    male  2     4          1     4             8
- 9 data_headers/… 6192        21    male  2     4          1     4             9
-10 data_headers/… 6192        21    male  2     4          1     4            10
+ 1 data_headers/… 6191        25    male  1     4          1     4             1
+ 2 data_headers/… 6191        25    male  1     4          1     4             2
+ 3 data_headers/… 6191        25    male  1     4          1     4             3
+ 4 data_headers/… 6191        25    male  1     4          1     4             4
+ 5 data_headers/… 6191        25    male  1     4          1     4             5
+ 6 data_headers/… 6191        25    male  1     4          1     4             6
+ 7 data_headers/… 6191        25    male  1     4          1     4             7
+ 8 data_headers/… 6191        25    male  1     4          1     4             8
+ 9 data_headers/… 6191        25    male  1     4          1     4             9
+10 data_headers/… 6191        25    male  1     4          1     4            10
 # ℹ 90 more rows
 # ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
 ```
@@ -5966,11 +5966,11 @@ left_join(slice_sample(header, n = 5), trials, by = "filename")
 # A tibble: 5 × 12
   filename     trial_num speed_actual speed_resp correct Participant Age   Sex  
   &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
-1 data_header…         4 fas          faster     TRUE    6192        21    male 
-2 data_header…        18 slo          slower     TRUE    6192        21    male 
-3 data_header…         1 fas          faster     TRUE    6191        25    male 
-4 data_header…         9 slo          slower     TRUE    6191        25    male 
-5 data_header…         4 slo          slower     TRUE    6191        25    male 
+1 data_header…        18 slo          slower     TRUE    6191        25    male 
+2 data_header…         5 fas          faster     TRUE    6192        21    male 
+3 data_header…         1 slo          slower     TRUE    6192        21    male 
+4 data_header…         7 slo          slower     TRUE    6191        25    male 
+5 data_header…        10 fas          faster     TRUE    6192        21    male 
 # ℹ 4 more variables: Order &lt;chr&gt;, FirstSpeed &lt;chr&gt;, Block &lt;chr&gt;, speed &lt;chr&gt;
 ```
 ]
