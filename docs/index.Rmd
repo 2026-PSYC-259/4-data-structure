@@ -415,7 +415,7 @@ fct_count(ds$eye_f, prop = T) %>%
 ```
 
 ---
-`r chunk_reveal("releveling", break_type = "rotate", float = "none", widths = c(8, 1), title = "# Setting factor levels")`
+`r chunk_reveal("releveling", break_type = "rotate", float = "none", widths = c(8, 1), title = "# Setting factor levels", font_size_code = "70%")`
 
 ```{r releveling, include = FALSE}
 ds <- ds %>% select(name, eye_f)
@@ -477,19 +477,22 @@ class: inverse, center, middle
 options(opts)  # restore defaults for later slides
 ```
 
-`r chunk_reveal("pivot-longer", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Multiple Columns -> One Variable ")`
+`r chunk_reveal("pivot-longer", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Multiple Columns -> One Variable ", font_size_code = "70%")`
  
 ```{r pivot-longer, include = FALSE}
 ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
 ds %>% print(n = 10)  #ROTATE
 ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word") #ROTATE
-ds %>% pivot_longer(-(id:dob), names_to = "age", names_prefix = "age_", values_to = "word") #ROTATE
-ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", values_drop_na = T, names_prefix = "age_") #ROTATE
+ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", names_prefix = "age_") #ROTATE
+ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", names_prefix = "age_", values_drop_na = T) #ROTATE
 ```
 ---
-
-`r chunk_reveal("pivot-wider", break_type = "auto", widths = c(2, 1), title = "# One Column -> Multiple variables")`
+```{r, include = FALSE}
+opts <- options(tibble.width = Inf, width = 110,
+                    tibble.print_min = 5, tibble.print_max = 5)
+```
+`r chunk_reveal("pivot-wider", break_type = "auto", float = "none", widths = c(12, 1), title = "# One Column -> Multiple variables")`
  
 ```{r pivot-wider, include = FALSE}
 ds <- read_delim(list.files(path = "data_headers", full.names = T),
@@ -503,7 +506,10 @@ ds <- ds %>% pivot_wider(id_cols = "filename",
 ds
 ```
 ---
-`r chunk_reveal("separate", break_type = "auto", widths = c(2, 1), title = "# One Variable -> Multiple Variables")`
+
+
+
+`r chunk_reveal("separate", break_type = "auto", float = "none", widths = c(12, 1), title = "# One Variable -> Multiple Variables")`
 ```{r separate, include = FALSE}
 ds 
 ds %>% separate_wider_delim(filename, 
@@ -511,42 +517,45 @@ delim = "/", names = c("dir", "file"))
 ```
 
 ---
-`r chunk_reveal("unite", break_type = "auto", widths = c(2, 1), title = "# Multiple Variables -> One Variable")`
+`r chunk_reveal("unite", break_type = "auto", float = "none", widths = c(12, 1), title = "# Multiple Variables -> One Variable")`
 ```{r unite, include = FALSE}
 ds 
 ds %>% unite(col = "block_speed_condition", 
-Block, speed, condition, sep = "_")
+Block, speed, condition, sep = "_", remove = FALSE)
 ```
-
--unite()
 ---
 
-`r chunk_reveal("bindcols", break_type = "auto", widths = c(2, 1), title = "# Binding Columns")`
+`r chunk_reveal("bindcols", break_type = "user", float = "none", widths = c(12, 1), title = "# Binding Columns", font_size_code = "70%")`
  
 ```{r bindcols, include = FALSE}
-star_wars_numeric <- starwars %>% select(where(is.numeric)) #87x3
-star_wars_numeric
-star_wars_char <- starwars %>% select(where(is.character)) #87x8
-star_wars_char
-star_wars_combined <- bind_cols(star_wars_numeric, star_wars_char) #87x11
-star_wars_combined
+star_wars_numeric <- starwars %>% select(where(is.numeric))
+star_wars_numeric #BREAK
+star_wars_char <- starwars %>% select(where(is.character))
+star_wars_char #BREAK
+star_wars_combined <- bind_cols(star_wars_numeric, star_wars_char)
+star_wars_combined #BREAK
 ```
 ---
-`r chunk_reveal("bindrows", break_type = "auto", widths = c(2, 1), title = "# Binding Rows")`
+
+```{r, include = FALSE}
+opts2 <- options(tibble.width = NULL, width = 110,
+                    tibble.print_min = 5, tibble.print_max = 5)
+```
+`r chunk_reveal("bindrows", break_type = "user", float = "none", widths = c(12, 1), title = "# Binding Rows", font_size_code = "70%")`
  
 ```{r bindrows, include = FALSE}
 s1 <- starwars %>% slice_sample(n = 2) #2x14
-s1
+s1 #BREAK
 s2 <- starwars %>% slice_sample(n = 2) #2x14
-s2
+s2 #BREAK
 s3 <- starwars %>% slice_sample(n = 2) #2x14
-s3
+s3 #BREAK
 star_wars_combined <- bind_rows(s1, s2, s3) #6x14
-star_wars_combined
+star_wars_combined #BREAK
 ```
 ---
 
-`r chunk_reveal("join", break_type = "auto", widths = c(2, 1), title = "# Joining Data")`
+`r chunk_reveal("join", break_type = "auto", float = "none", widths = c(12, 1), title = "# Joining Data with Differing Rows/Columns", font_size_code = "65%")`
  
 ```{r join, include = FALSE}
 fnames <- list.files(path = "data_headers", full.names = T)
