@@ -40,8 +40,6 @@ class: center, middle, inverse, title-slide
 
 - Workflow critique
 
-- Resources on course site
-
 ---
 
 # Today's Outline
@@ -59,7 +57,7 @@ class: center, middle, inverse, title-slide
 &lt;svg viewBox="0 0 496 512" style="height:1em;display:inline-block;vertical-align:-.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; Follow along from the [Github repo](https://github.com/2026-PSYC-259/4-data-structure)
 ]
 
-.footnote[.small[.bold[Last updated: 2026-10-19]]]
+.footnote[.small[.bold[Last updated: 2026-10-23]]]
 
 ---
 class: inverse, center, middle
@@ -474,7 +472,7 @@ count: false
 &lt;style&gt;
 .panel1-patterns-rotate {
   color: black;
-  width: 90.4615384615385%;
+  width: 65.3333333333333%;
   hight: 32%;
   float: none;
   padding-left: 1%;
@@ -482,7 +480,7 @@ count: false
 }
 .panel2-patterns-rotate {
   color: black;
-  width: 7.53846153846154%;
+  width: 32.6666666666667%;
   hight: 32%;
   float: none;
   padding-left: 1%;
@@ -2883,7 +2881,7 @@ time_length(as.period(interval(mdy("05-27-1983"), mdy("05-28-2022"))), "years")
 ---
 count: false
  
-# Age math
+# Age Math
 .panel1-age-auto[
 
 ``` r
@@ -2898,7 +2896,7 @@ count: false
 ---
 count: false
  
-# Age math
+# Age Math
 .panel1-age-auto[
 
 ``` r
@@ -2914,7 +2912,7 @@ birth_date &lt;- ymd("2001-09-01", "2000-09-01")
 ---
 count: false
  
-# Age math
+# Age Math
 .panel1-age-auto[
 
 ``` r
@@ -2935,14 +2933,15 @@ Time differences in days
 ---
 count: false
  
-# Age math
+# Age Math
 .panel1-age-auto[
 
 ``` r
 birth_date &lt;- ymd("2001-09-01", "2000-09-01")
 test_date &lt;- ymd("2020-09-01", "2019-09-01")
 (test_date-birth_date)/365.25
-*as.period(interval(start = birth_date, end = test_date), unit = "years")
+*as.period(interval(start = birth_date,
+* end = test_date), unit = "years")
 ```
 ]
  
@@ -2961,14 +2960,15 @@ Time differences in days
 ---
 count: false
  
-# Age math
+# Age Math
 .panel1-age-auto[
 
 ``` r
 birth_date &lt;- ymd("2001-09-01", "2000-09-01")
 test_date &lt;- ymd("2020-09-01", "2019-09-01")
 (test_date-birth_date)/365.25
-as.period(interval(start = birth_date, end = test_date), unit = "years")
+as.period(interval(start = birth_date,
+  end = test_date), unit = "years")
 *test_date - years(1) + days(7)
 ```
 ]
@@ -2992,17 +2992,17 @@ Time differences in days
 &lt;style&gt;
 .panel1-age-auto {
   color: black;
-  width: 90.4615384615385%;
+  width: 49%;
   hight: 32%;
-  float: none;
+  float: left;
   padding-left: 1%;
   font-size: 80%
 }
 .panel2-age-auto {
   color: black;
-  width: 7.53846153846154%;
+  width: 49%;
   hight: 32%;
-  float: none;
+  float: left;
   padding-left: 1%;
   font-size: 80%
 }
@@ -3010,7 +3010,7 @@ Time differences in days
   color: black;
   width: NA%;
   hight: 33%;
-  float: none;
+  float: left;
   padding-left: 1%;
   font-size: 80%
 }
@@ -3274,7 +3274,7 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 12:55:58 PDT"
+[1] "2026-10-23 18:56:13 PDT"
 ```
 ]
 
@@ -3317,11 +3317,11 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 12:55:58 PDT"
+[1] "2026-10-23 18:56:13 PDT"
 ```
 
 ```
-[1] "1726d 1H 16M 30.5612099170685S"
+[1] "1730d 7H 16M 45.5113360881805S"
 ```
 ]
 
@@ -3365,15 +3365,15 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 12:55:58 PDT"
+[1] "2026-10-23 18:56:13 PDT"
 ```
 
 ```
-[1] "1726d 1H 16M 30.6580309867859S"
+[1] "1730d 7H 16M 45.5752511024475S"
 ```
 
 ```
-[1] "2026-10-19 15:55:58 EDT"
+[1] "2026-10-23 21:56:13 EDT"
 ```
 ]
 
@@ -3418,19 +3418,19 @@ Time difference of 0 secs
 ```
 
 ```
-[1] "2026-10-19 12:55:58 PDT"
+[1] "2026-10-23 18:56:13 PDT"
 ```
 
 ```
-[1] "1726d 1H 16M 30.7449860572815S"
+[1] "1730d 7H 16M 45.6315159797668S"
 ```
 
 ```
-[1] "2026-10-19 15:55:58 EDT"
+[1] "2026-10-23 21:56:13 EDT"
 ```
 
 ```
-[1] "2026-10-19 12:55:58 EDT"
+[1] "2026-10-23 18:56:13 EDT"
 ```
 ]
 
@@ -3478,40 +3478,25 @@ x
 [1] rarely     rarely     neutral    frequently rarely     &lt;NA&gt;      
 Levels: rarely neutral frequently
 ```
-- levels restrict the possible set of values
+- Levels restrict the possible set of values
 
-- levels are ordered, which carries forward to output, modeling, graphics, etc.
+- Levels are ordered, which carries forward to output, modeling, graphics, etc.
 
-- factors work as dummy codes; use as.numeric(factor) to treat as a continuous variable in models
+- Factors work as dummy codes; use as.numeric(factor) to treat as a continuous variable in models
 ---
 
 count: false
  
 # Factors
-.panel1-factors-auto[
+.panel1-factors-user[
 
 ``` r
 *ds &lt;- starwars
-```
-]
- 
-.panel2-factors-auto[
-
-]
-
----
-count: false
- 
-# Factors
-.panel1-factors-auto[
-
-``` r
-ds &lt;- starwars
 *unique(ds$eye_color)
 ```
 ]
  
-.panel2-factors-auto[
+.panel2-factors-user[
 
 ```
  [1] "blue"          "yellow"        "red"           "brown"        
@@ -3525,16 +3510,17 @@ ds &lt;- starwars
 count: false
  
 # Factors
-.panel1-factors-auto[
+.panel1-factors-user[
 
 ``` r
 ds &lt;- starwars
 unique(ds$eye_color)
-*ds &lt;- ds %&gt;% mutate(eye_f = factor(eye_color))
+*ds &lt;- ds %&gt;%
+* mutate(eye_f = factor(eye_color))
 ```
 ]
  
-.panel2-factors-auto[
+.panel2-factors-user[
 
 ```
  [1] "blue"          "yellow"        "red"           "brown"        
@@ -3548,17 +3534,19 @@ unique(ds$eye_color)
 count: false
  
 # Factors
-.panel1-factors-auto[
+.panel1-factors-user[
 
 ``` r
 ds &lt;- starwars
 unique(ds$eye_color)
-ds &lt;- ds %&gt;% mutate(eye_f = factor(eye_color))
-*fct_count(ds$eye_f, sort = T) %&gt;% slice_head(n = 5)
+ds &lt;- ds %&gt;%
+  mutate(eye_f = factor(eye_color))
+*fct_count(ds$eye_f, sort = T) %&gt;%
+* slice_head(n = 5)
 ```
 ]
  
-.panel2-factors-auto[
+.panel2-factors-user[
 
 ```
  [1] "blue"          "yellow"        "red"           "brown"        
@@ -3583,18 +3571,21 @@ ds &lt;- ds %&gt;% mutate(eye_f = factor(eye_color))
 count: false
  
 # Factors
-.panel1-factors-auto[
+.panel1-factors-user[
 
 ``` r
 ds &lt;- starwars
 unique(ds$eye_color)
-ds &lt;- ds %&gt;% mutate(eye_f = factor(eye_color))
-fct_count(ds$eye_f, sort = T) %&gt;% slice_head(n = 5)
-*fct_count(ds$eye_f, prop = T) %&gt;% slice_head(n = 5)
+ds &lt;- ds %&gt;%
+  mutate(eye_f = factor(eye_color))
+fct_count(ds$eye_f, sort = T) %&gt;%
+  slice_head(n = 5)
+*fct_count(ds$eye_f, prop = T) %&gt;%
+* slice_head(n = 5)
 ```
 ]
  
-.panel2-factors-auto[
+.panel2-factors-user[
 
 ```
  [1] "blue"          "yellow"        "red"           "brown"        
@@ -3627,23 +3618,23 @@ fct_count(ds$eye_f, sort = T) %&gt;% slice_head(n = 5)
 ]
 
 &lt;style&gt;
-.panel1-factors-auto {
+.panel1-factors-user {
   color: black;
-  width: 49%;
+  width: 39.2%;
   hight: 32%;
   float: left;
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-factors-auto {
+.panel2-factors-user {
   color: black;
-  width: 49%;
+  width: 58.8%;
   hight: 32%;
   float: left;
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-factors-auto {
+.panel3-factors-user {
   color: black;
   width: NA%;
   hight: 33%;
@@ -4029,13 +4020,14 @@ class: inverse, center, middle
 - Each type of observational unit is a table
   * e.g., participant questionnaire vs trial-by-trial data
 ---
+
 count: false
  
 # Dataset Preparations
 .panel1-selectcols-rotate[
 
 ``` r
-print(relig_income, n = 5)
+print(relig_income, n = 5, width = Inf)
 *relig_income %&gt;% select(religion, contains("$"))
 ```
 ]
@@ -4044,41 +4036,33 @@ print(relig_income, n = 5)
 
 ```
 # A tibble: 18 × 11
-  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-1 Agnostic       27        34        60        81        76       137        122
-2 Atheist        12        27        37        52        35        70         73
-3 Buddhist       27        21        30        34        33        58         62
-4 Catholic      418       617       732       670       638      1116        949
-5 Don’t kn…      15        14        15        11        10        35         21
+  religion           `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k` `&gt;150k`
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+1 Agnostic                27        34        60        81        76       137        122         109      84
+2 Atheist                 12        27        37        52        35        70         73          59      74
+3 Buddhist                27        21        30        34        33        58         62          39      53
+4 Catholic               418       617       732       670       638      1116        949         792     633
+5 Don’t know/refused      15        14        15        11        10        35         21          17      18
+  `Don't know/refused`
+                 &lt;dbl&gt;
+1                   96
+2                   76
+3                   54
+4                 1489
+5                  116
 # ℹ 13 more rows
-# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
-#   `Don't know/refused` &lt;dbl&gt;
 ```
 
 ```
 # A tibble: 18 × 9
-   religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-   &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
- 1 Agnostic      27        34        60        81        76       137        122
- 2 Atheist       12        27        37        52        35        70         73
- 3 Buddhist      27        21        30        34        33        58         62
- 4 Catholic     418       617       732       670       638      1116        949
- 5 Don’t k…      15        14        15        11        10        35         21
- 6 Evangel…     575       869      1064       982       881      1486        949
- 7 Hindu          1         9         7         9        11        34         47
- 8 Histori…     228       244       236       238       197       223        131
- 9 Jehovah…      20        27        24        24        21        30         15
-10 Jewish        19        19        25        25        30        95         69
-11 Mainlin…     289       495       619       655       651      1107        939
-12 Mormon        29        40        48        51        56       112         85
-13 Muslim         6         7         9        10         9        23         16
-14 Orthodox      13        17        23        32        32        47         38
-15 Other C…       9         7        11        13        13        14         18
-16 Other F…      20        33        40        46        49        63         46
-17 Other W…       5         2         3         4         2         7          3
-18 Unaffil…     217       299       374       365       341       528        407
-# ℹ 1 more variable: `$100-150k` &lt;dbl&gt;
+  religion           `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k`
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1 Agnostic                27        34        60        81        76       137        122         109
+2 Atheist                 12        27        37        52        35        70         73          59
+3 Buddhist                27        21        30        34        33        58         62          39
+4 Catholic               418       617       732       670       638      1116        949         792
+5 Don’t know/refused      15        14        15        11        10        35         21          17
+# ℹ 13 more rows
 ```
 ]
 
@@ -4089,7 +4073,7 @@ count: false
 .panel1-selectcols-rotate[
 
 ``` r
-print(relig_income, n = 5)
+print(relig_income, n = 5, width = Inf)
 *relig_income %&gt;% select(religion, starts_with("$"))
 ```
 ]
@@ -4098,41 +4082,33 @@ print(relig_income, n = 5)
 
 ```
 # A tibble: 18 × 11
-  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-1 Agnostic       27        34        60        81        76       137        122
-2 Atheist        12        27        37        52        35        70         73
-3 Buddhist       27        21        30        34        33        58         62
-4 Catholic      418       617       732       670       638      1116        949
-5 Don’t kn…      15        14        15        11        10        35         21
+  religion           `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k` `&gt;150k`
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+1 Agnostic                27        34        60        81        76       137        122         109      84
+2 Atheist                 12        27        37        52        35        70         73          59      74
+3 Buddhist                27        21        30        34        33        58         62          39      53
+4 Catholic               418       617       732       670       638      1116        949         792     633
+5 Don’t know/refused      15        14        15        11        10        35         21          17      18
+  `Don't know/refused`
+                 &lt;dbl&gt;
+1                   96
+2                   76
+3                   54
+4                 1489
+5                  116
 # ℹ 13 more rows
-# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
-#   `Don't know/refused` &lt;dbl&gt;
 ```
 
 ```
 # A tibble: 18 × 8
-   religion         `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
- 1 Agnostic                34        60        81        76       137        122
- 2 Atheist                 27        37        52        35        70         73
- 3 Buddhist                21        30        34        33        58         62
- 4 Catholic               617       732       670       638      1116        949
- 5 Don’t know/refu…        14        15        11        10        35         21
- 6 Evangelical Prot       869      1064       982       881      1486        949
- 7 Hindu                    9         7         9        11        34         47
- 8 Historically Bl…       244       236       238       197       223        131
- 9 Jehovah's Witne…        27        24        24        21        30         15
-10 Jewish                  19        25        25        30        95         69
-11 Mainline Prot          495       619       655       651      1107        939
-12 Mormon                  40        48        51        56       112         85
-13 Muslim                   7         9        10         9        23         16
-14 Orthodox                17        23        32        32        47         38
-15 Other Christian          7        11        13        13        14         18
-16 Other Faiths            33        40        46        49        63         46
-17 Other World Rel…         2         3         4         2         7          3
-18 Unaffiliated           299       374       365       341       528        407
-# ℹ 1 more variable: `$100-150k` &lt;dbl&gt;
+  religion           `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k`
+  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1 Agnostic                  34        60        81        76       137        122         109
+2 Atheist                   27        37        52        35        70         73          59
+3 Buddhist                  21        30        34        33        58         62          39
+4 Catholic                 617       732       670       638      1116        949         792
+5 Don’t know/refused        14        15        11        10        35         21          17
+# ℹ 13 more rows
 ```
 ]
 
@@ -4143,7 +4119,7 @@ count: false
 .panel1-selectcols-rotate[
 
 ``` r
-print(relig_income, n = 5)
+print(relig_income, n = 5, width = Inf)
 *relig_income %&gt;% select(religion, contains("k"))
 ```
 ]
@@ -4152,42 +4128,40 @@ print(relig_income, n = 5)
 
 ```
 # A tibble: 18 × 11
-  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-1 Agnostic       27        34        60        81        76       137        122
-2 Atheist        12        27        37        52        35        70         73
-3 Buddhist       27        21        30        34        33        58         62
-4 Catholic      418       617       732       670       638      1116        949
-5 Don’t kn…      15        14        15        11        10        35         21
+  religion           `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k` `&gt;150k`
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+1 Agnostic                27        34        60        81        76       137        122         109      84
+2 Atheist                 12        27        37        52        35        70         73          59      74
+3 Buddhist                27        21        30        34        33        58         62          39      53
+4 Catholic               418       617       732       670       638      1116        949         792     633
+5 Don’t know/refused      15        14        15        11        10        35         21          17      18
+  `Don't know/refused`
+                 &lt;dbl&gt;
+1                   96
+2                   76
+3                   54
+4                 1489
+5                  116
 # ℹ 13 more rows
-# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
-#   `Don't know/refused` &lt;dbl&gt;
 ```
 
 ```
 # A tibble: 18 × 11
-   religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-   &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
- 1 Agnostic      27        34        60        81        76       137        122
- 2 Atheist       12        27        37        52        35        70         73
- 3 Buddhist      27        21        30        34        33        58         62
- 4 Catholic     418       617       732       670       638      1116        949
- 5 Don’t k…      15        14        15        11        10        35         21
- 6 Evangel…     575       869      1064       982       881      1486        949
- 7 Hindu          1         9         7         9        11        34         47
- 8 Histori…     228       244       236       238       197       223        131
- 9 Jehovah…      20        27        24        24        21        30         15
-10 Jewish        19        19        25        25        30        95         69
-11 Mainlin…     289       495       619       655       651      1107        939
-12 Mormon        29        40        48        51        56       112         85
-13 Muslim         6         7         9        10         9        23         16
-14 Orthodox      13        17        23        32        32        47         38
-15 Other C…       9         7        11        13        13        14         18
-16 Other F…      20        33        40        46        49        63         46
-17 Other W…       5         2         3         4         2         7          3
-18 Unaffil…     217       299       374       365       341       528        407
-# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
-#   `Don't know/refused` &lt;dbl&gt;
+  religion           `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k` `&gt;150k`
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+1 Agnostic                27        34        60        81        76       137        122         109      84
+2 Atheist                 12        27        37        52        35        70         73          59      74
+3 Buddhist                27        21        30        34        33        58         62          39      53
+4 Catholic               418       617       732       670       638      1116        949         792     633
+5 Don’t know/refused      15        14        15        11        10        35         21          17      18
+  `Don't know/refused`
+                 &lt;dbl&gt;
+1                   96
+2                   76
+3                   54
+4                 1489
+5                  116
+# ℹ 13 more rows
 ```
 ]
 
@@ -4198,7 +4172,7 @@ count: false
 .panel1-selectcols-rotate[
 
 ``` r
-print(relig_income, n = 5)
+print(relig_income, n = 5, width = Inf)
 *relig_income %&gt;% select(religion, starts_with("$"), ends_with("k"))
 ```
 ]
@@ -4207,48 +4181,40 @@ print(relig_income, n = 5)
 
 ```
 # A tibble: 18 × 11
-  religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-1 Agnostic       27        34        60        81        76       137        122
-2 Atheist        12        27        37        52        35        70         73
-3 Buddhist       27        21        30        34        33        58         62
-4 Catholic      418       617       732       670       638      1116        949
-5 Don’t kn…      15        14        15        11        10        35         21
+  religion           `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k` `&gt;150k`
+  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+1 Agnostic                27        34        60        81        76       137        122         109      84
+2 Atheist                 12        27        37        52        35        70         73          59      74
+3 Buddhist                27        21        30        34        33        58         62          39      53
+4 Catholic               418       617       732       670       638      1116        949         792     633
+5 Don’t know/refused      15        14        15        11        10        35         21          17      18
+  `Don't know/refused`
+                 &lt;dbl&gt;
+1                   96
+2                   76
+3                   54
+4                 1489
+5                  116
 # ℹ 13 more rows
-# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
-#   `Don't know/refused` &lt;dbl&gt;
 ```
 
 ```
 # A tibble: 18 × 10
-   religion         `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
-   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
- 1 Agnostic                34        60        81        76       137        122
- 2 Atheist                 27        37        52        35        70         73
- 3 Buddhist                21        30        34        33        58         62
- 4 Catholic               617       732       670       638      1116        949
- 5 Don’t know/refu…        14        15        11        10        35         21
- 6 Evangelical Prot       869      1064       982       881      1486        949
- 7 Hindu                    9         7         9        11        34         47
- 8 Historically Bl…       244       236       238       197       223        131
- 9 Jehovah's Witne…        27        24        24        21        30         15
-10 Jewish                  19        25        25        30        95         69
-11 Mainline Prot          495       619       655       651      1107        939
-12 Mormon                  40        48        51        56       112         85
-13 Muslim                   7         9        10         9        23         16
-14 Orthodox                17        23        32        32        47         38
-15 Other Christian          7        11        13        13        14         18
-16 Other Faiths            33        40        46        49        63         46
-17 Other World Rel…         2         3         4         2         7          3
-18 Unaffiliated           299       374       365       341       528        407
-# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&lt;$10k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;
+  religion           `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k` `&lt;$10k` `&gt;150k`
+  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 Agnostic                  34        60        81        76       137        122         109      27      84
+2 Atheist                   27        37        52        35        70         73          59      12      74
+3 Buddhist                  21        30        34        33        58         62          39      27      53
+4 Catholic                 617       732       670       638      1116        949         792     418     633
+5 Don’t know/refused        14        15        11        10        35         21          17      15      18
+# ℹ 13 more rows
 ```
 ]
 
 &lt;style&gt;
 .panel1-selectcols-rotate {
   color: black;
-  width: 87.1111111111111%;
+  width: 90.4615384615385%;
   hight: 32%;
   float: none;
   padding-left: 1%;
@@ -4256,7 +4222,7 @@ print(relig_income, n = 5)
 }
 .panel2-selectcols-rotate {
   color: black;
-  width: 10.8888888888889%;
+  width: 7.53846153846154%;
   hight: 32%;
   float: none;
   padding-left: 1%;
@@ -4279,50 +4245,20 @@ class: inverse, center, middle
 # Dataset Transformations 
 ---
 
+
 count: false
  
 # Multiple Columns -&gt; One Variable 
-.panel1-pivot-longer-auto[
-
-``` r
-*ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv')
-```
-]
- 
-.panel2-pivot-longer-auto[
-
-]
-
----
-count: false
- 
-# Multiple Columns -&gt; One Variable 
-.panel1-pivot-longer-auto[
-
-``` r
-ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
-* mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-```
-]
- 
-.panel2-pivot-longer-auto[
-
-]
-
----
-count: false
- 
-# Multiple Columns -&gt; One Variable 
-.panel1-pivot-longer-auto[
+.panel1-pivot-longer-rotate[
 
 ``` r
 ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-*ds %&gt;% print(n = 25)
+*ds %&gt;% print(n = 10)
 ```
 ]
  
-.panel2-pivot-longer-auto[
+.panel2-pivot-longer-rotate[
 
 ```
 # A tibble: 51 × 27
@@ -4338,22 +4274,7 @@ ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
  8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
  9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
 10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-# ℹ 26 more rows
+# ℹ 41 more rows
 # ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
 #   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
 #   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
@@ -4365,53 +4286,16 @@ ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
 count: false
  
 # Multiple Columns -&gt; One Variable 
-.panel1-pivot-longer-auto[
+.panel1-pivot-longer-rotate[
 
 ``` r
 ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-ds %&gt;% print(n = 25)
 *ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
 ```
 ]
  
-.panel2-pivot-longer-auto[
-
-```
-# A tibble: 51 × 27
-   id    dob        age_12  age_12.5 age_13 age_13.5 age_14 age_14.5     age_15
-   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;lgl&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
- 1 Jonah 2017-08-30 book    dad      NA     cat      baby   socks/shoes  banana
- 2 Jonah 2017-08-30 ball    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   dog (animal) llama 
- 3 Jonah 2017-08-30 bye bye &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 4 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 5 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 6 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 7 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-# ℹ 26 more rows
-# ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
-#   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
-#   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
-#   age_22 &lt;chr&gt;, age_22.5 &lt;chr&gt;, age_23 &lt;chr&gt;, age_23.5 &lt;chr&gt;, age_24 &lt;chr&gt;
-```
+.panel2-pivot-longer-rotate[
 
 ```
 # A tibble: 1,275 × 4
@@ -4435,72 +4319,16 @@ ds %&gt;% print(n = 25)
 count: false
  
 # Multiple Columns -&gt; One Variable 
-.panel1-pivot-longer-auto[
+.panel1-pivot-longer-rotate[
 
 ``` r
 ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-ds %&gt;% print(n = 25)
-ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
-*ds %&gt;% pivot_longer(-(id:dob), names_to = "age",
-*                   names_prefix = "age_", values_to = "word")
+*ds %&gt;% pivot_longer(-(id:dob), names_to = "age", names_prefix = "age_", values_to = "word")
 ```
 ]
  
-.panel2-pivot-longer-auto[
-
-```
-# A tibble: 51 × 27
-   id    dob        age_12  age_12.5 age_13 age_13.5 age_14 age_14.5     age_15
-   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;lgl&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
- 1 Jonah 2017-08-30 book    dad      NA     cat      baby   socks/shoes  banana
- 2 Jonah 2017-08-30 ball    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   dog (animal) llama 
- 3 Jonah 2017-08-30 bye bye &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 4 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 5 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 6 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 7 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-# ℹ 26 more rows
-# ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
-#   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
-#   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
-#   age_22 &lt;chr&gt;, age_22.5 &lt;chr&gt;, age_23 &lt;chr&gt;, age_23.5 &lt;chr&gt;, age_24 &lt;chr&gt;
-```
-
-```
-# A tibble: 1,275 × 4
-   id    dob        age      word       
-   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;      
- 1 Jonah 2017-08-30 age_12   book       
- 2 Jonah 2017-08-30 age_12.5 dad        
- 3 Jonah 2017-08-30 age_13   &lt;NA&gt;       
- 4 Jonah 2017-08-30 age_13.5 cat        
- 5 Jonah 2017-08-30 age_14   baby       
- 6 Jonah 2017-08-30 age_14.5 socks/shoes
- 7 Jonah 2017-08-30 age_15   banana     
- 8 Jonah 2017-08-30 age_15.5 cheese     
- 9 Jonah 2017-08-30 age_16   shoes      
-10 Jonah 2017-08-30 age_16.5 monkey     
-# ℹ 1,265 more rows
-```
+.panel2-pivot-longer-rotate[
 
 ```
 # A tibble: 1,275 × 4
@@ -4524,92 +4352,16 @@ ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
 count: false
  
 # Multiple Columns -&gt; One Variable 
-.panel1-pivot-longer-auto[
+.panel1-pivot-longer-rotate[
 
 ``` r
 ds &lt;- read_csv('data_cleaned/vocab_annoying_headers.csv') %&gt;%
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-ds %&gt;% print(n = 25)
-ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word")
-ds %&gt;% pivot_longer(-(id:dob), names_to = "age",
-                    names_prefix = "age_", values_to = "word")
-*ds %&gt;% pivot_longer(-(id:dob), names_to = "age",
-*                   values_to = "word",
-*                   values_drop_na = T, names_prefix = "age_")
+*ds %&gt;% pivot_longer(-(id:dob), names_to = "age", values_to = "word", values_drop_na = T, names_prefix = "age_")
 ```
 ]
  
-.panel2-pivot-longer-auto[
-
-```
-# A tibble: 51 × 27
-   id    dob        age_12  age_12.5 age_13 age_13.5 age_14 age_14.5     age_15
-   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;lgl&gt;  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt; 
- 1 Jonah 2017-08-30 book    dad      NA     cat      baby   socks/shoes  banana
- 2 Jonah 2017-08-30 ball    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   dog (animal) llama 
- 3 Jonah 2017-08-30 bye bye &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 4 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 5 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 6 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 7 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 8 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
- 9 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-10 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-11 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-12 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-13 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-14 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-15 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-16 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-17 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-18 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-19 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-20 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-21 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-22 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-23 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-24 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-25 Jonah 2017-08-30 &lt;NA&gt;    &lt;NA&gt;     NA     &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;  
-# ℹ 26 more rows
-# ℹ 18 more variables: age_15.5 &lt;chr&gt;, age_16 &lt;chr&gt;, age_16.5 &lt;chr&gt;,
-#   age_17 &lt;chr&gt;, age_17.5 &lt;chr&gt;, age_18 &lt;chr&gt;, age_18.5 &lt;chr&gt;, age_19 &lt;chr&gt;,
-#   age_19.5 &lt;chr&gt;, age_20 &lt;chr&gt;, age_20.5 &lt;chr&gt;, age_21 &lt;chr&gt;, age_21.5 &lt;chr&gt;,
-#   age_22 &lt;chr&gt;, age_22.5 &lt;chr&gt;, age_23 &lt;chr&gt;, age_23.5 &lt;chr&gt;, age_24 &lt;chr&gt;
-```
-
-```
-# A tibble: 1,275 × 4
-   id    dob        age      word       
-   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;      
- 1 Jonah 2017-08-30 age_12   book       
- 2 Jonah 2017-08-30 age_12.5 dad        
- 3 Jonah 2017-08-30 age_13   &lt;NA&gt;       
- 4 Jonah 2017-08-30 age_13.5 cat        
- 5 Jonah 2017-08-30 age_14   baby       
- 6 Jonah 2017-08-30 age_14.5 socks/shoes
- 7 Jonah 2017-08-30 age_15   banana     
- 8 Jonah 2017-08-30 age_15.5 cheese     
- 9 Jonah 2017-08-30 age_16   shoes      
-10 Jonah 2017-08-30 age_16.5 monkey     
-# ℹ 1,265 more rows
-```
-
-```
-# A tibble: 1,275 × 4
-   id    dob        age   word       
-   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;      
- 1 Jonah 2017-08-30 12    book       
- 2 Jonah 2017-08-30 12.5  dad        
- 3 Jonah 2017-08-30 13    &lt;NA&gt;       
- 4 Jonah 2017-08-30 13.5  cat        
- 5 Jonah 2017-08-30 14    baby       
- 6 Jonah 2017-08-30 14.5  socks/shoes
- 7 Jonah 2017-08-30 15    banana     
- 8 Jonah 2017-08-30 15.5  cheese     
- 9 Jonah 2017-08-30 16    shoes      
-10 Jonah 2017-08-30 16.5  monkey     
-# ℹ 1,265 more rows
-```
+.panel2-pivot-longer-rotate[
 
 ```
 # A tibble: 440 × 4
@@ -4630,27 +4382,27 @@ ds %&gt;% pivot_longer(-(id:dob), names_to = "age",
 ]
 
 &lt;style&gt;
-.panel1-pivot-longer-auto {
+.panel1-pivot-longer-rotate {
   color: black;
-  width: 65.3333333333333%;
+  width: 90.4615384615385%;
   hight: 32%;
-  float: left;
+  float: none;
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-pivot-longer-auto {
+.panel2-pivot-longer-rotate {
   color: black;
-  width: 32.6666666666667%;
+  width: 7.53846153846154%;
   hight: 32%;
-  float: left;
+  float: none;
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-pivot-longer-auto {
+.panel3-pivot-longer-rotate {
   color: black;
   width: NA%;
   hight: 33%;
-  float: left;
+  float: none;
   padding-left: 1%;
   font-size: 80%
 }
@@ -4876,7 +4628,8 @@ count: false
 
 ``` r
 ds
-*ds %&gt;% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
+*ds %&gt;% separate_wider_delim(filename,
+*delim = "/", names = c("dir", "file"))
 ```
 ]
  
@@ -4989,7 +4742,8 @@ count: false
 
 ``` r
 ds
-*ds %&gt;% unite(col = "block_speed_condition", Block, speed, condition, sep = "_")
+*ds %&gt;% unite(col = "block_speed_condition",
+*Block, speed, condition, sep = "_")
 ```
 ]
  
@@ -5381,8 +5135,8 @@ s1 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Taun We      213    NA none       grey       black             NA fema… femin…
-2 Mace Win…    188    84 none       dark       brown             72 male  mascu…
+1 Dormé        165    NA brown      light      brown             NA fema… femin…
+2 Ben Quad…    163    65 none       grey, gre… orange            NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5407,8 +5161,8 @@ s1
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
-2 C-3PO        167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
+1 Ayla Sec…    178    55 none       blue       hazel             48 fema… femin…
+2 Wedge An…    170    77 brown      fair       hazel             21 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5434,8 +5188,8 @@ s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Wilhuff …    180  NA   auburn, g… fair       blue            64   male  mascu…
-2 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascu…
+1 Shaak Ti     178  57   none       red, blue… black             NA fema… femin…
+2 Luminara…    170  56.2 black      yellow     blue              58 fema… femin…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5444,8 +5198,8 @@ s2 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Owen Lars    178   120 brown, gr… light      blue              52 male  mascu…
-2 Ben Quad…    163    65 none       grey, gre… orange            NA male  mascu…
+1 Wicket S…     88    20 brown      brown      brown              8 male  mascu…
+2 Shmi Sky…    163    NA black      fair       brown             72 fema… femin…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5472,8 +5226,8 @@ s2
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Finis Va…    170    NA blond      fair       blue              91 male  mascu…
-2 Ric Olié     183    NA brown      fair       blue              NA male  mascu…
+1 Yoda          66    17 white      green      brown            896 male  mascu…
+2 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5482,8 +5236,8 @@ s2
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Ackbar       180    83 none       brown mot… orange            41 male  mascu…
-2 Bib Fort…    180    NA none       pale       pink              NA male  mascu…
+1 Jabba De…    175  1358 &lt;NA&gt;       green-tan… orange           600 herm… mascu…
+2 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5509,20 +5263,10 @@ s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 
 ```
 # A tibble: 2 × 14
-  name    height  mass hair_color skin_color eye_color birth_year sex    gender 
-  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  
-1 Taun We    213    NA none       grey       black             NA female femini…
-2 Sebulba    112    40 none       grey, red  orange            NA male   mascul…
-# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
-#   vehicles &lt;list&gt;, starships &lt;list&gt;
-```
-
-```
-# A tibble: 2 × 14
-  name  height  mass hair_color skin_color eye_color birth_year sex    gender  
-  &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   
-1 Dormé    165    NA brown      light      brown             NA female feminine
-2 Rey       NA    NA brown      light      hazel             NA female feminine
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Luke Sky…    172    77 blond      fair       blue              19 male  mascu…
+2 Shaak Ti     178    57 none       red, blue… black             NA fema… femin…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5531,8 +5275,18 @@ s3 &lt;- starwars %&gt;% slice_sample(n = 2)  #2x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Raymus A…    188    79 brown      light      brown             NA male  mascu…
-2 Captain …     NA    NA none       none       unknown           NA fema… femin…
+1 Watto        137    NA black      blue, grey yellow            NA male  mascu…
+2 Jabba De…    175  1358 &lt;NA&gt;       green-tan… orange           600 herm… mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;
+```
+
+```
+# A tibble: 2 × 14
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Cliegg L…    183    NA brown      fair       blue            82   male  mascu…
+2 Anakin S…    188    84 blond      fair       blue            41.9 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5561,28 +5315,28 @@ s3
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Ayla Sec…    178  55   none       blue       hazel             48 fema… femin…
-2 Luminara…    170  56.2 black      yellow     blue              58 fema… femin…
+1 Leia Org…    150    49 brown      light      brown             19 fema… femin…
+2 Jek Tono…    180   110 brown      fair       blue              NA &lt;NA&gt;  &lt;NA&gt;  
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 
 ```
 # A tibble: 2 × 14
-  name    height  mass hair_color skin_color eye_color birth_year sex    gender 
-  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  
-1 Taun We    213    NA none       grey       black             NA female femini…
-2 Yoda        66    17 white      green      brown            896 male   mascul…
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
+2 Mas Amed…    196    NA none       blue       blue              NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 
 ```
 # A tibble: 2 × 14
-  name  height  mass hair_color skin_color  eye_color birth_year sex   gender   
-  &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
-1 Finn      NA    NA black      dark        dark              NA male  masculine
-2 R2-D2     96    32 &lt;NA&gt;       white, blue red               33 none  masculine
+  name      height  mass hair_color skin_color eye_color birth_year sex   gender
+  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+1 Eeth Koth    171    NA black      brown      brown             NA male  mascu…
+2 Cliegg L…    183    NA brown      fair       blue              82 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5610,10 +5364,10 @@ star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
 
 ```
 # A tibble: 2 × 14
-  name      height  mass hair_color skin_color eye_color birth_year sex   gender
-  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Nute Gun…    191    90 none       mottled g… red               NA male  mascu…
-2 Palpatine    170    75 grey       pale       yellow            82 male  mascu…
+  name    height  mass hair_color skin_color eye_color birth_year sex   gender  
+  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   
+1 Lama Su    229    88 none       grey       black             NA male  masculi…
+2 Finn        NA    NA black      dark       dark              NA male  masculi…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5622,18 +5376,18 @@ star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
 # A tibble: 2 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 C-3PO        167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
-2 Jocasta …    167    NA white      fair       blue              NA fema… femin…
+1 Wedge An…    170    77 brown      fair       hazel             21 male  mascu…
+2 Mace Win…    188    84 none       dark       brown             72 male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 
 ```
 # A tibble: 2 × 14
-  name      height  mass hair_color skin_color eye_color birth_year sex   gender
-  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
-2 Jar Jar …    196    66 none       orange     orange            52 male  mascu…
+  name    height  mass hair_color skin_color eye_color birth_year sex   gender  
+  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   
+1 Dooku      193    80 white      fair       brown            102 male  masculi…
+2 Lama Su    229    88 none       grey       black             NA male  masculi…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5642,12 +5396,12 @@ star_wars_combined &lt;- bind_rows(s1, s2, s3)  #6x14
 # A tibble: 6 × 14
   name      height  mass hair_color skin_color eye_color birth_year sex   gender
   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
-1 Nute Gun…    191    90 none       mottled g… red               NA male  mascu…
-2 Palpatine    170    75 grey       pale       yellow            82 male  mascu…
-3 C-3PO        167    75 &lt;NA&gt;       gold       yellow           112 none  mascu…
-4 Jocasta …    167    NA white      fair       blue              NA fema… femin…
-5 Chewbacca    228   112 brown      unknown    blue             200 male  mascu…
-6 Jar Jar …    196    66 none       orange     orange            52 male  mascu…
+1 Lama Su      229    88 none       grey       black             NA male  mascu…
+2 Finn          NA    NA black      dark       dark              NA male  mascu…
+3 Wedge An…    170    77 brown      fair       hazel             21 male  mascu…
+4 Mace Win…    188    84 none       dark       brown             72 male  mascu…
+5 Dooku        193    80 white      fair       brown            102 male  mascu…
+6 Lama Su      229    88 none       grey       black             NA male  mascu…
 # ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
@@ -5889,201 +5643,6 @@ trials
 10 data_headers/… 6191        25    male  1     4          1     4            10
 # ℹ 230 more rows
 # ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
-```
-]
-
----
-count: false
- 
-# Joining Data
-.panel1-join-auto[
-
-``` r
-fnames &lt;- list.files(path = "data_headers", full.names = T)
-header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
-trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
-header
-trials
-left_join(header, trials, by = "filename")
-*left_join(slice_sample(header, n = 5), trials, by = "filename")
-```
-]
- 
-.panel2-join-auto[
-
-```
-# A tibble: 12 × 8
-   filename                Participant Age   Sex   Order FirstSpeed Block speed
-   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
- 1 data_headers/6191_1.txt 6191        25    male  1     4          1     4    
- 2 data_headers/6191_2.txt 6191        25    male  1     4          2     7    
- 3 data_headers/6191_3.txt 6191        25    male  1     4          3     4    
- 4 data_headers/6191_4.txt 6191        25    male  1     4          4     7    
- 5 data_headers/6191_5.txt 6191        25    male  1     4          5     4    
- 6 data_headers/6191_6.txt 6191        25    male  1     4          6     7    
- 7 data_headers/6192_1.txt 6192        21    male  2     4          1     4    
- 8 data_headers/6192_2.txt 6192        21    male  2     4          2     7    
- 9 data_headers/6192_3.txt 6192        21    male  2     4          3     4    
-10 data_headers/6192_4.txt 6192        21    male  2     4          4     7    
-11 data_headers/6192_5.txt 6192        21    male  2     4          5     4    
-12 data_headers/6192_6.txt 6192        21    male  2     4          6     7    
-```
-
-```
-# A tibble: 240 × 5
-   filename                trial_num speed_actual speed_resp correct
-   &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;  
- 1 data_headers/6191_1.txt         1 fas          slower     FALSE  
- 2 data_headers/6191_1.txt         2 fas          faster     TRUE   
- 3 data_headers/6191_1.txt         3 fas          faster     TRUE   
- 4 data_headers/6191_1.txt         4 fas          slower     FALSE  
- 5 data_headers/6191_1.txt         5 fas          faster     TRUE   
- 6 data_headers/6191_1.txt         6 slo          slower     TRUE   
- 7 data_headers/6191_1.txt         7 fas          faster     TRUE   
- 8 data_headers/6191_1.txt         8 slo          slower     TRUE   
- 9 data_headers/6191_1.txt         9 slo          slower     TRUE   
-10 data_headers/6191_1.txt        10 slo          faster     FALSE  
-# ℹ 230 more rows
-```
-
-```
-# A tibble: 240 × 12
-   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
-   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 data_headers/… 6191        25    male  1     4          1     4             1
- 2 data_headers/… 6191        25    male  1     4          1     4             2
- 3 data_headers/… 6191        25    male  1     4          1     4             3
- 4 data_headers/… 6191        25    male  1     4          1     4             4
- 5 data_headers/… 6191        25    male  1     4          1     4             5
- 6 data_headers/… 6191        25    male  1     4          1     4             6
- 7 data_headers/… 6191        25    male  1     4          1     4             7
- 8 data_headers/… 6191        25    male  1     4          1     4             8
- 9 data_headers/… 6191        25    male  1     4          1     4             9
-10 data_headers/… 6191        25    male  1     4          1     4            10
-# ℹ 230 more rows
-# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
-```
-
-```
-# A tibble: 100 × 12
-   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
-   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 data_headers/… 6192        21    male  2     4          1     4             1
- 2 data_headers/… 6192        21    male  2     4          1     4             2
- 3 data_headers/… 6192        21    male  2     4          1     4             3
- 4 data_headers/… 6192        21    male  2     4          1     4             4
- 5 data_headers/… 6192        21    male  2     4          1     4             5
- 6 data_headers/… 6192        21    male  2     4          1     4             6
- 7 data_headers/… 6192        21    male  2     4          1     4             7
- 8 data_headers/… 6192        21    male  2     4          1     4             8
- 9 data_headers/… 6192        21    male  2     4          1     4             9
-10 data_headers/… 6192        21    male  2     4          1     4            10
-# ℹ 90 more rows
-# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
-```
-]
-
----
-count: false
- 
-# Joining Data
-.panel1-join-auto[
-
-``` r
-fnames &lt;- list.files(path = "data_headers", full.names = T)
-header &lt;- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %&gt;% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
-trials &lt;- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
-header
-trials
-left_join(header, trials, by = "filename")
-left_join(slice_sample(header, n = 5), trials, by = "filename")
-*left_join(slice_sample(trials, n = 5), header, by = "filename")
-```
-]
- 
-.panel2-join-auto[
-
-```
-# A tibble: 12 × 8
-   filename                Participant Age   Sex   Order FirstSpeed Block speed
-   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
- 1 data_headers/6191_1.txt 6191        25    male  1     4          1     4    
- 2 data_headers/6191_2.txt 6191        25    male  1     4          2     7    
- 3 data_headers/6191_3.txt 6191        25    male  1     4          3     4    
- 4 data_headers/6191_4.txt 6191        25    male  1     4          4     7    
- 5 data_headers/6191_5.txt 6191        25    male  1     4          5     4    
- 6 data_headers/6191_6.txt 6191        25    male  1     4          6     7    
- 7 data_headers/6192_1.txt 6192        21    male  2     4          1     4    
- 8 data_headers/6192_2.txt 6192        21    male  2     4          2     7    
- 9 data_headers/6192_3.txt 6192        21    male  2     4          3     4    
-10 data_headers/6192_4.txt 6192        21    male  2     4          4     7    
-11 data_headers/6192_5.txt 6192        21    male  2     4          5     4    
-12 data_headers/6192_6.txt 6192        21    male  2     4          6     7    
-```
-
-```
-# A tibble: 240 × 5
-   filename                trial_num speed_actual speed_resp correct
-   &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;  
- 1 data_headers/6191_1.txt         1 fas          slower     FALSE  
- 2 data_headers/6191_1.txt         2 fas          faster     TRUE   
- 3 data_headers/6191_1.txt         3 fas          faster     TRUE   
- 4 data_headers/6191_1.txt         4 fas          slower     FALSE  
- 5 data_headers/6191_1.txt         5 fas          faster     TRUE   
- 6 data_headers/6191_1.txt         6 slo          slower     TRUE   
- 7 data_headers/6191_1.txt         7 fas          faster     TRUE   
- 8 data_headers/6191_1.txt         8 slo          slower     TRUE   
- 9 data_headers/6191_1.txt         9 slo          slower     TRUE   
-10 data_headers/6191_1.txt        10 slo          faster     FALSE  
-# ℹ 230 more rows
-```
-
-```
-# A tibble: 240 × 12
-   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
-   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 data_headers/… 6191        25    male  1     4          1     4             1
- 2 data_headers/… 6191        25    male  1     4          1     4             2
- 3 data_headers/… 6191        25    male  1     4          1     4             3
- 4 data_headers/… 6191        25    male  1     4          1     4             4
- 5 data_headers/… 6191        25    male  1     4          1     4             5
- 6 data_headers/… 6191        25    male  1     4          1     4             6
- 7 data_headers/… 6191        25    male  1     4          1     4             7
- 8 data_headers/… 6191        25    male  1     4          1     4             8
- 9 data_headers/… 6191        25    male  1     4          1     4             9
-10 data_headers/… 6191        25    male  1     4          1     4            10
-# ℹ 230 more rows
-# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
-```
-
-```
-# A tibble: 100 × 12
-   filename       Participant Age   Sex   Order FirstSpeed Block speed trial_num
-   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1 data_headers/… 6191        25    male  1     4          1     4             1
- 2 data_headers/… 6191        25    male  1     4          1     4             2
- 3 data_headers/… 6191        25    male  1     4          1     4             3
- 4 data_headers/… 6191        25    male  1     4          1     4             4
- 5 data_headers/… 6191        25    male  1     4          1     4             5
- 6 data_headers/… 6191        25    male  1     4          1     4             6
- 7 data_headers/… 6191        25    male  1     4          1     4             7
- 8 data_headers/… 6191        25    male  1     4          1     4             8
- 9 data_headers/… 6191        25    male  1     4          1     4             9
-10 data_headers/… 6191        25    male  1     4          1     4            10
-# ℹ 90 more rows
-# ℹ 3 more variables: speed_actual &lt;chr&gt;, speed_resp &lt;chr&gt;, correct &lt;lgl&gt;
-```
-
-```
-# A tibble: 5 × 12
-  filename     trial_num speed_actual speed_resp correct Participant Age   Sex  
-  &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;lgl&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;
-1 data_header…        18 slo          faster     FALSE   6191        25    male 
-2 data_header…         9 slo          slower     TRUE    6192        21    male 
-3 data_header…        15 fas          faster     TRUE    6192        21    male 
-4 data_header…        14 fas          faster     TRUE    6191        25    male 
-5 data_header…         2 slo          slower     TRUE    6191        25    male 
-# ℹ 4 more variables: Order &lt;chr&gt;, FirstSpeed &lt;chr&gt;, Block &lt;chr&gt;, speed &lt;chr&gt;
 ```
 ]
 

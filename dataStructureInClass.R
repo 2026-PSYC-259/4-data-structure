@@ -176,9 +176,9 @@ ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>%
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
 ds %>% print(n = 25) 
 ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word") 
-ds %>% pivot_longer(-(id:dob), names_to = "age", 
+sorted <- ds %>% pivot_longer(-(id:dob), names_to = "age", 
                     names_prefix = "age_", values_to = "word")
-ds %>% pivot_longer(-(id:dob), names_to = "age", 
+sorted2 <- ds %>% pivot_longer(-(id:dob), names_to = "age", 
                     values_to = "word", values_drop_na = T, names_prefix = "age_")
 
 # One Column -> Multiple variables
@@ -195,11 +195,13 @@ ds
 
 # One Variable -> Multiple Variables
 
-ds %>% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
+separate <- ds %>% separate_wider_delim(filename, delim = "/", names = c("dir", "file"))
 
 # Multiple Variables -> One Variable
+?unite
+united <- ds %>% unite(col = "block_speed_condition", Block, speed, condition, sep = "_", remove = F)
 
-ds %>% unite(col = "block_speed_condition", Block, speed, condition, sep = "_")
+ds  %>% unite(col = "datetime", year, month, day, sep = "-", remove = F)
 
 # Binding Columns
 
@@ -224,11 +226,13 @@ star_wars_combined
 # Joining by key value
 
 fnames <- list.files(path = "data_headers", full.names = T)
-header <- read_delim(fnames, col_names = c("field", "value"), col_types = c("cc"), delim = " ", n_max = 7, id = "filename") %>% pivot_wider(id_cols = "filename", names_from = "field", values_from = "value")
-trials <- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), skip = 8, id = "filename")
+header <- read_delim(fnames, col_names = c("field", "value"), 
+                     col_types = c("cc"), delim = " ", 
+                     n_max = 8, id = "filename") %>% pivot_wider(id_cols = "filename", 
+                                                  names_from = "field", values_from = "value")
+
+trials <- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_resp", "correct"), 
+                   skip = 8, id = "filename")
 header 
 trials 
-left_join(header, trials, by = "filename") 
-left_join(slice_sample(header, n = 5), trials, by = "filename") 
-left_join(slice_sample(trials, n = 5), header, by = "filename") 
-
+lj1 <- left_join(header, trials, by = "filename") 

@@ -57,8 +57,6 @@ library(tidyverse)
 
 - Workflow critique
 
-- Resources on course site
-
 ---
 
 # Today's Outline
@@ -201,7 +199,7 @@ ds %>% mutate(word_length = str_length(word),
 `r icons::fontawesome("github")` [RStudio regex cheatsheet](https://rstudio.github.io/cheatsheets/regex.pdf)
 ]
 ---
-`r chunk_reveal("patterns", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Matching Patterns")`
+`r chunk_reveal("patterns", break_type = "rotate", float = "none", widths = c(2, 1), title = "# Matching Patterns")`
 
 ```{r patterns, include = F}
 ds %>% mutate(contains_punct = str_detect(word, "[:punct:]")) #ROTATE
@@ -361,13 +359,14 @@ time_length(as.period(interval(mdy("05-27-1983"), mdy("05-28-2022"))), "years")
 ```
 
 ---
-`r chunk_reveal("age", break_type = "auto", float = "none", widths = c(12, 1), title = "# Age math")`
+`r chunk_reveal("age", break_type = "auto", widths = c(1, 1), title = "# Age Math")`
 
 ```{r age, include = FALSE}
 birth_date <- ymd("2001-09-01", "2000-09-01")
 test_date <- ymd("2020-09-01", "2019-09-01")
 (test_date-birth_date)/365.25
-as.period(interval(start = birth_date, end = test_date), unit = "years")
+as.period(interval(start = birth_date, 
+  end = test_date), unit = "years")
 test_date - years(1) + days(7)
 ```
 ---
@@ -395,21 +394,24 @@ x <- c(1, 1, 2, 3, 1, 4)
 x <- factor(x, levels = c(1,2,3), labels = c("rarely", "neutral", "frequently"))
 x
 ```
-- levels restrict the possible set of values
+- Levels restrict the possible set of values
 
-- levels are ordered, which carries forward to output, modeling, graphics, etc.
+- Levels are ordered, which carries forward to output, modeling, graphics, etc.
 
-- factors work as dummy codes; use as.numeric(factor) to treat as a continuous variable in models
+- Factors work as dummy codes; use as.numeric(factor) to treat as a continuous variable in models
 ---
 
-`r chunk_reveal("factors", break_type = "auto", widths = c(1, 1), title = "# Factors")`
+`r chunk_reveal("factors", break_type = "user", widths = c(1, 1.5), title = "# Factors")`
 
 ```{r factors, include = FALSE}
-ds <- starwars
-unique(ds$eye_color)
-ds <- ds %>% mutate(eye_f = factor(eye_color))
-fct_count(ds$eye_f, sort = T) %>% slice_head(n = 5)
-fct_count(ds$eye_f, prop = T) %>% slice_head(n = 5)
+ds <- starwars 
+unique(ds$eye_color) #BREAK
+ds <- ds %>% 
+  mutate(eye_f = factor(eye_color)) #BREAK
+fct_count(ds$eye_f, sort = T) %>% 
+  slice_head(n = 5) #BREAK
+fct_count(ds$eye_f, prop = T) %>%
+  slice_head(n = 5) #BREAK
 ```
 
 ---
@@ -455,9 +457,13 @@ class: inverse, center, middle
 - Each type of observational unit is a table
   * e.g., participant questionnaire vs trial-by-trial data
 ---
-`r chunk_reveal("selectcols", break_type = "rotate", float = "none", widths = c(8, 1), title = "# Dataset Preparations")`
+```{r, include = FALSE}
+opts <- options(tibble.width = Inf, width = 110,
+                    tibble.print_min = 5, tibble.print_max = 5)
+```
+`r chunk_reveal("selectcols", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Dataset Preparations")`
 ```{r selectcols, include = FALSE}
-print(relig_income, n = 5)
+print(relig_income, n = 5, width = Inf)
 relig_income %>% select(religion, contains("$")) #ROTATE
 relig_income %>% select(religion, starts_with("$")) #ROTATE
 relig_income %>% select(religion, contains("k")) #ROTATE
@@ -467,19 +473,19 @@ relig_income %>% select(religion, starts_with("$"), ends_with("k")) #ROTATE
 class: inverse, center, middle
 # Dataset Transformations 
 ---
+```{r, include = FALSE}
+options(opts)  # restore defaults for later slides
+```
 
-`r chunk_reveal("pivot-longer", break_type = "auto", widths = c(2, 1), title = "# Multiple Columns -> One Variable ")`
+`r chunk_reveal("pivot-longer", break_type = "rotate", float = "none", widths = c(12, 1), title = "# Multiple Columns -> One Variable ")`
  
 ```{r pivot-longer, include = FALSE}
 ds <- read_csv('data_cleaned/vocab_annoying_headers.csv') %>% 
   mutate(id = "Jonah", dob = as.Date("2017-08-30"), .before = "age_12")
-ds %>% print(n = 25) 
-ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word") 
-ds %>% pivot_longer(-(id:dob), names_to = "age", 
-                    names_prefix = "age_", values_to = "word")
-ds %>% pivot_longer(-(id:dob), names_to = "age", 
-                    values_to = "word", 
-                    values_drop_na = T, names_prefix = "age_")
+ds %>% print(n = 10)  #ROTATE
+ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word") #ROTATE
+ds %>% pivot_longer(-(id:dob), names_to = "age", names_prefix = "age_", values_to = "word") #ROTATE
+ds %>% pivot_longer(-(id:dob), names_to = "age", values_to = "word", values_drop_na = T, names_prefix = "age_") #ROTATE
 ```
 ---
 
@@ -549,8 +555,6 @@ trials <- read_tsv(fnames, col_names = c("trial_num", "speed_actual", "speed_res
 header 
 trials 
 left_join(header, trials, by = "filename") 
-left_join(slice_sample(header, n = 5), trials, by = "filename") 
-left_join(slice_sample(trials, n = 5), header, by = "filename") 
 ```
 
 
